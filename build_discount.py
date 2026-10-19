@@ -359,9 +359,11 @@ for _vendor in VENDOR_META:
         "series": _series, "desc": _desc, "footnote": _foot,
         "models": _models,
     })
+import datetime as _dt
 _data = {
     "meta": {
-        "generated": "2026-10-19",
+        "generated": _dt.date.today().isoformat(),
+        "updated": _dt.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         "source": "各厂商官方定价页 + 第三方汇总；折扣为用户提供政策",
         "currency_note": "¥ 人民币 / $ 美元；汇率参考 1 $ ≈ 7.2 ¥",
     },

@@ -1,0 +1,9 @@
+部署方式已切换为 GitHub Pages 独立仓库（业务隔离 / 免腾讯云授权 / 链接固定）。
+固定外网链接将在以下步骤完成后确定：
+  1. 在 GitHub 新建一个独立仓库（如 llm-pricing-board）
+  2. 配置 remote + PAT 凭据
+  3. 首次 python deploy_site.py 推送
+  4. 仓库开启 GitHub Pages（分支 main，根目录）
+固定 URL 形如：https://<github-user>.github.io/<repo>/
+（每周自动更新只推送 prices.json，URL 永久不变）
+上次 CloudStudio 链接（已失效，仅作历史参考）：https://108da9a2adaa41bebd78cc6120a5ec04.app.workbuddy.host
