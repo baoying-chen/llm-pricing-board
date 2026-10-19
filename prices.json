@@ -1,0 +1,1482 @@
+{
+  "meta": {
+    "generated": "2026-10-19",
+    "source": "各厂商官方定价页 + 第三方汇总；折扣为用户提供政策",
+    "currency_note": "¥ 人民币 / $ 美元；汇率参考 1 $ ≈ 7.2 ¥"
+  },
+  "discount_table": [
+    {
+      "name": "OpenAI 系列",
+      "policy": "7.5折",
+      "coef": "0.75"
+    },
+    {
+      "name": "Anthropic / Claude",
+      "policy": "7.5折",
+      "coef": "0.75"
+    },
+    {
+      "name": "Gemini 系列",
+      "policy": "7折",
+      "coef": "0.70"
+    },
+    {
+      "name": "Grok 系列",
+      "policy": "6.5折",
+      "coef": "0.65"
+    },
+    {
+      "name": "DouBao 系列",
+      "policy": "9.5折",
+      "coef": "0.95"
+    },
+    {
+      "name": "Qwen 系列",
+      "policy": "4.5折（qwen3.7-max 6折 / preview 无折扣）",
+      "coef": "0.45"
+    },
+    {
+      "name": "Kimi 系列",
+      "policy": "阶梯：≥50万8.5折 / 3万≤月消<50万9折",
+      "coef": "0.90"
+    },
+    {
+      "name": "MiniMax 系列",
+      "policy": "5折（官方现时；清单曾8.5折）",
+      "coef": "0.50"
+    },
+    {
+      "name": "DeepSeek / V4",
+      "policy": "5折",
+      "coef": "0.50"
+    },
+    {
+      "name": "智谱 GLM 系列",
+      "policy": "阶梯：≥5万9折 / ≥30万85折 / ≥60万8折",
+      "coef": "0.90"
+    },
+    {
+      "name": "小米 MiMo 系列",
+      "policy": "8.8折",
+      "coef": "0.88"
+    },
+    {
+      "name": "腾讯混元 Hunyuan",
+      "policy": "6.5折",
+      "coef": "0.65"
+    },
+    {
+      "name": "百度文心 ERNIE",
+      "policy": "9折",
+      "coef": "0.90"
+    }
+  ],
+  "vendors": [
+    {
+      "vendor": "智谱 GLM",
+      "display": "智谱 AI",
+      "tag": "dom",
+      "series": "GLM 系列",
+      "desc": "计费：按量计费（元/百万 tokens） · 平台：BigModel · 输入/输出区分 · 缓存命中约输入价 25-30%",
+      "footnote": "阶梯折扣按<b>月消费</b>档位：≥5万→9折，≥30万→85折，≥60万→8折。下表「折后价」按 9折（≥5万档）示例。Batch API 标准价5折；免费模型：GLM-4.7-Flash、GLM-4.6V-Flash。",
+      "models": [
+        {
+          "model": "GLM-5.3",
+          "context": "1M",
+          "max_output": "-",
+          "input": "8.00",
+          "output": "28.00",
+          "cache": "2.00",
+          "discount": "阶梯：≥5万9折 / ≥30万85折 / ≥60万8折",
+          "after_in": "¥7.2",
+          "after_out": "¥25.2"
+        },
+        {
+          "model": "GLM-5.3-Flash",
+          "context": "1M",
+          "max_output": "-",
+          "input": "0.80",
+          "output": "2.80",
+          "cache": "0.23",
+          "discount": "阶梯：≥5万9折 / ≥30万85折 / ≥60万8折",
+          "after_in": "¥0.72",
+          "after_out": "¥2.52"
+        },
+        {
+          "model": "GLM-5.2",
+          "context": "1M",
+          "max_output": "-",
+          "input": "8.00",
+          "output": "28.00",
+          "cache": "2.00",
+          "discount": "阶梯：≥5万9折 / ≥30万85折 / ≥60万8折",
+          "after_in": "¥7.2",
+          "after_out": "¥25.2"
+        },
+        {
+          "model": "GLM-5.1",
+          "context": "128K",
+          "max_output": "-",
+          "input": "6.00/8.00",
+          "output": "24.00/28.00",
+          "cache": "1.30/2.00",
+          "discount": "阶梯：≥5万9折 / ≥30万85折 / ≥60万8折",
+          "after_in": "¥5.4/¥7.2",
+          "after_out": "¥21.6/¥25.2"
+        },
+        {
+          "model": "GLM-4.7-Flash",
+          "context": "200K",
+          "max_output": "-",
+          "input": "免费",
+          "output": "免费",
+          "cache": "免费",
+          "discount": "阶梯：≥5万9折 / ≥30万85折 / ≥60万8折",
+          "after_in": "免费",
+          "after_out": "免费"
+        },
+        {
+          "model": "GLM-4.6V(视觉)",
+          "context": "128K",
+          "max_output": "-",
+          "input": "1.00/2.00",
+          "output": "3.00/6.00",
+          "cache": "-",
+          "discount": "阶梯：≥5万9折 / ≥30万85折 / ≥60万8折",
+          "after_in": "¥0.9/¥1.8",
+          "after_out": "¥2.7/¥5.4"
+        },
+        {
+          "model": "GLM-4.6V-Flash",
+          "context": "-",
+          "max_output": "-",
+          "input": "免费",
+          "output": "免费",
+          "cache": "免费",
+          "discount": "阶梯：≥5万9折 / ≥30万85折 / ≥60万8折",
+          "after_in": "免费",
+          "after_out": "免费"
+        },
+        {
+          "model": "GLM-OCR",
+          "context": "32K",
+          "max_output": "-",
+          "input": "0.20",
+          "output": "0.20",
+          "cache": "-",
+          "discount": "阶梯：≥5万9折 / ≥30万85折 / ≥60万8折",
+          "after_in": "¥0.18",
+          "after_out": "¥0.18"
+        }
+      ]
+    },
+    {
+      "vendor": "DeepSeek",
+      "display": "DeepSeek",
+      "tag": "dom",
+      "series": "深度求索",
+      "desc": "计费：按量计费（$/百万 tokens，海外区） · 平台：api.deepseek.com · 缓存命中约未命中的 1/50",
+      "footnote": "高峰时段（周一至周五 UTC 01:00-04:00、06:00-10:00，不含中国法定假日）价格翻倍，其余时段半价；折后价已含 5折 代理折扣。",
+      "models": [
+        {
+          "model": "deepseek-flash (V4.1)",
+          "context": "1M",
+          "max_output": "384K",
+          "input": "0.15/0.30",
+          "output": "0.60/1.20",
+          "cache": "0.003/0.006",
+          "discount": "5折",
+          "after_in": "$0.075/$0.15",
+          "after_out": "$0.3/$0.6"
+        },
+        {
+          "model": "deepseek-v4-pro",
+          "context": "1M",
+          "max_output": "384K",
+          "input": "0.66/1.32",
+          "output": "1.98/3.96",
+          "cache": "0.022/0.044",
+          "discount": "5折",
+          "after_in": "$0.33/$0.66",
+          "after_out": "$0.99/$1.98"
+        }
+      ]
+    },
+    {
+      "vendor": "Kimi",
+      "display": "月之暗面",
+      "tag": "dom",
+      "series": "Kimi K 系列",
+      "desc": "计费：按量计费（元/百万 tokens） · 平台：platform.kimi.com · 缓存区分 5min / 1h TTL",
+      "footnote": "阶梯折扣按<b>月消费</b>：≥50万→8.5折，3万≤月消<50万→9折。下表「折后价」按 9折 示例。K2 系列 2026-05-25 下线。",
+      "models": [
+        {
+          "model": "Kimi K2.6",
+          "context": "256K",
+          "max_output": "-",
+          "input": "6.50",
+          "output": "27.00",
+          "cache": "1.10",
+          "discount": "阶梯：月消≥50万8.5折 / 3万≤月消<50万9折",
+          "after_in": "¥5.85",
+          "after_out": "¥24.3"
+        },
+        {
+          "model": "Kimi K2.7 Code",
+          "context": "256K",
+          "max_output": "-",
+          "input": "6.50",
+          "output": "27.00",
+          "cache": "1.00",
+          "discount": "阶梯：月消≥50万8.5折 / 3万≤月消<50万9折",
+          "after_in": "¥5.85",
+          "after_out": "¥24.3"
+        },
+        {
+          "model": "Kimi K2 (0905-preview)",
+          "context": "256K",
+          "max_output": "-",
+          "input": "4.00",
+          "output": "16.00",
+          "cache": "1.00",
+          "discount": "阶梯：月消≥50万8.5折 / 3万≤月消<50万9折",
+          "after_in": "¥3.6",
+          "after_out": "¥14.4"
+        },
+        {
+          "model": "Kimi K2-Turbo",
+          "context": "256K",
+          "max_output": "-",
+          "input": "8.00",
+          "output": "58.00",
+          "cache": "1.00",
+          "discount": "阶梯：月消≥50万8.5折 / 3万≤月消<50万9折",
+          "after_in": "¥7.2",
+          "after_out": "¥52.2"
+        },
+        {
+          "model": "Kimi K2-Thinking",
+          "context": "256K",
+          "max_output": "-",
+          "input": "4.00",
+          "output": "16.00",
+          "cache": "1.00",
+          "discount": "阶梯：月消≥50万8.5折 / 3万≤月消<50万9折",
+          "after_in": "¥3.6",
+          "after_out": "¥14.4"
+        },
+        {
+          "model": "moonshot-v1-8k",
+          "context": "8K",
+          "max_output": "-",
+          "input": "2.00",
+          "output": "10.00",
+          "cache": "-",
+          "discount": "阶梯：月消≥50万8.5折 / 3万≤月消<50万9折",
+          "after_in": "¥1.8",
+          "after_out": "¥9"
+        },
+        {
+          "model": "moonshot-v1-32k",
+          "context": "32K",
+          "max_output": "-",
+          "input": "5.00",
+          "output": "20.00",
+          "cache": "-",
+          "discount": "阶梯：月消≥50万8.5折 / 3万≤月消<50万9折",
+          "after_in": "¥4.5",
+          "after_out": "¥18"
+        },
+        {
+          "model": "moonshot-v1-128k",
+          "context": "128K",
+          "max_output": "-",
+          "input": "10.00",
+          "output": "30.00",
+          "cache": "-",
+          "discount": "阶梯：月消≥50万8.5折 / 3万≤月消<50万9折",
+          "after_in": "¥9",
+          "after_out": "¥27"
+        }
+      ]
+    },
+    {
+      "vendor": "稀宇科技 MiniMax",
+      "display": "稀宇科技",
+      "tag": "dom",
+      "series": "MiniMax / 海螺 AI",
+      "desc": "计费：按量计费（¥/百万 tokens） · 平台：platform.minimaxi.com · 双兼容 OpenAI / Anthropic 端点",
+      "footnote": "官方现时统一 <b>5折</b>（你清单中的 8.5折 为早期/清单价，已失效）。M3 标价为永久五折后价格。",
+      "models": [
+        {
+          "model": "MiniMax-M3",
+          "context": "1M",
+          "max_output": "-",
+          "input": "2.10/4.20",
+          "output": "8.40/16.80",
+          "cache": "0.42",
+          "discount": "5折（官方现时；清单价曾为8.5折）",
+          "after_in": "¥1.05/¥2.1",
+          "after_out": "¥4.2/¥8.4"
+        },
+        {
+          "model": "MiniMax-M2.7",
+          "context": "200K",
+          "max_output": "-",
+          "input": "2.10",
+          "output": "8.40",
+          "cache": "0.42",
+          "discount": "5折（官方现时；清单价曾为8.5折）",
+          "after_in": "¥1.05",
+          "after_out": "¥4.2"
+        },
+        {
+          "model": "MiniMax-M2.7-highspeed",
+          "context": "200K",
+          "max_output": "-",
+          "input": "4.20",
+          "output": "16.80",
+          "cache": "0.42",
+          "discount": "5折（官方现时；清单价曾为8.5折）",
+          "after_in": "¥2.1",
+          "after_out": "¥8.4"
+        },
+        {
+          "model": "MiniMax-M2.5",
+          "context": "200K",
+          "max_output": "-",
+          "input": "2.10",
+          "output": "8.40",
+          "cache": "0.21",
+          "discount": "5折（官方现时；清单价曾为8.5折）",
+          "after_in": "¥1.05",
+          "after_out": "¥4.2"
+        },
+        {
+          "model": "MiniMax-M2.5-highspeed",
+          "context": "200K",
+          "max_output": "-",
+          "input": "4.20",
+          "output": "16.80",
+          "cache": "0.21",
+          "discount": "5折（官方现时；清单价曾为8.5折）",
+          "after_in": "¥2.1",
+          "after_out": "¥8.4"
+        },
+        {
+          "model": "MiniMax-M2-her",
+          "context": "64K",
+          "max_output": "-",
+          "input": "2.10",
+          "output": "8.40",
+          "cache": "-",
+          "discount": "5折（官方现时；清单价曾为8.5折）",
+          "after_in": "¥1.05",
+          "after_out": "¥4.2"
+        },
+        {
+          "model": "MiniMax-01",
+          "context": "1M",
+          "max_output": "-",
+          "input": "0.20",
+          "output": "0.20",
+          "cache": "-",
+          "discount": "5折（官方现时；清单价曾为8.5折）",
+          "after_in": "¥0.1",
+          "after_out": "¥0.1"
+        },
+        {
+          "model": "MiniMax-Text-01",
+          "context": "1M",
+          "max_output": "-",
+          "input": "0.80",
+          "output": "0.80",
+          "cache": "-",
+          "discount": "5折（官方现时；清单价曾为8.5折）",
+          "after_in": "¥0.4",
+          "after_out": "¥0.4"
+        }
+      ]
+    },
+    {
+      "vendor": "阿里通义 Qwen",
+      "display": "阿里通义",
+      "tag": "dom",
+      "series": "Qwen / 千问",
+      "desc": "计费：按量计费（元/百万 tokens） · 平台：阿里云百炼 · 中国内地（北京）口径 · 阶梯按输入长度",
+      "footnote": "基础系列 <b>4.5折</b>；qwen3.7-max 特批 <b>6折</b>；带 preview 的预览模型 <b>无折扣</b>。Batch 半价与缓存命中折扣不可叠加。",
+      "models": [
+        {
+          "model": "qwen3.7-max",
+          "context": "1M",
+          "max_output": "-",
+          "input": "1.65",
+          "output": "4.951",
+          "cache": "命中折扣",
+          "discount": "6折",
+          "after_in": "$0.99",
+          "after_out": "$2.9706"
+        },
+        {
+          "model": "qwen3.6-max-preview",
+          "context": "256K",
+          "max_output": "-",
+          "input": "1.238/2.063",
+          "output": "7.426/12.377",
+          "cache": "命中折扣",
+          "discount": "preview 无折扣",
+          "after_in": "$1.238/$2.063",
+          "after_out": "$7.426/$12.377"
+        },
+        {
+          "model": "qwen3-max",
+          "context": "256K",
+          "max_output": "-",
+          "input": "0.359/0.574/1.004",
+          "output": "1.434/2.294/4.014",
+          "cache": "命中折扣",
+          "discount": "4.5折",
+          "after_in": "$0.1615/$0.2583/$0.4518",
+          "after_out": "$0.6453/$1.0323/$1.8063"
+        },
+        {
+          "model": "qwen3.7-plus",
+          "context": "1M",
+          "max_output": "-",
+          "input": "0.4/1.2",
+          "output": "1.6/4.8",
+          "cache": "命中折扣",
+          "discount": "4.5折",
+          "after_in": "$0.18/$0.54",
+          "after_out": "$0.72/$2.16"
+        },
+        {
+          "model": "qwen3.5-plus",
+          "context": "1M",
+          "max_output": "-",
+          "input": "0.8/2/4",
+          "output": "4.8/12/24",
+          "cache": "命中折扣",
+          "discount": "4.5折",
+          "after_in": "¥0.36/¥0.9/¥1.8",
+          "after_out": "¥2.16/¥5.4/¥10.8"
+        },
+        {
+          "model": "qwen-long",
+          "context": "1M",
+          "max_output": "-",
+          "input": "0.50",
+          "output": "2.00",
+          "cache": "-",
+          "discount": "4.5折",
+          "after_in": "¥0.225",
+          "after_out": "¥0.9"
+        },
+        {
+          "model": "qwen-turbo",
+          "context": "1M",
+          "max_output": "-",
+          "input": "0.30",
+          "output": "0.60",
+          "cache": "-",
+          "discount": "4.5折",
+          "after_in": "¥0.135",
+          "after_out": "¥0.27"
+        },
+        {
+          "model": "qwen3-omni-flash",
+          "context": "-",
+          "max_output": "-",
+          "input": "1.8文本/15.8音频",
+          "output": "6.9/12.7/62.6",
+          "cache": "-",
+          "discount": "4.5折",
+          "after_in": "¥0.81文本/¥7.11音频",
+          "after_out": "¥3.105/¥5.715/¥28.17"
+        }
+      ]
+    },
+    {
+      "vendor": "腾讯混元 Hunyuan",
+      "display": "腾讯",
+      "tag": "dom",
+      "series": "混元 Hunyuan",
+      "desc": "计费：按量计费（元/百万 tokens） · 平台：腾讯云大模型知识引擎 · 部分模型支持缓存命中",
+      "footnote": "全系列 <b>6.5折</b>。混元 Lite 等免费模型维持免费；其他模型折后价按 6.5折 折算。",
+      "models": [
+        {
+          "model": "Hy4 preview",
+          "context": "960K",
+          "max_output": "64K",
+          "input": "0.0012起",
+          "output": "0.004起",
+          "cache": "0.0004",
+          "discount": "6.5折",
+          "after_in": "¥0.0008起",
+          "after_out": "¥0.0026起"
+        },
+        {
+          "model": "Hy3 preview",
+          "context": "256K",
+          "max_output": "-",
+          "input": "1.20",
+          "output": "4.00",
+          "cache": "0.40",
+          "discount": "6.5折",
+          "after_in": "¥0.78",
+          "after_out": "¥2.6"
+        },
+        {
+          "model": "hunyuan-T1-latest",
+          "context": "-",
+          "max_output": "-",
+          "input": "1.00",
+          "output": "4.00",
+          "cache": "-",
+          "discount": "6.5折",
+          "after_in": "¥0.65",
+          "after_out": "¥2.6"
+        },
+        {
+          "model": "hunyuan-turbos-latest",
+          "context": "-",
+          "max_output": "-",
+          "input": "0.80",
+          "output": "2.00",
+          "cache": "-",
+          "discount": "6.5折",
+          "after_in": "¥0.52",
+          "after_out": "¥1.3"
+        },
+        {
+          "model": "hunyuan-pro",
+          "context": "32K",
+          "max_output": "4K",
+          "input": "30.00",
+          "output": "100.00",
+          "cache": "-",
+          "discount": "6.5折",
+          "after_in": "¥19.5",
+          "after_out": "¥65"
+        },
+        {
+          "model": "hunyuan-standard-256k",
+          "context": "256K",
+          "max_output": "-",
+          "input": "15.00",
+          "output": "60.00",
+          "cache": "-",
+          "discount": "6.5折",
+          "after_in": "¥9.75",
+          "after_out": "¥39"
+        },
+        {
+          "model": "hunyuan-standard",
+          "context": "32K",
+          "max_output": "2K",
+          "input": "4.50",
+          "output": "5.00",
+          "cache": "-",
+          "discount": "6.5折",
+          "after_in": "¥2.925",
+          "after_out": "¥3.25"
+        },
+        {
+          "model": "hunyuan-lite",
+          "context": "250K",
+          "max_output": "-",
+          "input": "免费",
+          "output": "免费",
+          "cache": "免费",
+          "discount": "6.5折",
+          "after_in": "免费",
+          "after_out": "免费"
+        }
+      ]
+    },
+    {
+      "vendor": "百度文心 ERNIE",
+      "display": "百度",
+      "tag": "dom",
+      "series": "文心 ERNIE",
+      "desc": "计费：按量计费（元/百万 tokens） · 平台：百度智能云千帆 · 千亿参数旗舰 + 免费轻量矩阵",
+      "footnote": "全系列 <b>9折</b>（记者/直接折扣，全系列统一）。Speed/Lite/Tiny 长期免费；5.1 旗舰折后 ¥3.6/¥16.2。",
+      "models": [
+        {
+          "model": "ERNIE 5.1",
+          "context": "-",
+          "max_output": "-",
+          "input": "4.00",
+          "output": "18.00",
+          "cache": "-",
+          "discount": "9折",
+          "after_in": "¥3.6",
+          "after_out": "¥16.2"
+        },
+        {
+          "model": "ERNIE X1 Turbo",
+          "context": "32K",
+          "max_output": "-",
+          "input": "1.00",
+          "output": "4.00",
+          "cache": "-",
+          "discount": "9折",
+          "after_in": "¥0.9",
+          "after_out": "¥3.6"
+        },
+        {
+          "model": "ERNIE X1",
+          "context": "32K",
+          "max_output": "-",
+          "input": "2.00",
+          "output": "8.00",
+          "cache": "-",
+          "discount": "9折",
+          "after_in": "¥1.8",
+          "after_out": "¥7.2"
+        },
+        {
+          "model": "ERNIE 4.5 Turbo VL",
+          "context": "32K",
+          "max_output": "-",
+          "input": "3.00",
+          "output": "9.00",
+          "cache": "-",
+          "discount": "9折",
+          "after_in": "¥2.7",
+          "after_out": "¥8.1"
+        },
+        {
+          "model": "ERNIE 4.5",
+          "context": "8K",
+          "max_output": "-",
+          "input": "4.00",
+          "output": "16.00",
+          "cache": "-",
+          "discount": "9折",
+          "after_in": "¥3.6",
+          "after_out": "¥14.4"
+        },
+        {
+          "model": "ERNIE 4.5 Turbo",
+          "context": "32K~128K",
+          "max_output": "-",
+          "input": "0.80",
+          "output": "3.20",
+          "cache": "-",
+          "discount": "9折",
+          "after_in": "¥0.72",
+          "after_out": "¥2.88"
+        },
+        {
+          "model": "ERNIE 4.0",
+          "context": "8K",
+          "max_output": "-",
+          "input": "4.00",
+          "output": "16.00",
+          "cache": "-",
+          "discount": "9折",
+          "after_in": "¥3.6",
+          "after_out": "¥14.4"
+        },
+        {
+          "model": "ERNIE 3.5",
+          "context": "8K~128K",
+          "max_output": "-",
+          "input": "0.80",
+          "output": "2.00",
+          "cache": "-",
+          "discount": "9折",
+          "after_in": "¥0.72",
+          "after_out": "¥1.8"
+        },
+        {
+          "model": "ERNIE Speed",
+          "context": "128K",
+          "max_output": "-",
+          "input": "免费",
+          "output": "免费",
+          "cache": "-",
+          "discount": "9折",
+          "after_in": "免费",
+          "after_out": "免费"
+        },
+        {
+          "model": "ERNIE Lite",
+          "context": "128K",
+          "max_output": "-",
+          "input": "免费",
+          "output": "免费",
+          "cache": "-",
+          "discount": "9折",
+          "after_in": "免费",
+          "after_out": "免费"
+        },
+        {
+          "model": "ERNIE Tiny",
+          "context": "8K",
+          "max_output": "-",
+          "input": "免费",
+          "output": "免费",
+          "cache": "-",
+          "discount": "9折",
+          "after_in": "免费",
+          "after_out": "免费"
+        }
+      ]
+    },
+    {
+      "vendor": "字节豆包 Doubao",
+      "display": "字节跳动",
+      "tag": "dom",
+      "series": "豆包 Doubao / Seed",
+      "desc": "计费：按量计费（元/百万 tokens） · 平台：火山引擎方舟 · 缓存命中与 Batch 折扣可叠加",
+      "footnote": "全系列 <b>9.5折</b>。国内按「输入上下文长度区间」分档：0-32K、32K-128K、128K-256K；折后价按各档分别折算。",
+      "models": [
+        {
+          "model": "Doubao-seed-2.0-pro",
+          "context": "256K",
+          "max_output": "-",
+          "input": "3.20",
+          "output": "16.00",
+          "cache": "-",
+          "discount": "9.5折",
+          "after_in": "¥3.04",
+          "after_out": "¥15.2"
+        },
+        {
+          "model": "Doubao-seed-2.0-lite",
+          "context": "256K",
+          "max_output": "-",
+          "input": "0.60",
+          "output": "3.60",
+          "cache": "-",
+          "discount": "9.5折",
+          "after_in": "¥0.57",
+          "after_out": "¥3.42"
+        },
+        {
+          "model": "Doubao-seed-2.0-mini",
+          "context": "256K",
+          "max_output": "-",
+          "input": "0.20",
+          "output": "2.00",
+          "cache": "-",
+          "discount": "9.5折",
+          "after_in": "¥0.19",
+          "after_out": "¥1.9"
+        },
+        {
+          "model": "Doubao-seed-1.6",
+          "context": "262K",
+          "max_output": "-",
+          "input": "0.117",
+          "output": "1.168",
+          "cache": "-",
+          "discount": "9.5折",
+          "after_in": "$0.1111",
+          "after_out": "$1.1096"
+        },
+        {
+          "model": "Doubao-seed-1.6-lite",
+          "context": "262K",
+          "max_output": "-",
+          "input": "0.044",
+          "output": "0.350",
+          "cache": "-",
+          "discount": "9.5折",
+          "after_in": "$0.0418",
+          "after_out": "$0.3325"
+        },
+        {
+          "model": "Doubao-seed-1.6-flash",
+          "context": "262K",
+          "max_output": "-",
+          "input": "0.022",
+          "output": "0.219",
+          "cache": "-",
+          "discount": "9.5折",
+          "after_in": "$0.0209",
+          "after_out": "$0.2081"
+        },
+        {
+          "model": "Doubao-1.5-pro-32k",
+          "context": "128K",
+          "max_output": "12K",
+          "input": "0.80",
+          "output": "2.00",
+          "cache": "0.16",
+          "discount": "9.5折",
+          "after_in": "¥0.76",
+          "after_out": "¥1.9"
+        },
+        {
+          "model": "Doubao-1.5-pro-256k",
+          "context": "256K",
+          "max_output": "16K",
+          "input": "0.80",
+          "output": "2.00",
+          "cache": "-",
+          "discount": "9.5折",
+          "after_in": "¥0.76",
+          "after_out": "¥1.9"
+        },
+        {
+          "model": "Doubao-1.5-lite",
+          "context": "32K",
+          "max_output": "-",
+          "input": "0.30",
+          "output": "0.60",
+          "cache": "-",
+          "discount": "9.5折",
+          "after_in": "¥0.285",
+          "after_out": "¥0.57"
+        }
+      ]
+    },
+    {
+      "vendor": "小米 MiMo",
+      "display": "小米",
+      "tag": "dom",
+      "series": "MiMo",
+      "desc": "计费：按量计费（元/百万 tokens） · 平台：mimo.mi.com · SGLang + HiCache 三级存储",
+      "footnote": "全系列 <b>8.8折</b>。Batch API / Token Plan 订阅另计；海外价同结构（美元）。",
+      "models": [
+        {
+          "model": "MiMo-V2.6-Pro(≤256K)",
+          "context": "1M",
+          "max_output": "-",
+          "input": "3.00",
+          "output": "6.00",
+          "cache": "0.025",
+          "discount": "8.8折",
+          "after_in": "¥2.64",
+          "after_out": "¥5.28"
+        },
+        {
+          "model": "MiMo-V2.6-Pro(256K-1M)",
+          "context": "1M",
+          "max_output": "-",
+          "input": "6.00",
+          "output": "12.00",
+          "cache": "-",
+          "discount": "8.8折",
+          "after_in": "¥5.28",
+          "after_out": "¥10.56"
+        },
+        {
+          "model": "MiMo-V2.6-Pro-UltraSpeed",
+          "context": "-",
+          "max_output": "-",
+          "input": "30.00",
+          "output": "60.00",
+          "cache": "0.25",
+          "discount": "8.8折",
+          "after_in": "¥26.4",
+          "after_out": "¥52.8"
+        },
+        {
+          "model": "MiMo-V2.6-Flash",
+          "context": "256K",
+          "max_output": "-",
+          "input": "1.00",
+          "output": "2.00",
+          "cache": "0.02",
+          "discount": "8.8折",
+          "after_in": "¥0.88",
+          "after_out": "¥1.76"
+        },
+        {
+          "model": "MiMo-V2-Omni",
+          "context": "256K",
+          "max_output": "128K",
+          "input": "2.94",
+          "output": "14.70",
+          "cache": "0.56",
+          "discount": "8.8折",
+          "after_in": "¥2.5872",
+          "after_out": "¥12.936"
+        },
+        {
+          "model": "MiMo-V2-Flash",
+          "context": "256K",
+          "max_output": "64K",
+          "input": "0.70",
+          "output": "2.10",
+          "cache": "0.07",
+          "discount": "8.8折",
+          "after_in": "¥0.616",
+          "after_out": "¥1.848"
+        },
+        {
+          "model": "MiMo-V2-TTS",
+          "context": "8K",
+          "max_output": "8K",
+          "input": "免费",
+          "output": "免费",
+          "cache": "-",
+          "discount": "8.8折",
+          "after_in": "免费",
+          "after_out": "免费"
+        }
+      ]
+    },
+    {
+      "vendor": "Anthropic Claude",
+      "display": "Anthropic",
+      "tag": "os",
+      "series": "Claude",
+      "desc": "计费：按量计费（$/百万 tokens） · 平台：api.anthropic.com · 缓存分 5min / 1h TTL",
+      "footnote": "全系列 <b>7.5折</b>。缓存读取约输入 5-10%；Batch 5折（与代理折扣可叠加与否以商务条款为准）。",
+      "models": [
+        {
+          "model": "Claude Opus 5.5",
+          "context": "1M",
+          "max_output": "128K",
+          "input": "4.00",
+          "output": "20.00",
+          "cache": "0.20",
+          "discount": "7.5折",
+          "after_in": "$3",
+          "after_out": "$15"
+        },
+        {
+          "model": "Claude Sonnet 5.5",
+          "context": "1M",
+          "max_output": "128K",
+          "input": "2.00",
+          "output": "10.00",
+          "cache": "0.10",
+          "discount": "7.5折",
+          "after_in": "$1.5",
+          "after_out": "$7.5"
+        },
+        {
+          "model": "Claude Haiku 5.5 (≤100K)",
+          "context": "1M",
+          "max_output": "-",
+          "input": "0.10",
+          "output": "0.50",
+          "cache": "0.01",
+          "discount": "7.5折",
+          "after_in": "$0.075",
+          "after_out": "$0.375"
+        },
+        {
+          "model": "Claude Haiku 5.5 (>100K)",
+          "context": "1M",
+          "max_output": "-",
+          "input": "0.50",
+          "output": "2.50",
+          "cache": "0.05",
+          "discount": "7.5折",
+          "after_in": "$0.375",
+          "after_out": "$1.875"
+        },
+        {
+          "model": "Claude Fable 5.1",
+          "context": "1M",
+          "max_output": "128K",
+          "input": "10.00",
+          "output": "50.00",
+          "cache": "0.25",
+          "discount": "7.5折",
+          "after_in": "$7.5",
+          "after_out": "$37.5"
+        },
+        {
+          "model": "Claude Mythos 5.1",
+          "context": "1M",
+          "max_output": "128K",
+          "input": "10.00",
+          "output": "50.00",
+          "cache": "0.25",
+          "discount": "7.5折",
+          "after_in": "$7.5",
+          "after_out": "$37.5"
+        },
+        {
+          "model": "Claude Opus 5",
+          "context": "1M",
+          "max_output": "-",
+          "input": "5.00",
+          "output": "25.00",
+          "cache": "0.50",
+          "discount": "7.5折",
+          "after_in": "$3.75",
+          "after_out": "$18.75"
+        },
+        {
+          "model": "Claude Sonnet 5",
+          "context": "1M",
+          "max_output": "-",
+          "input": "2.00",
+          "output": "10.00",
+          "cache": "0.20",
+          "discount": "7.5折",
+          "after_in": "$1.5",
+          "after_out": "$7.5"
+        },
+        {
+          "model": "Claude Opus 4.8",
+          "context": "1M",
+          "max_output": "-",
+          "input": "5.00",
+          "output": "25.00",
+          "cache": "0.50",
+          "discount": "7.5折",
+          "after_in": "$3.75",
+          "after_out": "$18.75"
+        },
+        {
+          "model": "Claude Sonnet 4.6",
+          "context": "1M",
+          "max_output": "-",
+          "input": "3.00",
+          "output": "15.00",
+          "cache": "0.30",
+          "discount": "7.5折",
+          "after_in": "$2.25",
+          "after_out": "$11.25"
+        },
+        {
+          "model": "Claude Haiku 4.5",
+          "context": "200K",
+          "max_output": "-",
+          "input": "1.00",
+          "output": "5.00",
+          "cache": "0.10",
+          "discount": "7.5折",
+          "after_in": "$0.75",
+          "after_out": "$3.75"
+        }
+      ]
+    },
+    {
+      "vendor": "Google Gemini",
+      "display": "Google",
+      "tag": "os",
+      "series": "Gemini",
+      "desc": "计费：按量计费（$/百万 tokens） · 平台：ai.google.dev · Pro 按 200K 上下文分档",
+      "footnote": "全系列 <b>7折</b>。Pro 模型按 ≤200K / >200K 分档；3.7/3.6 Flash 限时价至 2026-12-31，2027 起翻倍。",
+      "models": [
+        {
+          "model": "Gemini 3.1 Pro Preview",
+          "context": "1M",
+          "max_output": "-",
+          "input": "2.00/4.00",
+          "output": "12.00/18.00",
+          "cache": "-",
+          "discount": "7折",
+          "after_in": "$1.4/$2.8",
+          "after_out": "$8.4/$12.6"
+        },
+        {
+          "model": "Gemini 2.5 Pro",
+          "context": "1M",
+          "max_output": "-",
+          "input": "1.25/2.50",
+          "output": "10.00/15.00",
+          "cache": "0.125/0.25",
+          "discount": "7折",
+          "after_in": "$0.875/$1.75",
+          "after_out": "$7/$10.5"
+        },
+        {
+          "model": "Gemini 3.7 Flash",
+          "context": "1M",
+          "max_output": "-",
+          "input": "0.75",
+          "output": "3.75",
+          "cache": "0.075",
+          "discount": "7折",
+          "after_in": "$0.525",
+          "after_out": "$2.625"
+        },
+        {
+          "model": "Gemini 3.6 Flash",
+          "context": "1M",
+          "max_output": "-",
+          "input": "0.75",
+          "output": "3.75",
+          "cache": "0.075",
+          "discount": "7折",
+          "after_in": "$0.525",
+          "after_out": "$2.625"
+        },
+        {
+          "model": "Gemini 3 Flash Preview",
+          "context": "1M",
+          "max_output": "-",
+          "input": "0.50",
+          "output": "3.00",
+          "cache": "0.05",
+          "discount": "7折",
+          "after_in": "$0.35",
+          "after_out": "$2.1"
+        },
+        {
+          "model": "Gemini 2.5 Flash",
+          "context": "1M",
+          "max_output": "-",
+          "input": "0.30",
+          "output": "2.50",
+          "cache": "0.03",
+          "discount": "7折",
+          "after_in": "$0.21",
+          "after_out": "$1.75"
+        },
+        {
+          "model": "Gemini 2.5 Flash-Lite",
+          "context": "1M",
+          "max_output": "-",
+          "input": "0.10",
+          "output": "0.40",
+          "cache": "-",
+          "discount": "7折",
+          "after_in": "$0.07",
+          "after_out": "$0.28"
+        },
+        {
+          "model": "Gemini 3.5 Flash",
+          "context": "1M",
+          "max_output": "-",
+          "input": "1.50",
+          "output": "9.00",
+          "cache": "0.15",
+          "discount": "7折",
+          "after_in": "$1.05",
+          "after_out": "$6.3"
+        },
+        {
+          "model": "Gemini 3.1 Flash-Lite",
+          "context": "1M",
+          "max_output": "-",
+          "input": "0.25",
+          "output": "1.50",
+          "cache": "0.025",
+          "discount": "7折",
+          "after_in": "$0.175",
+          "after_out": "$1.05"
+        }
+      ]
+    },
+    {
+      "vendor": "OpenAI",
+      "display": "OpenAI",
+      "tag": "os",
+      "series": "GPT / o-series",
+      "desc": "计费：按量计费（$/百万 tokens） · 平台：platform.openai.com · 缓存读取约输入 10%",
+      "footnote": "全系列 <b>7.5折</b>。o 系列思维链 token 计入输出计费；Fast/Priority 模式 2x 加价另计。",
+      "models": [
+        {
+          "model": "GPT-5.5",
+          "context": "1.05M",
+          "max_output": "128K",
+          "input": "5.00",
+          "output": "30.00",
+          "cache": "0.50",
+          "discount": "7.5折",
+          "after_in": "$3.75",
+          "after_out": "$22.5"
+        },
+        {
+          "model": "GPT-5.5 Pro",
+          "context": "1.05M",
+          "max_output": "-",
+          "input": "30.00",
+          "output": "180.00",
+          "cache": "-",
+          "discount": "7.5折",
+          "after_in": "$22.5",
+          "after_out": "$135"
+        },
+        {
+          "model": "GPT-5.4 (≤272K)",
+          "context": "1.05M",
+          "max_output": "128K",
+          "input": "2.50",
+          "output": "15.00",
+          "cache": "0.25",
+          "discount": "7.5折",
+          "after_in": "$1.875",
+          "after_out": "$11.25"
+        },
+        {
+          "model": "GPT-5.4 (>272K)",
+          "context": "1.05M",
+          "max_output": "128K",
+          "input": "5.00",
+          "output": "22.50",
+          "cache": "0.50",
+          "discount": "7.5折",
+          "after_in": "$3.75",
+          "after_out": "$16.875"
+        },
+        {
+          "model": "GPT-5.4-mini",
+          "context": "400K",
+          "max_output": "128K",
+          "input": "0.75",
+          "output": "4.50",
+          "cache": "0.075",
+          "discount": "7.5折",
+          "after_in": "$0.5625",
+          "after_out": "$3.375"
+        },
+        {
+          "model": "GPT-5.4-nano",
+          "context": "400K",
+          "max_output": "128K",
+          "input": "0.20",
+          "output": "1.25",
+          "cache": "0.02",
+          "discount": "7.5折",
+          "after_in": "$0.15",
+          "after_out": "$0.9375"
+        },
+        {
+          "model": "GPT-5",
+          "context": "400K",
+          "max_output": "128K",
+          "input": "1.25",
+          "output": "10.00",
+          "cache": "0.125",
+          "discount": "7.5折",
+          "after_in": "$0.9375",
+          "after_out": "$7.5"
+        },
+        {
+          "model": "GPT-5.1",
+          "context": "400K",
+          "max_output": "-",
+          "input": "1.25",
+          "output": "10.00",
+          "cache": "0.125",
+          "discount": "7.5折",
+          "after_in": "$0.9375",
+          "after_out": "$7.5"
+        },
+        {
+          "model": "GPT-5-mini",
+          "context": "400K",
+          "max_output": "128K",
+          "input": "0.25",
+          "output": "2.00",
+          "cache": "0.025",
+          "discount": "7.5折",
+          "after_in": "$0.1875",
+          "after_out": "$1.5"
+        },
+        {
+          "model": "GPT-5-nano",
+          "context": "400K",
+          "max_output": "128K",
+          "input": "0.05",
+          "output": "0.40",
+          "cache": "0.005",
+          "discount": "7.5折",
+          "after_in": "$0.0375",
+          "after_out": "$0.3"
+        },
+        {
+          "model": "GPT-4.1",
+          "context": "1M",
+          "max_output": "33K",
+          "input": "2.00",
+          "output": "8.00",
+          "cache": "0.50",
+          "discount": "7.5折",
+          "after_in": "$1.5",
+          "after_out": "$6"
+        },
+        {
+          "model": "GPT-4.1-mini",
+          "context": "1M",
+          "max_output": "33K",
+          "input": "0.40",
+          "output": "1.60",
+          "cache": "0.10",
+          "discount": "7.5折",
+          "after_in": "$0.3",
+          "after_out": "$1.2"
+        },
+        {
+          "model": "GPT-4.1-nano",
+          "context": "1M",
+          "max_output": "33K",
+          "input": "0.10",
+          "output": "0.40",
+          "cache": "0.025",
+          "discount": "7.5折",
+          "after_in": "$0.075",
+          "after_out": "$0.3"
+        },
+        {
+          "model": "GPT-4o",
+          "context": "128K",
+          "max_output": "16K",
+          "input": "2.50",
+          "output": "10.00",
+          "cache": "1.25",
+          "discount": "7.5折",
+          "after_in": "$1.875",
+          "after_out": "$7.5"
+        },
+        {
+          "model": "GPT-4o-mini",
+          "context": "128K",
+          "max_output": "16K",
+          "input": "0.15",
+          "output": "0.60",
+          "cache": "0.075",
+          "discount": "7.5折",
+          "after_in": "$0.1125",
+          "after_out": "$0.45"
+        },
+        {
+          "model": "o3",
+          "context": "200K",
+          "max_output": "100K",
+          "input": "2.00",
+          "output": "8.00",
+          "cache": "0.50",
+          "discount": "7.5折",
+          "after_in": "$1.5",
+          "after_out": "$6"
+        },
+        {
+          "model": "o3-pro",
+          "context": "200K",
+          "max_output": "-",
+          "input": "20.00",
+          "output": "80.00",
+          "cache": "-",
+          "discount": "7.5折",
+          "after_in": "$15",
+          "after_out": "$60"
+        },
+        {
+          "model": "o4-mini",
+          "context": "200K",
+          "max_output": "100K",
+          "input": "1.10",
+          "output": "4.40",
+          "cache": "0.275",
+          "discount": "7.5折",
+          "after_in": "$0.825",
+          "after_out": "$3.3"
+        },
+        {
+          "model": "o1",
+          "context": "200K",
+          "max_output": "-",
+          "input": "15.00",
+          "output": "60.00",
+          "cache": "7.50",
+          "discount": "7.5折",
+          "after_in": "$11.25",
+          "after_out": "$45"
+        }
+      ]
+    },
+    {
+      "vendor": "xAI Grok",
+      "display": "xAI",
+      "tag": "os",
+      "series": "Grok",
+      "desc": "计费：按量计费（$/百万 tokens） · 平台：api.x.ai · 按 200K 上下文分档",
+      "footnote": "全系列 <b>6.5折</b>。按 ≤200K / ≥200K 分档，超过阈值整请求按高档计费。",
+      "models": [
+        {
+          "model": "grok-4.7",
+          "context": "500K",
+          "max_output": "-",
+          "input": "2.00/4.00",
+          "output": "6.00/12.00",
+          "cache": "0.50/1.00",
+          "discount": "6.5折",
+          "after_in": "$1.3/$2.6",
+          "after_out": "$3.9/$7.8"
+        },
+        {
+          "model": "grok-4.6",
+          "context": "500K",
+          "max_output": "-",
+          "input": "2.00/4.00",
+          "output": "6.00/12.00",
+          "cache": "0.50/1.00",
+          "discount": "6.5折",
+          "after_in": "$1.3/$2.6",
+          "after_out": "$3.9/$7.8"
+        },
+        {
+          "model": "grok-4.5",
+          "context": "500K",
+          "max_output": "-",
+          "input": "2.00/4.00",
+          "output": "6.00/12.00",
+          "cache": "0.30/0.60",
+          "discount": "6.5折",
+          "after_in": "$1.3/$2.6",
+          "after_out": "$3.9/$7.8"
+        },
+        {
+          "model": "grok-4.3",
+          "context": "1M",
+          "max_output": "-",
+          "input": "1.25/2.50",
+          "output": "2.50/5.00",
+          "cache": "0.20/0.40",
+          "discount": "6.5折",
+          "after_in": "$0.8125/$1.625",
+          "after_out": "$1.625/$3.25"
+        },
+        {
+          "model": "grok-4.20-reasoning",
+          "context": "1M",
+          "max_output": "-",
+          "input": "1.25/2.50",
+          "output": "2.50/5.00",
+          "cache": "0.20/0.40",
+          "discount": "6.5折",
+          "after_in": "$0.8125/$1.625",
+          "after_out": "$1.625/$3.25"
+        },
+        {
+          "model": "grok-4.20-non-reasoning",
+          "context": "1M",
+          "max_output": "-",
+          "input": "1.25/2.50",
+          "output": "2.50/5.00",
+          "cache": "0.20/0.40",
+          "discount": "6.5折",
+          "after_in": "$0.8125/$1.625",
+          "after_out": "$1.625/$3.25"
+        },
+        {
+          "model": "grok-4.20-multi-agent",
+          "context": "1M",
+          "max_output": "-",
+          "input": "1.25/2.50",
+          "output": "2.50/5.00",
+          "cache": "0.20/0.40",
+          "discount": "6.5折",
+          "after_in": "$0.8125/$1.625",
+          "after_out": "$1.625/$3.25"
+        },
+        {
+          "model": "grok-build-0.1",
+          "context": "256K",
+          "max_output": "-",
+          "input": "1.00/2.00",
+          "output": "2.00/4.00",
+          "cache": "0.20/0.40",
+          "discount": "6.5折",
+          "after_in": "$0.65/$1.3",
+          "after_out": "$1.3/$2.6"
+        }
+      ]
+    }
+  ]
+}

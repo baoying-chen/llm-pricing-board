@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>国内外主流大模型定价对比（含代理折扣）</title>
+<style>
+  :root {
+    --bg: #f7f8fa; --panel: #ffffff; --border: #e5e7eb; --text: #1f2328;
+    --muted: #6b7280; --accent: #2563eb; --domestic: #1d4ed8; --overseas: #047857;
+    --header: #f1f5f9; --zebra: #fafbfc; --disc: #fff7ed; --disc-border: #fed7aa;
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--text);
+    font-family:-apple-system,"PingFang SC","Microsoft YaHei","Segoe UI",Arial,sans-serif;
+    line-height:1.55; padding:32px 16px 80px; }
+  .wrap { max-width:1440px; margin:0 auto; }
+  h1 { font-size:26px; margin:0 0 4px; }
+  .sub { color:var(--muted); font-size:13px; margin-bottom:24px; }
+  .meta { background:#fffbeb; border:1px solid #fde68a; border-radius:8px; padding:12px 16px;
+    font-size:13px; color:#78350f; margin-bottom:26px; }
+  .meta b { color:#92400e; }
+  .meta ul { margin:6px 0 0 20px; padding:0; }
+  .meta li { margin:2px 0; }
+  .section { background:var(--panel); border:1px solid var(--border); border-radius:12px;
+    padding:18px 22px 24px; margin-bottom:26px; box-shadow:0 1px 2px rgba(0,0,0,.03); }
+  .section h2 { font-size:18px; margin:0 0 4px; display:flex; align-items:center; gap:10px; }
+  .tag { font-size:11px; padding:2px 8px; border-radius:999px; color:#fff; }
+  .tag.dom { background:var(--domestic); } .tag.os { background:var(--overseas); }
+  .section .desc { color:var(--muted); font-size:12px; margin-bottom:14px; }
+  .scroll { overflow-x:auto; }
+  table { width:100%; border-collapse:collapse; font-size:13px; min-width:1000px; }
+  th, td { text-align:left; padding:9px 12px; border-bottom:1px solid var(--border);
+    vertical-align:top; white-space:nowrap; }
+  th { background:var(--header); font-weight:600; color:#334155; font-size:12px;
+    letter-spacing:.02em; position:sticky; top:0; }
+  tbody tr:nth-child(even) { background:var(--zebra); }
+  tbody tr:hover { background:#eef2ff; }
+  .model { font-weight:600; color:#0f172a; }
+  .price { font-variant-numeric:tabular-nums; }
+  .na { color:#94a3b8; font-style:italic; }
+  .disc { background:var(--disc); color:#9a3412; font-weight:600; font-size:12px; }
+  .disc-col { background:#fffaf2; }
+  .footnote { margin-top:14px; padding-top:12px; border-top:1px dashed var(--border);
+    font-size:12px; color:var(--muted); }
+  .toc { display:grid; grid-template-columns:repeat(auto-fill,minmax(170px,1fr)); gap:8px; margin-bottom:24px; }
+  .toc a { display:block; background:#fff; border:1px solid var(--border); border-radius:6px;
+    padding:8px 12px; text-decoration:none; color:var(--text); font-size:13px; }
+  .toc a:hover { border-color:var(--accent); color:var(--accent); }
+  .toc .grp { grid-column:1/-1; font-size:11px; color:var(--muted); margin-top:6px; padding-left:4px; }
+  .dtab { width:100%; border-collapse:collapse; font-size:13px; margin-bottom:8px; }
+  .dtab th, .dtab td { border:1px solid var(--border); padding:7px 12px; white-space:nowrap; }
+  .dtab th { background:#fef3c7; }
+  .legend { display:flex; flex-wrap:wrap; gap:14px; margin:6px 0 18px; font-size:12px; color:var(--muted); }
+  code { font-family:ui-monospace,Menlo,monospace; font-size:12px; }
+  #loading { text-align:center; color:var(--muted); padding:60px 0; font-size:15px; }
+  #err { display:none; background:#fef2f2; border:1px solid #fecaca; color:#991b1b;
+    border-radius:8px; padding:16px; font-size:13px; margin-bottom:20px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>国内外主流大模型 API 定价对比 · 含代理折扣</h1>
+  <div class="sub" id="sub">加载中…</div>
+  <div id="loading">正在加载最新价格数据…</div>
+  <div id="err"></div>
+  <div id="app"></div>
+</div>
+
+<script>
+function esc(s){
+  return String(s==null?"":s).replace(/[&<>"']/g, function(c){
+    return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c];
+  });
+}
+function fmtDisc(v){ return v ? '<td class="disc">'+esc(v)+'</td>' : '<td class="disc">—</td>'; }
+
+function render(data){
+  document.getElementById("loading").style.display = "none";
+  const meta = data.meta || {};
+  document.getElementById("sub").textContent =
+    "生成时间：" + (meta.generated||"") + " · 数据来源：" + (meta.source||"") + " · 价格单位：每百万 tokens（¥ 或 $）· 折扣为用户提供政策";
+
+  const app = document.getElementById("app");
+  let h = "";
+
+  // 折扣政策对照表
+  h += '<h2 style="font-size:17px;margin:0 0 12px;">折扣政策对照表</h2>';
+  h += '<div class="scroll"><table class="dtab"><thead><tr><th>厂商系列</th><th>折扣政策</th><th>系数</th></tr></thead><tbody>';
+  (data.discount_table||[]).forEach(function(d){
+    h += "<tr><td><b>"+esc(d.name)+"</b></td><td>"+esc(d.policy)+"</td><td class='price'>"+esc(d.coef)+"</td></tr>";
+  });
+  h += "</tbody></table></div>";
+
+  // 目录
+  h += '<div class="toc">';
+  const dom = data.vendors.filter(function(v){return v.tag==="dom";});
+  const os = data.vendors.filter(function(v){return v.tag==="os";});
+  h += '<div class="grp">国内</div>';
+  dom.forEach(function(v){ h += '<a href="#'+esc(v.vendor)+'">'+esc(v.display)+'</a>'; });
+  h += '<div class="grp">海外</div>';
+  os.forEach(function(v){ h += '<a href="#'+esc(v.vendor)+'">'+esc(v.display)+'</a>'; });
+  h += '</div>';
+
+  // 各厂商分节
+  data.vendors.forEach(function(v){
+    const isDom = v.tag==="dom";
+    h += '<div class="section" id="'+esc(v.vendor)+'">';
+    h += '<h2>'+esc(v.display)+' <span class="tag '+v.tag+'">'+(isDom?"国内":"海外")+'</span> <span style="font-weight:400;font-size:13px;color:var(--muted);">'+esc(v.series||"")+'</span></h2>';
+    h += '<div class="desc">'+esc(v.desc||"")+'</div>';
+    h += '<div class="scroll"><table>';
+    h += '<thead><tr><th>模型</th><th>上下文</th><th>最大输出</th><th>输入单价</th><th>输出单价</th><th>缓存命中</th><th>折扣</th><th>折后输入</th><th>折后输出</th></tr></thead><tbody>';
+    (v.models||[]).forEach(function(m){
+      const cache = m.cache;
+      const cacheCls = (cache==="—"||cache==="-"||cache===""||(cache&&cache.indexOf("免费")>=0)) ? ' class="na"' : "";
+      h += '<tr>'
+        + '<td class="model">'+esc(m.model)+'</td>'
+        + '<td>'+esc(m.context)+'</td><td>'+esc(m.max_output)+'</td>'
+        + '<td class="price">'+esc(m.input)+'</td>'
+        + '<td class="price">'+esc(m.output)+'</td>'
+        + '<td class="price"'+cacheCls+'>'+esc(cache)+'</td>'
+        + fmtDisc(m.discount)
+        + '<td class="price disc-col">'+esc(m.after_in)+'</td>'
+        + '<td class="price disc-col">'+esc(m.after_out)+'</td>'
+        + '</tr>';
+    });
+    h += '</tbody></table></div>';
+    h += '<div class="footnote">'+esc(v.footnote||"")+'</div>';
+    h += '</div>';
+  });
+
+  h += '<div class="section"><div class="footnote" style="border:0;margin:0;padding:0;color:var(--muted);font-size:12px;line-height:1.7;">'
+     + '数据采集 '+(meta.generated||"")+'，模型与折扣政策变动频繁，正式大批量采购前请回官方页与商务二次确认。'
+     + (meta.currency_note?('<br>'+esc(meta.currency_note)):"") + '</div></div>';
+
+  app.innerHTML = h;
+}
+
+fetch("prices.json", {cache:"no-store"})
+  .then(function(r){ if(!r.ok) throw new Error("HTTP "+r.status); return r.json(); })
+  .then(render)
+  .catch(function(e){
+    document.getElementById("loading").style.display = "none";
+    const err = document.getElementById("err");
+    err.style.display = "block";
+    err.innerHTML = "无法加载 <code>prices.json</code>：" + esc(e.message) +
+      "。<br>若直接双击打开本文件（file://），浏览器会拦截本地 fetch；请通过部署后的网址访问，或将本目录用静态服务器打开。";
+  });
+</script>
+</body>
+</html>
