@@ -61,8 +61,14 @@ def main():
     # 3) 推送到当前分支（原地更新 → URL 固定）
     branch = run(["git", "branch", "--show-current"], check=False, allow_fail=True)
     branch = branch.stdout.strip() or "main"
-    run(["git", "push", "origin", branch], check=False, allow_fail=True)
-    print("部署完成：推送到 origin/%s（GitHub Pages URL 不变）" % branch)
+    pr = run(["git", "push", "origin", branch], check=False, allow_fail=True)
+    if pr.returncode != 0:
+        sys.exit(
+            "✗ 推送失败：未配置 remote `origin` 或凭据无效。\n"
+            "  请先执行：git remote add origin https://<PAT>@github.com/<user>/<repo>.git\n"
+            "  然后重跑：python deploy_site.py"
+        )
+    print("✓ 部署完成：推送到 origin/%s（GitHub Pages URL 不变）" % branch)
 
 
 if __name__ == "__main__":
