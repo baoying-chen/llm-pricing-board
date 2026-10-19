@@ -32,6 +32,22 @@ def main():
     os.chdir(here)
     init = "--init" in sys.argv
 
+    # 若本地存在 .deploy_env（由 setup_github.py 写入，含 PAT/owner/repo），
+    # 则临时把 remote 设为带 PAT 的 URL，便于无交互推送；不写死到 git config 之外。
+    envf = os.path.join(here, ".deploy_env")
+    if os.path.exists(envf):
+        cfg = {}
+        for line in open(envf, encoding="utf-8"):
+            line = line.strip()
+            if not line or "=" not in line:
+                continue
+            k, v = line.split("=", 1)
+            cfg[k] = v
+        if cfg.get("PAT") and cfg.get("OWNER") and cfg.get("REPO"):
+            url = "https://%s@github.com/%s/%s.git" % (cfg["PAT"], cfg["OWNER"], cfg["REPO"])
+            run(["git", "remote", "set-url", "origin", url], check=False, allow_fail=True)
+            print(">> 已从 .deploy_env 载入部署凭据")
+
     if init:
         run(["git", "init", "-b", "main"], allow_fail=True)
         # 确保只跟踪站点所需文件 + 构建脚本（便于追溯），忽略临时产物
