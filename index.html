@@ -130,12 +130,8 @@
     border-radius:999px; margin:1px 4px 1px 0; border:1px solid; white-space:nowrap; }
   .footnote { margin-top:14px; padding-top:12px; border-top:1px dashed var(--border);
     font-size:12px; color:var(--muted); }
-  .toc { display:grid; grid-template-columns:repeat(auto-fill,minmax(170px,1fr)); gap:8px; margin-bottom:24px; }
-  .toc a { display:block; background:var(--panel); border:1px solid var(--border); border-radius:8px;
-    padding:8px 12px; text-decoration:none; color:var(--text); font-size:13px;
-    backdrop-filter:blur(8px); transition:.15s; }
-  .toc a:hover { border-color:var(--accent2); color:#f0abfc; box-shadow:0 0 14px rgba(236,72,153,.25); transform:translateY(-1px); }
-  .toc .grp { grid-column:1/-1; font-size:11px; color:var(--muted); margin-top:6px; padding-left:4px; letter-spacing:.12em; text-transform:uppercase; }
+  html{ scroll-behavior:smooth; }
+  .section{ scroll-margin-top:92px; }
   .dtab { width:100%; border-collapse:collapse; font-size:13px; margin-bottom:8px; }
   .dtab th, .dtab td { border:1px solid var(--border); padding:7px 12px; white-space:nowrap; }
   .dtab th { background:rgba(168,85,247,.14); color:#cbb8f5; }
@@ -271,14 +267,23 @@
   .cutcard .cmpchk input{ accent-color:#c084fc; }
 
   /* 厂商导航侧边栏 */
-  #sidenav{ position:fixed; top:96px; left:10px; width:190px; max-height:calc(100vh - 120px); overflow:auto; z-index:50;
-    background:var(--panel); border:1px solid var(--border); border-radius:14px; padding:12px 10px; backdrop-filter:blur(10px);
-    -webkit-backdrop-filter:blur(10px); box-shadow:var(--glow); display:none; }
-  #sidenav .grp{ font-size:11px; color:var(--muted); letter-spacing:.12em; text-transform:uppercase; margin:10px 0 4px; }
+  #sidenav{ position:fixed; top:96px; left:12px; width:196px; max-height:calc(100vh - 120px); overflow-y:auto; z-index:50;
+    background:linear-gradient(180deg, rgba(30,18,60,.85), rgba(16,10,38,.88)); border:1px solid var(--border); border-radius:14px; padding:12px 10px; backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px); box-shadow:var(--glow); display:none; }
+  #sidenav::-webkit-scrollbar{ width:5px; }
+  #sidenav::-webkit-scrollbar-thumb{ background:rgba(168,85,247,.35); border-radius:999px; }
+  #sidenav .grp{ font-size:10.5px; color:var(--muted); letter-spacing:.14em; text-transform:uppercase; margin:12px 0 5px; padding-left:9px;
+    display:flex; align-items:center; gap:6px; }
+  #sidenav .grp::after{ content:""; flex:1; height:1px; background:linear-gradient(90deg, rgba(168,85,247,.35), transparent); }
   #sidenav .grp:first-child{ margin-top:2px; }
-  #sidenav a{ display:block; font-size:12.5px; color:#cfe6ff; text-decoration:none; padding:3px 8px; border-radius:7px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-  #sidenav a:hover{ background:rgba(168,85,247,.16); color:#f0abfc; }
-  @media (min-width:1280px){ #sidenav{ display:block; } .wrap{ padding-left:208px; } }
+  #sidenav a{ position:relative; display:block; font-size:12.5px; color:#cfe6ff; text-decoration:none; padding:5px 9px 5px 13px; border-radius:8px;
+    white-space:nowrap; overflow:hidden; text-overflow:ellipsis; transition:.15s; }
+  #sidenav a::before{ content:""; position:absolute; left:3px; top:50%; transform:translateY(-50%) scaleY(0); width:3px; height:60%;
+    border-radius:999px; background:linear-gradient(180deg,#c084fc,#22d3ee); transition:.18s; }
+  #sidenav a:hover{ background:rgba(168,85,247,.14); color:#f0abfc; transform:translateX(2px); }
+  #sidenav a.active{ background:rgba(168,85,247,.2); color:#f0abfc; font-weight:600; }
+  #sidenav a.active::before{ transform:translateY(-50%) scaleY(1); }
+  @media (min-width:1280px){ #sidenav{ display:block; } .wrap{ padding-left:214px; } }
   @media (max-width:760px){ .cutgrid{ grid-template-columns:1fr 1fr; } }
 
   /* 模型明细弹层 */
@@ -459,33 +464,12 @@ function renderStatic(){
     " · 价格单位：每百万 tokens（¥ 或 $）· 折扣为用户提供政策";
 
   let h = "";
-  // 目录
-  h += '<div class="toc">';
-  const dom = DATA.vendors.filter(function(v){return v.tag==="dom";});
-  const os = DATA.vendors.filter(function(v){return v.tag==="os";});
-  h += '<div class="grp">国内</div>';
-  dom.forEach(function(v){ h += '<a href="#'+esc(v.vendor)+'">'+esc(v.display)+'</a>'; });
-  h += '<div class="grp">海外</div>';
-  os.forEach(function(v){ h += '<a href="#'+esc(v.vendor)+'">'+esc(v.display)+'</a>'; });
-  h += '</div>';
   h += '<div class="heat-legend">单元格按 <b style="color:#cfe6ff">折后价 ¥ 等效值</b> 高低着色（绿=便宜 · 黄=居中 · 红=贵）；折扣列按折扣力度绿色加深。价格文本随上方「币种」切换显示。</div>';
 
   // 成本计算器已改为右上角按钮 → 抽屉（见 #calcDrawer）
 
-  // 各模型降幅速览（卡片墙）
-  h += '<div class="section" id="cutWall"><h2 style="font-size:17px;margin:0 0 6px;">📉 各模型降幅速览 <span style="font-weight:400;font-size:12px;color:var(--muted);">标牌价 → 折后价 落差排行</span></h2>';
-  h += '<div class="panel-note">降幅 =（1 − 折扣系数）×100%，按当前「币种」显示折后价；免费模型与未打折模型不计入排行。点击卡片看明细，勾选可加入对比。</div>';
-  h += '<div class="ph-row">'
-     + '<input type="search" id="cutQ" placeholder="搜索模型 / 厂商 / 能力" style="min-width:200px" />'
-     + '<select id="cutRg"><option value="all">全部</option><option value="dom">国内</option><option value="os">海外</option></select>'
-     + '<select id="cutCap"><option value="">能力：全部</option></select>'
-     + '<select id="cutSort"><option value="cutDesc">降幅最高在前</option><option value="cutAsc">降幅最低在前</option><option value="aoutAsc">折后输出价 低→高</option><option value="ainAsc">折后输入价 低→高</option></select>'
-     + '</div>';
-  h += '<div class="cutgrid" id="cutCards"></div>';
-  h += '<div class="footnote" id="cutFoot"></div></div>';
-
   // 行业数据概览
-  h += '<div class="section"><h2 style="font-size:17px;margin:0 0 6px;">📊 行业数据概览 <span style="font-weight:400;font-size:12px;color:var(--muted);">实时按当前价格计算</span></h2>';
+  h += '<div class="section" id="overview"><h2 style="font-size:17px;margin:0 0 6px;">📊 行业数据概览 <span style="font-weight:400;font-size:12px;color:var(--muted);">实时按当前价格计算</span></h2>';
   h += '<div class="panel-note">基于全部在售模型（免费模型计入数量但不计入均价）。价格统一折算 <b>¥/百万 tokens</b>。</div>';
   h += '<div class="statgrid" id="ovStats"></div>';
   h += '<div class="sub2">各厂商平均折后输出价</div>';
@@ -501,12 +485,24 @@ function renderStatic(){
   h += '<div class="scroll"><table id="cmpTable"></table></div></div>';
 
   // 模型历史价格波动
-  h += '<div class="section"><h2 style="font-size:17px;margin:0 0 6px;">📈 模型历史价格波动 <span style="font-weight:400;font-size:12px;color:var(--muted);">输入 / 输出 折后价走势</span></h2>';
+  h += '<div class="section" id="history"><h2 style="font-size:17px;margin:0 0 6px;">📈 模型历史价格波动 <span style="font-weight:400;font-size:12px;color:var(--muted);">输入 / 输出 折后价走势</span></h2>';
   h += '<div class="panel-note" id="histNote">加载中…</div>';
   h += '<div class="hist-tools"><label style="font-size:12px;color:var(--muted);">选择模型 <select class="mkselect" id="histSel"></select></label>'
      + '<span class="legend"><span><i style="background:#38bdf8"></i>折后输入</span><span><i style="background:#a78bfa"></i>折后输出</span></span></div>';
   h += '<div class="chartbox"><div id="histChart"></div></div>';
   h += '<div class="statgrid" id="histStats" style="margin-top:14px;"></div></div>';
+
+  // 各模型降幅速览（页面最下方）
+  h += '<div class="section" id="cutWall"><h2 style="font-size:17px;margin:0 0 6px;">📉 各模型降幅速览 <span style="font-weight:400;font-size:12px;color:var(--muted);">标牌价 → 折后价 落差排行</span></h2>';
+  h += '<div class="panel-note">降幅 =（1 − 折扣系数）×100%，按当前「币种」显示折后价；免费模型与未打折模型不计入排行。点击卡片看明细，勾选可加入对比。</div>';
+  h += '<div class="ph-row">'
+     + '<input type="search" id="cutQ" placeholder="搜索模型 / 厂商 / 能力" style="min-width:200px" />'
+     + '<select id="cutRg"><option value="all">全部</option><option value="dom">国内</option><option value="os">海外</option></select>'
+     + '<select id="cutCap"><option value="">能力：全部</option></select>'
+     + '<select id="cutSort"><option value="cutDesc">降幅最高在前</option><option value="cutAsc">降幅最低在前</option><option value="aoutAsc">折后输出价 低→高</option><option value="ainAsc">折后输入价 低→高</option></select>'
+     + '</div>';
+  h += '<div class="cutgrid" id="cutCards"></div>';
+  h += '<div class="footnote" id="cutFoot"></div></div>';
 
   // 页脚
   h += '<div class="section"><div class="footnote" style="border:0;margin:0;padding:0;color:var(--muted);font-size:12px;line-height:1.7;">'
@@ -515,11 +511,18 @@ function renderStatic(){
 
   document.getElementById("app").innerHTML = h;
 
-  // 厂商导航侧边栏
-  let sn = '<div class="grp">国内</div>';
-  dom.forEach(function(v){ sn += '<a href="#'+esc(v.vendor)+'">'+esc(v.display)+'</a>'; });
-  sn += '<div class="grp">海外</div>';
-  os.forEach(function(v){ sn += '<a href="#'+esc(v.vendor)+'">'+esc(v.display)+'</a>'; });
+  // 厂商导航侧边栏（页面导航 + 厂商分组）
+  const dom = DATA.vendors.filter(function(v){return v.tag==="dom";});
+  const os = DATA.vendors.filter(function(v){return v.tag==="os";});
+  let sn = '<div class="grp">页面</div>';
+  sn += '<a href="#overview" data-t="overview">📊 行业概览</a>';
+  sn += '<a href="#compare" data-t="compare">🔍 模型对比</a>';
+  sn += '<a href="#history" data-t="history">📈 历史价格</a>';
+  sn += '<a href="#cutWall" data-t="cutWall">📉 降幅速览</a>';
+  sn += '<div class="grp">国内厂商</div>';
+  dom.forEach(function(v){ sn += '<a href="#'+esc(v.vendor)+'" data-t="'+esc(v.vendor)+'">'+esc(v.display)+'</a>'; });
+  sn += '<div class="grp">海外厂商</div>';
+  os.forEach(function(v){ sn += '<a href="#'+esc(v.vendor)+'" data-t="'+esc(v.vendor)+'">'+esc(v.display)+'</a>'; });
   const snEl = document.getElementById("sidenav"); if(snEl) snEl.innerHTML = sn;
 }
 
@@ -585,6 +588,7 @@ function drawVendorsInto(){
   const tail = idx>=0 ? _staticHTML.slice(idx) : "";
   document.getElementById("app").innerHTML = head + h + tail;
   renderCutWall();   // 主表重渲染会重置 #app，卡片墙需同步重建
+  setupSpy();        // 区块被重建，滚动高亮需重新挂载
 }
 
 function selectedModels(){
@@ -1030,6 +1034,26 @@ function closeDisc(){
 }
 
 // ---------- 事件 ----------
+// 侧边栏滚动高亮：当前浏览的区块对应链接点亮
+let _spy = null;
+function setupSpy(){
+  if(_spy) _spy.disconnect();
+  const links = document.querySelectorAll("#sidenav a[data-t]");
+  if(!links.length || !("IntersectionObserver" in window)) return;
+  const map = {};
+  links.forEach(function(a){ map[a.getAttribute("data-t")] = a; });
+  const targets = Object.keys(map).map(function(id){ return document.getElementById(id); }).filter(Boolean);
+  _spy = new IntersectionObserver(function(ents){
+    ents.forEach(function(en){
+      if(en.isIntersecting){
+        links.forEach(function(a){ a.classList.remove("active"); });
+        const a = map[en.target.id]; if(a) a.classList.add("active");
+      }
+    });
+  }, { rootMargin:"-12% 0px -72% 0px" });
+  targets.forEach(function(t){ _spy.observe(t); });
+}
+
 function bindUI(){
   document.getElementById("tRegion").addEventListener("change", function(e){ STATE.region=e.target.value; drawVendorsInto(); });
   document.getElementById("tQ").addEventListener("input", function(e){ STATE.q=e.target.value.trim(); drawVendorsInto(); });
