@@ -472,8 +472,6 @@ function renderStatic(){
   h += '<div class="section" id="overview"><h2 style="font-size:17px;margin:0 0 6px;">📊 行业数据概览 <span style="font-weight:400;font-size:12px;color:var(--muted);">实时按当前价格计算</span></h2>';
   h += '<div class="panel-note">基于全部在售模型（免费模型计入数量但不计入均价）。价格统一折算 <b>¥/百万 tokens</b>。</div>';
   h += '<div class="statgrid" id="ovStats"></div>';
-  h += '<div class="sub2">各厂商平均折后输出价</div>';
-  h += '<div class="barchart" id="ovBars"></div>';
   h += '<div class="sub2">性价比两端</div>';
   h += '<div id="ovCheap"></div><div id="ovExp"></div>';
   h += '<div class="sub2">折扣覆盖</div>';
@@ -483,6 +481,10 @@ function renderStatic(){
   h += '<div class="section" id="compare"><h2 style="font-size:17px;margin:0 0 10px;">🔍 模型对比 <button class="btn" id="cmpClear">清空</button></h2>';
   h += '<div id="cmpTags"></div>';
   h += '<div class="scroll"><table id="cmpTable"></table></div></div>';
+
+  // 各厂商平均折后输出价（历史价格波动上方）
+  h += '<div class="section" id="avgBar"><h2 style="font-size:17px;margin:0 0 6px;">📊 各厂商平均折后输出价 <span style="font-weight:400;font-size:12px;color:var(--muted);">统一折算 ¥/百万 tokens</span></h2>';
+  h += '<div class="barchart" id="ovBars"></div></div>';
 
   // 模型历史价格波动
   h += '<div class="section" id="history"><h2 style="font-size:17px;margin:0 0 6px;">📈 模型历史价格波动 <span style="font-weight:400;font-size:12px;color:var(--muted);">输入 / 输出 折后价走势</span></h2>';
