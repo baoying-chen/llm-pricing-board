@@ -245,6 +245,50 @@
     table { min-width:920px; }
     h1 { font-size:26px; }
   }
+
+  /* 币种分段控件 */
+  .seg{ display:inline-flex; border:1px solid var(--border); border-radius:8px; overflow:hidden; }
+  .seg button{ font-size:12px; padding:5px 11px; border:0; background:rgba(10,6,26,.5); color:var(--muted); cursor:pointer; transition:.15s; }
+  .seg button+.seg button{ border-left:1px solid var(--border); }
+  .seg button.on{ background:linear-gradient(92deg,#8b5cf6,#ec4899); color:#fff; font-weight:600; }
+
+  /* 降幅速览 筛选行 + 卡片墙 */
+  .ph-row{ display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin:6px 0 4px; }
+  .ph-row input[type=search], .ph-row select{ font-size:13px; padding:6px 9px; border:1px solid var(--border); border-radius:8px; background:rgba(10,6,26,.72); color:var(--text); outline:none; }
+  .ph-row select:focus, .ph-row input:focus{ border-color:var(--accent); box-shadow:0 0 0 3px rgba(168,85,247,.2); }
+  .cutgrid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(224px,1fr)); gap:12px; margin-top:14px; }
+  .cutcard{ position:relative; background:rgba(8,4,22,.4); border:1px solid var(--border); border-radius:12px; padding:13px 14px 14px; cursor:pointer; transition:.15s; }
+  .cutcard:hover{ border-color:var(--accent2); box-shadow:0 0 16px rgba(168,85,247,.28); transform:translateY(-2px); }
+  .cutcard .nm{ font-weight:700; color:#f3efff; font-size:14px; margin-bottom:1px; padding-right:56px; }
+  .cutcard .vd{ font-size:11.5px; color:var(--muted); margin-bottom:8px; }
+  .cutcard .cut{ font-size:23px; font-weight:800; background:linear-gradient(92deg,#34d399,#22d3ee); -webkit-background-clip:text; background-clip:text; color:transparent; font-variant-numeric:tabular-nums; line-height:1.1; }
+  .cutcard .cut small{ font-size:11px; -webkit-text-fill-color:var(--muted); font-weight:500; margin-left:4px; }
+  .cutcard .pr{ font-size:12px; color:#cfe6ff; font-family:ui-monospace,Menlo,monospace; margin:6px 0 8px; }
+  .cutcard .caps{ margin:2px 0 12px; }
+  .cutcard .cbar{ height:6px; border-radius:999px; background:rgba(8,4,22,.6); overflow:hidden; margin-bottom:10px; }
+  .cutcard .cbar i{ display:block; height:100%; background:linear-gradient(90deg,#34d399,#22d3ee); }
+  .cutcard .cmpchk{ display:inline-flex; align-items:center; gap:5px; font-size:12px; color:var(--muted); cursor:pointer; }
+  .cutcard .cmpchk input{ accent-color:#c084fc; }
+
+  /* 厂商导航侧边栏 */
+  #sidenav{ position:fixed; top:96px; left:10px; width:190px; max-height:calc(100vh - 120px); overflow:auto; z-index:50;
+    background:var(--panel); border:1px solid var(--border); border-radius:14px; padding:12px 10px; backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px); box-shadow:var(--glow); display:none; }
+  #sidenav .grp{ font-size:11px; color:var(--muted); letter-spacing:.12em; text-transform:uppercase; margin:10px 0 4px; }
+  #sidenav .grp:first-child{ margin-top:2px; }
+  #sidenav a{ display:block; font-size:12.5px; color:#cfe6ff; text-decoration:none; padding:3px 8px; border-radius:7px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  #sidenav a:hover{ background:rgba(168,85,247,.16); color:#f0abfc; }
+  @media (min-width:1280px){ #sidenav{ display:block; } .wrap{ padding-left:208px; } }
+  @media (max-width:760px){ .cutgrid{ grid-template-columns:1fr 1fr; } }
+
+  /* 模型明细弹层 */
+  .modal-panel{ position:fixed; z-index:320; top:50%; left:50%; transform:translate(-50%,-50%) scale(.96); opacity:0; pointer-events:none; transition:.2s;
+    width:min(520px,94vw); max-height:86vh; overflow:auto; background:var(--panel); border:1px solid var(--border); border-radius:16px; padding:18px 22px 22px;
+    backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); box-shadow:0 24px 70px rgba(5,2,18,.6); }
+  .modal-panel.show{ opacity:1; pointer-events:auto; transform:translate(-50%,-50%) scale(1); }
+  .mcell{ display:flex; justify-content:space-between; gap:14px; padding:9px 0; border-bottom:1px solid rgba(167,139,250,.12); font-size:13px; }
+  .mcell .k{ color:var(--muted); }
+  .mcell .v{ color:#eaf2ff; text-align:right; }
 </style>
 </head>
 <body>
@@ -275,13 +319,22 @@
     </label>
     <span class="sep"></span>
     <label><input type="checkbox" id="tAuto" checked /> 自动刷新</label>
-    <label><input type="checkbox" id="tCNY" checked /> 折算为 ¥</label>
+    <label>币种
+      <span class="seg" id="curSeg">
+        <button type="button" data-c="CNY" class="on">¥</button>
+        <button type="button" data-c="USD">$</button>
+        <button type="button" data-c="RAW">原币种</button>
+      </span>
+    </label>
+    <label>汇率 <input type="number" id="fxRate" value="7.2" step="0.05" min="1" style="width:72px" /></label>
     <button class="btn" id="tRefresh">立即刷新</button>
     <button class="btn primary" id="tCmp">对比 (0)</button>
     <button class="btn primary" id="tCalc">💰 成本计算器</button>
     <button class="btn primary" id="tDisc">📋 折扣政策</button>
     <span class="status" id="status"><span class="dot"></span>自动刷新：开 · 等待数据</span>
   </div>
+
+  <aside class="sidenav" id="sidenav"></aside>
 
   <div id="loading">正在加载最新价格数据…</div>
   <div id="err"></div>
@@ -321,13 +374,25 @@
   </div>
 </aside>
 
+<!-- 模型明细弹层 -->
+<div class="modal-mask" id="cutMask"></div>
+<div class="modal-panel" id="cutModal" role="dialog" aria-modal="true">
+  <div class="drawer-hd">
+    <span class="t" id="cutMTitle"></span>
+    <button class="btn" id="cutMClose">✕ 关闭</button>
+  </div>
+  <div class="panel-note" id="cutMSub" style="margin:10px 0 4px"></div>
+  <div id="cutMCells"></div>
+</div>
+
 <div id="toast"></div>
 
 <script>
-const RATE = 7.2;                 // 1 $ ≈ 7.2 ¥
+let RATE = 7.2;                   // 1 $ ≈ 7.2 ¥（可编辑）
 let DATA = null;
-const STATE = { region:"all", q:"", sort:"default", auto:true, toCNY:true, useFilt:false,
+const STATE = { region:"all", q:"", sort:"default", auto:true, curMode:"CNY", useFilt:false,
                 compare:new Set(), lastCheck:null };
+const CUT = { q:"", rg:"all", cap:"", sort:"cutDesc" };   // 降幅速览筛选状态
 
 function esc(s){
   return String(s==null?"":s).replace(/[&<>"']/g, function(c){
@@ -342,15 +407,16 @@ function parseNum(s){
   return m ? parseFloat(m[0]) : null;
 }
 function toCNY(v, cur){ return cur==="$" ? v*RATE : v; }
+// 币种显示：CNY=统一折算¥；USD=统一折算$；RAW=按各模型原币种
 function fmtMoney(v, cur){
   if(v==null) return "—";
-  let cny = toCNY(v, cur);
-  if(STATE.toCNY){
-    let s = "¥" + (cny>=1 ? cny.toFixed(2) : cny.toFixed(4));
-    if(cur==="$") s += ' <small>($'+v.toFixed(4)+')</small>';
-    return s;
-  }
-  return cur + (v>=1 ? v.toFixed(2) : v.toFixed(4));
+  let val, sym;
+  if(STATE.curMode==="RAW"){ val=v; sym=cur; }
+  else if(STATE.curMode==="USD"){ val = cur==="$" ? v : v/RATE; sym="$"; }
+  else { val = cur==="$" ? v*RATE : v; sym="¥"; }   // CNY
+  const s = sym + (Math.abs(val)>=1 ? val.toFixed(2) : val.toFixed(4));
+  if(STATE.curMode==="CNY" && cur==="$") s += ' <small>($'+v.toFixed(4)+')</small>';
+  return s;
 }
 function cmp(a,b){ // null 排末尾
   if(a==null && b==null) return 0;
@@ -402,9 +468,21 @@ function renderStatic(){
   h += '<div class="grp">海外</div>';
   os.forEach(function(v){ h += '<a href="#'+esc(v.vendor)+'">'+esc(v.display)+'</a>'; });
   h += '</div>';
-  h += '<div class="heat-legend">价格单元格按 <b style="color:#cfe6ff">折后价</b> 高低着色（绿=便宜 · 黄=居中 · 红=贵）；折扣列按折扣力度绿色加深。单位已统一折算 ¥。</div>';
+  h += '<div class="heat-legend">单元格按 <b style="color:#cfe6ff">折后价 ¥ 等效值</b> 高低着色（绿=便宜 · 黄=居中 · 红=贵）；折扣列按折扣力度绿色加深。价格文本随上方「币种」切换显示。</div>';
 
   // 成本计算器已改为右上角按钮 → 抽屉（见 #calcDrawer）
+
+  // 各模型降幅速览（卡片墙）
+  h += '<div class="section" id="cutWall"><h2 style="font-size:17px;margin:0 0 6px;">📉 各模型降幅速览 <span style="font-weight:400;font-size:12px;color:var(--muted);">标牌价 → 折后价 落差排行</span></h2>';
+  h += '<div class="panel-note">降幅 =（1 − 折扣系数）×100%，按当前「币种」显示折后价；免费模型与未打折模型不计入排行。点击卡片看明细，勾选可加入对比。</div>';
+  h += '<div class="ph-row">'
+     + '<input type="search" id="cutQ" placeholder="搜索模型 / 厂商 / 能力" style="min-width:200px" />'
+     + '<select id="cutRg"><option value="all">全部</option><option value="dom">国内</option><option value="os">海外</option></select>'
+     + '<select id="cutCap"><option value="">能力：全部</option></select>'
+     + '<select id="cutSort"><option value="cutDesc">降幅最高在前</option><option value="cutAsc">降幅最低在前</option><option value="aoutAsc">折后输出价 低→高</option><option value="ainAsc">折后输入价 低→高</option></select>'
+     + '</div>';
+  h += '<div class="cutgrid" id="cutCards"></div>';
+  h += '<div class="footnote" id="cutFoot"></div></div>';
 
   // 行业数据概览
   h += '<div class="section"><h2 style="font-size:17px;margin:0 0 6px;">📊 行业数据概览 <span style="font-weight:400;font-size:12px;color:var(--muted);">实时按当前价格计算</span></h2>';
@@ -436,6 +514,13 @@ function renderStatic(){
      + (meta.currency_note?('<br>'+esc(meta.currency_note)):"") + '</div></div>';
 
   document.getElementById("app").innerHTML = h;
+
+  // 厂商导航侧边栏
+  let sn = '<div class="grp">国内</div>';
+  dom.forEach(function(v){ sn += '<a href="#'+esc(v.vendor)+'">'+esc(v.display)+'</a>'; });
+  sn += '<div class="grp">海外</div>';
+  os.forEach(function(v){ sn += '<a href="#'+esc(v.vendor)+'">'+esc(v.display)+'</a>'; });
+  const snEl = document.getElementById("sidenav"); if(snEl) snEl.innerHTML = sn;
 }
 
 // 重组 app：static 部分已在 DOM，这里仅替换厂商列表；为简单起见整体重渲染
@@ -479,12 +564,12 @@ function drawVendorsInto(){
         + '<td class="model">'+esc(m.model)+'</td>'
         + '<td class="caps">'+capChips(m.cap)+'</td>'
         + '<td>'+esc(m.context)+'</td><td>'+esc(m.max_output)+'</td>'
-        + '<td class="price" style="'+inS+'">'+esc(m.input)+'</td>'
-        + '<td class="price" style="'+outS+'">'+esc(m.output)+'</td>'
-        + '<td class="price"'+cacheCls+'>'+esc(cache)+'</td>'
-        + '<td class="disc" style="'+dS+'">'+esc(m.discount)+'</td>'
-        + '<td class="price disc-col" style="'+ainS+'">'+esc(m.after_in)+'</td>'
-        + '<td class="price disc-col" style="'+aoutS+'">'+esc(m.after_out)+'</td>'
+        + '<td class="price" style="'+inS+'" title="'+esc(m.input)+'">'+fmtMoney(m.in_v, m.cur)+'</td>'
+        + '<td class="price" style="'+outS+'" title="'+esc(m.output)+'">'+fmtMoney(m.out_v, m.cur)+'</td>'
+        + '<td class="price"'+cacheCls+' title="'+esc(cache)+'">'+esc(cache)+'</td>'
+        + '<td class="disc" style="'+dS+'" title="'+esc(m.discount)+'">'+esc(m.discount)+'</td>'
+        + '<td class="price disc-col" style="'+ainS+'" title="'+esc(m.after_in)+'">'+fmtMoney(m.after_in_v, m.cur)+'</td>'
+        + '<td class="price disc-col" style="'+aoutS+'" title="'+esc(m.after_out)+'">'+fmtMoney(m.after_out_v, m.cur)+'</td>'
         + '</tr>';
     });
     h += '</tbody></table></div>';
@@ -499,6 +584,7 @@ function drawVendorsInto(){
   const head = idx>=0 ? _staticHTML.slice(0, idx) : _staticHTML;
   const tail = idx>=0 ? _staticHTML.slice(idx) : "";
   document.getElementById("app").innerHTML = head + h + tail;
+  renderCutWall();   // 主表重渲染会重置 #app，卡片墙需同步重建
 }
 
 function selectedModels(){
@@ -539,23 +625,27 @@ function drawCompare(){
 function drawCalc(){
   const vin = parseFloat(document.getElementById("cVin").value)||0;
   const vout = parseFloat(document.getElementById("cVout").value)||0;
+  const mode = STATE.curMode;
+  const dval = function(it){ // 排序/条长所用等效数值：USD 按$等效，其余按¥等效
+    if(mode==="USD") return it.cur==="$" ? it.v : it.v/RATE;
+    return it.cny;
+  };
   let list = [];
   DATA.vendors.forEach(function(v){
     v.models.forEach(function(m){
       if(STATE.useFilt && !matchModel(v, m)) return;
-      if(m._free){ list.push({m:m, v:0, cur:m.cur}); return; }
+      if(m._free){ list.push({m:m, v:0, cur:m.cur, cny:0}); return; }
       const ain = m._ain!=null?m._ain:0, aout = m._aout!=null?m._aout:0;
       const native = ain*vin + aout*vout;
       list.push({m:m, v:native, cur:m.cur, cny: toCNY(native, m.cur)});
     });
   });
-  if(STATE.toCNY) list.sort(function(a,b){ return (a.cny||0)-(b.cny||0); });
-  else list.sort(function(a,b){ return (a.v||0)-(b.v||0); });
-  const max = Math.max.apply(null, list.map(function(x){ return STATE.toCNY ? (x.cny||0) : (x.v||0); }).concat([1]));
+  list.sort(function(a,b){ return dval(a)-dval(b); });
+  const max = Math.max.apply(null, list.map(dval).concat([1]));
   const top = list.slice(0, 25);
   let h = "";
   top.forEach(function(it){
-    const val = STATE.toCNY ? (it.cny||0) : (it.v||0);
+    const val = dval(it);
     const pct = Math.max(2, Math.round(val/max*100));
     h += '<div class="costitem"><div class="nm">'+esc(it.m.model)
        + '<small>'+esc(it.m._key.split("/")[0])+'</small></div>'
@@ -648,6 +738,15 @@ function drawOverview(){
   s += statCard(fmtCNY(osAvg), "海外平均折后输出");
   const cov = withPrice? Math.round(discCnt/withPrice*100):0;
   s += statCard(cov+"%", "享代理折扣占比");
+  // 降幅统计（基于折扣系数）
+  const cuts = all.filter(function(r){return r.m.coef!=null && r.m.coef<1 && !r.m.free;})
+                  .map(function(r){return (1-r.m.coef)*100;});
+  let best=null;
+  all.forEach(function(r){ if(r.m.coef!=null && r.m.coef<1 && !r.m.free){ const c=(1-r.m.coef)*100; if(!best||c>best.c) best={c:c,m:r.m}; } });
+  const maxCut = cuts.length? Math.max.apply(null,cuts):0;
+  const avgCut = cuts.length? cuts.reduce(function(a,b){return a+b;},0)/cuts.length : 0;
+  s += statCard(maxCut.toFixed(0)+"%", "最大降幅"+(best?(" · "+esc(best.m.model)):""));
+  s += statCard(avgCut.toFixed(0)+"%", "平均折扣让利");
   document.getElementById("ovStats").innerHTML = s;
 
   // 各厂商平均折后输出（按国内/海外着色）
@@ -685,6 +784,91 @@ function drawOverview(){
 }
 function statCard(val, label){
   return '<div class="statcard"><div class="statval">'+val+'</div><div class="statlabel">'+label+'</div></div>';
+}
+
+// ---------- 各模型降幅速览 卡片墙 ----------
+function allModelsFlat(){
+  const out = [];
+  DATA.vendors.forEach(function(v){ v.models.forEach(function(m){ out.push({v:v, m:m}); }); });
+  return out;
+}
+function renderCutWall(){
+  const box = document.getElementById("cutCards"); if(!box) return;
+  // 能力筛选项：仅在未填充时补充（drawVendorsInto 会重置 #app，故放此处）
+  const capSel = document.getElementById("cutCap");
+  if(capSel && capSel.options.length<=1){
+    const capSet = {};
+    DATA.vendors.forEach(function(v){ v.models.forEach(function(m){ m._caps.forEach(function(c){ capSet[c]=1; }); }); });
+    const opts = Object.keys(capSet).sort(function(a,b){return a.localeCompare(b,"zh");})
+      .map(function(c){ return '<option value="'+esc(c)+'">'+esc(c)+'</option>'; }).join("");
+    capSel.innerHTML = '<option value="">能力：全部</option>'+opts;
+  }
+  const q = CUT.q.toLowerCase();
+  const cutOf = function(m){ return (1-(m._coef==null?1:m._coef))*100; };
+  let list = allModelsFlat().filter(function(it){
+    const m = it.m, v = it.v;
+    if(m._coef==null || m._coef>=1) return false;   // 未打折不计
+    if(m._free) return false;
+    if(CUT.rg!=="all" && v.tag!==CUT.rg) return false;
+    if(CUT.cap && m._caps.indexOf(CUT.cap)<0) return false;
+    if(q){ const hay=(m.model+" "+v.display+" "+v.series+" "+m._caps.join(" ")).toLowerCase(); if(hay.indexOf(q)<0) return false; }
+    return true;
+  });
+  list.sort(function(a,b){
+    const s=CUT.sort;
+    if(s==="cutAsc")  return cutOf(a.m)-cutOf(b.m);
+    if(s==="aoutAsc") return cmp(a.m._aout,b.m._aout);
+    if(s==="ainAsc")  return cmp(a.m._ain,b.m._ain);
+    return cutOf(b.m)-cutOf(a.m);   // cutDesc 默认
+  });
+  const maxCut = list.length ? Math.max.apply(null, list.map(function(it){return cutOf(it.m);})) : 1;
+  let h = "";
+  list.slice(0,60).forEach(function(it){
+    const m=it.m, v=it.v, cut=cutOf(m);
+    const w = Math.max(3, Math.round(cut/Math.max(50,maxCut)*100));
+    const sel = STATE.compare.has(m._key);
+    h += '<div class="cutcard" data-vendor="'+esc(v.vendor)+'" data-model="'+esc(m.model)+'">'
+       + '<span class="tag '+(v.tag==="dom"?"dom":"os")+'" style="position:absolute;top:12px;right:12px">'+((v.tag==="dom")?"国内":"海外")+'</span>'
+       + '<div class="nm">'+esc(m.model)+'</div>'
+       + '<div class="vd">'+esc(v.display)+'</div>'
+       + '<div class="cut">↓'+cut.toFixed(0)+'%<small>降幅</small></div>'
+       + '<div class="pr">折后 '+fmtMoney(m.after_in_v, m.cur)+' / '+fmtMoney(m.after_out_v, m.cur)+'</div>'
+       + '<div class="caps">'+capChips(m.cap)+'</div>'
+       + '<div class="cbar"><i style="width:'+w+'%"></i></div>'
+       + '<label class="cmpchk"><input type="checkbox" data-key="'+esc(m._key)+'"'+(sel?" checked":"")+' /> 对比</label>'
+       + '</div>';
+  });
+  box.innerHTML = h || '<div class="calc-note">没有匹配的模型</div>';
+  const foot = document.getElementById("cutFoot");
+  if(foot) foot.textContent = '显示 '+Math.min(60,list.length)+' / '+list.length+' 个有折扣的模型（免费与未打折不计入）';
+}
+
+// ---------- 模型明细弹层 ----------
+function mcell(k,v){ return '<div class="mcell"><div class="k">'+k+'</div><div class="v">'+v+'</div></div>'; }
+function openCutDetail(vendor, model){
+  let vm=null, m=null;
+  DATA.vendors.forEach(function(v){ if(v.vendor===vendor){ vm=v; v.models.forEach(function(x){ if(x.model===model) m=x; }); } });
+  if(!m) return;
+  const cut = (1-(m._coef==null?1:m._coef))*100;
+  const vin = parseFloat(document.getElementById("cVin").value)||0;
+  const vout = parseFloat(document.getElementById("cVout").value)||0;
+  const cost = m._free ? 0 : ((m._ain||0)*vin + (m._aout||0)*vout);
+  document.getElementById("cutMTitle").textContent = m.model;
+  document.getElementById("cutMSub").innerHTML = esc(vm.display)+' · '+((vm.tag==="dom")?"国内":"海外")+' · 上下文 '+esc(m.context)+' · 折扣：'+esc(m.discount);
+  document.getElementById("cutMCells").innerHTML =
+      mcell("折扣降幅", '<span style="color:#34d399;font-weight:700">↓'+cut.toFixed(0)+'%</span>')
+    + mcell("标牌输入 → 折后", esc(m.input)+' → <b style="color:#7dd3fc">'+esc(m.after_in)+'</b>')
+    + mcell("标牌输出 → 折后", esc(m.output)+' → <b style="color:#7dd3fc">'+esc(m.after_out)+'</b>')
+    + mcell("缓存命中价", esc(m.cache))
+    + mcell("上下文 / 最大输出", esc(m.context)+' / '+esc(m.max_output))
+    + mcell("偏向能力", capChips(m.cap))
+    + mcell("估算月度成本", fmtMoney(cost, m.cur));
+  document.getElementById("cutMask").classList.add("show");
+  document.getElementById("cutModal").classList.add("show");
+}
+function closeCutDetail(){
+  document.getElementById("cutMask").classList.remove("show");
+  document.getElementById("cutModal").classList.remove("show");
 }
 
 // ---------- 历史波动 ----------
@@ -851,8 +1035,38 @@ function bindUI(){
   document.getElementById("tQ").addEventListener("input", function(e){ STATE.q=e.target.value.trim(); drawVendorsInto(); });
   document.getElementById("tSort").addEventListener("change", function(e){ STATE.sort=e.target.value; drawVendorsInto(); });
   document.getElementById("tAuto").addEventListener("change", function(e){ STATE.auto=e.target.checked; updateStatus(); });
-  document.getElementById("tCNY").addEventListener("change", function(e){ STATE.toCNY=e.target.checked; drawCalc(); drawCompare(); });
   document.getElementById("tFilt").addEventListener("change", function(e){ STATE.useFilt=e.target.checked; drawCalc(); });
+  // 币种三模式 + 汇率
+  document.getElementById("curSeg").addEventListener("click", function(e){
+    const b = e.target.closest("button[data-c]"); if(!b) return;
+    STATE.curMode = b.dataset.c;
+    Array.prototype.forEach.call(this.children, function(x){ x.classList.toggle("on", x===b); });
+    rerenderCurrency();
+  });
+  document.getElementById("fxRate").addEventListener("input", function(e){
+    RATE = parseFloat(e.target.value)||7.2;
+    buildHeatScale(); drawVendorsInto(); drawCalc(); drawCompare(); renderCutWall();
+  });
+  function rerenderCurrency(){ drawVendorsInto(); drawCalc(); drawCompare(); renderCutWall(); }
+  // 降幅速览筛选
+  document.getElementById("cutQ").addEventListener("input", function(e){ CUT.q=e.target.value.trim(); renderCutWall(); });
+  document.getElementById("cutRg").addEventListener("change", function(e){ CUT.rg=e.target.value; renderCutWall(); });
+  document.getElementById("cutCap").addEventListener("change", function(e){ CUT.cap=e.target.value; renderCutWall(); });
+  document.getElementById("cutSort").addEventListener("change", function(e){ CUT.sort=e.target.value; renderCutWall(); });
+  document.getElementById("cutCards").addEventListener("click", function(e){
+    const chk = e.target.closest(".cmpchk");
+    if(chk){
+      const k = chk.querySelector("input").getAttribute("data-key");
+      const cb = chk.querySelector("input");
+      if(cb.checked) STATE.compare.add(k); else STATE.compare.delete(k);
+      document.getElementById("tCmp").textContent = "对比 ("+STATE.compare.size+")";
+      drawCompare(); return;
+    }
+    const card = e.target.closest(".cutcard");
+    if(card) openCutDetail(card.getAttribute("data-vendor"), card.getAttribute("data-model"));
+  });
+  document.getElementById("cutMClose").addEventListener("click", closeCutDetail);
+  document.getElementById("cutMask").addEventListener("click", closeCutDetail);
   document.getElementById("tRefresh").addEventListener("click", function(){ checkUpdate(true); });
   document.getElementById("tCmp").addEventListener("click", function(){ document.getElementById("compare").classList.toggle("show"); });
   document.getElementById("tCalc").addEventListener("click", openCalc);
@@ -861,7 +1075,7 @@ function bindUI(){
   document.getElementById("tDisc").addEventListener("click", openDisc);
   document.getElementById("discClose").addEventListener("click", closeDisc);
   document.getElementById("discMask").addEventListener("click", closeDisc);
-  document.addEventListener("keydown", function(e){ if(e.key==="Escape"){ closeCalc(); closeDisc(); } });
+  document.addEventListener("keydown", function(e){ if(e.key==="Escape"){ closeCalc(); closeDisc(); closeCutDetail(); } });
   document.getElementById("cVin").addEventListener("input", function(){ drawCalc(); drawCompare(); });
   document.getElementById("cVout").addEventListener("input", function(){ drawCalc(); drawCompare(); });
   document.getElementById("app").addEventListener("change", function(e){

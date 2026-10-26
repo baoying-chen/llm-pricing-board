@@ -1,7 +1,14 @@
 模型调研
 ================================================
 
-★ 分享用链接（推荐，发钉钉/微信用这条）：
+★ 分享用主链接（推荐，发钉钉/微信用这条）：
+https://baoying-chen.github.io/llm-pricing-board/
+
+- GitHub Pages：免 token、链接永久固定，服务器可直接抓到标题 → 分享卡片自动显示「模型调研」。
+- 仓库：baoying-chen/llm-pricing-board（Pages 已开启，main 分支 / 根目录）。
+- 凭据本地存于 .deploy_env（已 gitignore，不进公开仓库）。
+
+备用链接（workbuddy.host，免 token 永久）：
 https://108da9a2adaa41bebd78cc6120a5ec04.app.workbuddy.host/
 
 - 免 token、免授权、链接永久固定，服务器可直接抓到标题 → 分享卡片自动显示「模型调研」。

@@ -5,26 +5,28 @@
 页面标题已改为「模型调研」（浏览器标签 / OG 卡片 / Twitter 卡片 / 页面主标题 四处一致）。
 
 ------------------------------------------------
-方式 A｜普通聊天框直接粘贴（最省事，推荐用新链接）
+方式 A｜普通聊天框直接粘贴（最省事，推荐用 GitHub 主链接）
 ------------------------------------------------
+[模型调研](https://baoying-chen.github.io/llm-pricing-board/)
+
+★ 这条是 GitHub Pages 站点（2026-10-26 迁移）：
+- 免 token、链接永久固定（https://baoying-chen.github.io/llm-pricing-board/）；
+- 钉钉服务器能直接抓到页面标题 → 分享卡片自动显示「模型调研」+ 描述；
+- 每周一 09:00 随自动化同步更新数据（python deploy_site.py 推送），无需换链接。
+- 国内访问 github.io 速度一般，但卡片与打开均可用。
+
+备用（workbuddy.host，免 token 永久）：
 [模型调研](https://108da9a2adaa41bebd78cc6120a5ec04.app.workbuddy.host/)
-
-★ 这条是 workbuddy.host 站点（2026-10-26 新发布）：
-- 免 token、不过期、链接永久固定；
-- 钉钉服务器能直接抓到页面标题 → 分享卡片自动显示「模型调研」+ 描述（和旧卡片效果一样）；
-- 每周一 09:00 随自动化同步更新数据，无需换链接。
-
-旧 EdgeOne 链接已不建议分享：有 token 网关（钉钉抓取被 401 拦截 → 只显示裸链接文字），且 token 约 2~3 天过期。浏览器直接打开可用，最新 token 链接见 DEPLOY_LINK.txt。
 
 ------------------------------------------------
 方式 B｜群机器人（webhook）
 ------------------------------------------------
 curl 'https://oapi.dingtalk.com/robot/send?access_token=你的机器人token' \
   -H 'Content-Type: application/json' \
-  -d '{"msgtype":"markdown","markdown":{"title":"模型调研","text":"# 模型调研\n\n[打开看板](https://108da9a2adaa41bebd78cc6120a5ec04.app.workbuddy.host/)"} }'
+  -d '{"msgtype":"markdown","markdown":{"title":"模型调研","text":"# 模型调研\n\n[打开看板](https://baoying-chen.github.io/llm-pricing-board/)"} }'
 
 ------------------------------------------------
 方式 C｜纯文字 + 换行链接（兼容旧客户端）
 ------------------------------------------------
 模型调研
-https://108da9a2adaa41bebd78cc6120a5ec04.app.workbuddy.host/
+https://baoying-chen.github.io/llm-pricing-board/
