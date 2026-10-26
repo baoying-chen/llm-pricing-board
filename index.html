@@ -414,7 +414,7 @@ function fmtMoney(v, cur){
   if(STATE.curMode==="RAW"){ val=v; sym=cur; }
   else if(STATE.curMode==="USD"){ val = cur==="$" ? v : v/RATE; sym="$"; }
   else { val = cur==="$" ? v*RATE : v; sym="¥"; }   // CNY
-  const s = sym + (Math.abs(val)>=1 ? val.toFixed(2) : val.toFixed(4));
+  let s = sym + (Math.abs(val)>=1 ? val.toFixed(2) : val.toFixed(4));
   if(STATE.curMode==="CNY" && cur==="$") s += ' <small>($'+v.toFixed(4)+')</small>';
   return s;
 }
