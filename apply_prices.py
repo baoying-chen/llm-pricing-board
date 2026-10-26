@@ -19,7 +19,7 @@ HERE = os.path.dirname(__file__)
 CSV_PATH = os.path.join(HERE, "llm_pricing.csv")
 UPDATES_PATH = os.path.join(HERE, sys.argv[1]) if len(sys.argv) > 1 else os.path.join(HERE, "updates.json")
 
-COLS = ["厂商", "模型", "计费方式", "上下文长度", "最大输出Token",
+COLS = ["厂商", "模型", "偏向能力", "计费方式", "上下文长度", "最大输出Token",
         "输入单价", "输出单价", "缓存命中单价", "折扣", "折后输入单价",
         "折后输出单价", "币种", "数据来源"]
 

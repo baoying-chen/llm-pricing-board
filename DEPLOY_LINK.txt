@@ -1,9 +1,36 @@
-部署方式已切换为 GitHub Pages 独立仓库（业务隔离 / 免腾讯云授权 / 链接固定）。
-固定外网链接将在以下步骤完成后确定：
-  1. 在 GitHub 新建一个独立仓库（如 llm-pricing-board）
-  2. 配置 remote + PAT 凭据
-  3. 首次 python deploy_site.py 推送
-  4. 仓库开启 GitHub Pages（分支 main，根目录）
-固定 URL 形如：https://<github-user>.github.io/<repo>/
-（每周自动更新只推送 prices.json，URL 永久不变）
-上次 CloudStudio 链接（已失效，仅作历史参考）：https://108da9a2adaa41bebd78cc6120a5ec04.app.workbuddy.host
+模型调研
+================================================
+
+★ 分享用链接（推荐，发钉钉/微信用这条）：
+https://108da9a2adaa41bebd78cc6120a5ec04.app.workbuddy.host/
+
+- 免 token、免授权、链接永久固定，服务器可直接抓到标题 → 分享卡片自动显示「模型调研」。
+- 内容与 EdgeOne 同源（同一目录发布），每周自动化会同步重发这条链接，数据一起更新。
+- 管理：前往「设置—数据管理—应用」中管理。
+
+EdgeOne 链接（备用，浏览器直接打开看，需带 token）：
+https://llm-pricing-board-5vliub0d.edgeone.cool?eo_token=3849d69d63b3f981e1fc8463a54f1578&eo_time=1792980895
+（生成时间：2026-10-26 10:17）
+
+- 子域名永久固定：llm-pricing-board-5vliub0d.edgeone.cool
+- EdgeOne Makers 控制台：https://console.cloud.tencent.com/edgeone/pages/project/makers-tszoxxs3tkf0
+
+⚠️ 重要：eo_token 有有效期（实测约 2~3 天），不是永久有效
+- 2026-10-26 发现：10-23 生成的旧 token（f3f09c3a…）已打不开（401 网关页），重新部署拿到新 token 后恢复正常。
+- 结论：链接需「每次部署后重新取用」，旧链接过几天会失效。
+- 判断方法：curl 直接请求永远是 401（网关对非浏览器请求一律拦截），不能作为判据；需用浏览器或 WebFetch 验证。
+- 根本解法（三选一，推荐 A）：
+  A. 控制台绑定自定义域名（国内节点、免 token、链接永久）：console.cloud.tencent.com/edgeone/pages/project/makers-tszoxxs3tkf0
+  B. 迁到 GitHub Pages（免 token、链接永久，需 GitHub PAT）
+  C. 维持现状：每周自动部署后到本文件取最新链接
+
+更新频率：自动化任务每周一 09:00 抓取一次（WEEKLY），无变化则跳过部署。
+注意：若无变化跳过部署，token 不会刷新，链接可能在周中失效；建议届时手动重部署一次。
+
+【本轮】2026-10-26 10:17（每周定价刷新 + token 续期）
+- 抓取 13 家厂商官方定价页；本轮写入 7 条可信更新（详见自动化汇报）。
+- 处理：重新部署，子域名不变，生成新 token；Deployment ID dpz28a4ze2us。
+- 已用 WebFetch 验证页面可正常打开（标题「模型调研」，显示最新价格看板）。
+- 页面内容同步刷新（折扣抽屉为竖向卡片、偏向能力列、每周更新）。
+
+EdgeOne CLI 路径：C:\Users\baoying.chen\.workbuddy\binaries\node\cli-connector-packages\edgeone.cmd

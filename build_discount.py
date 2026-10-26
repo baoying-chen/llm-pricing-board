@@ -3,7 +3,7 @@
 读取 llm_pricing.csv，逐行套用用户给定的折扣政策，
 生成带「折扣 / 折后输入 / 折后输出」列的新版 CSV 与统一 schema 的 HTML。
 """
-import csv, re, html, os
+import csv, re, html, os, json as _js
 
 SRC = os.path.join(os.path.dirname(__file__), "llm_pricing.csv")
 OUT_CSV = os.path.join(os.path.dirname(__file__), "llm_pricing.csv")  # 覆盖写入
@@ -82,10 +82,41 @@ def apply_discount(price, factor, cur):
     return out
 
 # ---------------------------------------------------------------------------
+# 数值提取：供前端成本计算器 / 排序使用
+# ---------------------------------------------------------------------------
+def parse_price_num(s):
+    s = "" if s is None else str(s)
+    if "免费" in s or s.strip() in ("", "—", "-"):
+        return None
+    mm = re.search(r"-?\d+\.?\d*", s.replace(",", ""))
+    return float(mm.group()) if mm else None
+
+def parse_ctx_num(s):
+    s = "" if s is None else str(s).strip().lower()
+    if s in ("", "—", "-", "∞", "inf"):
+        return None
+    mm = re.search(r"(\d+(?:\.\d+)?)\s*([km])?", s)
+    if not mm:
+        return None
+    val = float(mm.group(1)); unit = mm.group(2)
+    if unit == "m":
+        val *= 1_000_000
+    elif unit == "k":
+        val *= 1_000
+    return int(val)
+
+# ---------------------------------------------------------------------------
 # 读取 CSV
 # ---------------------------------------------------------------------------
 with open(SRC, encoding="utf-8") as f:
     rows = list(csv.DictReader(f))
+
+# 厂商官方定价页 URL（外链数据源）
+try:
+    _src = _js.load(open(os.path.join(os.path.dirname(__file__), "vendor_sources.json"), encoding="utf-8"))
+    SOURCES = {x["vendor"]: x["url"] for x in _src}
+except Exception:
+    SOURCES = {}
 
 # 计算折扣 / 折后价，并写出新版 CSV
 out_rows = []
@@ -99,7 +130,7 @@ for r in rows:
     r["折后输出单价"] = apply_discount(r["输出单价"], factor, cur)
     out_rows.append(r)
 
-CSV_COLS = ["厂商", "模型", "计费方式", "上下文长度", "最大输出Token",
+CSV_COLS = ["厂商", "模型", "偏向能力", "计费方式", "上下文长度", "最大输出Token",
             "输入单价", "输出单价", "缓存命中单价", "折扣", "折后输入单价",
             "折后输出单价", "币种", "数据来源"]
 
@@ -121,7 +152,7 @@ VENDOR_META = {
                  "高峰时段（周一至周五 UTC 01:00-04:00、06:00-10:00，不含中国法定假日）价格翻倍，其余时段半价；折后价已含 5折 代理折扣。"),
     "Kimi": ("月之暗面", "dom", "Kimi K 系列",
              "计费：按量计费（元/百万 tokens） · 平台：platform.kimi.com · 缓存区分 5min / 1h TTL",
-             "阶梯折扣按<b>月消费</b>：≥50万→8.5折，3万≤月消<50万→9折。下表「折后价」按 9折 示例。K2 系列 2026-05-25 下线。"),
+             "阶梯折扣按<b>月消费</b>：≥50万→8.5折，3万≤月消<50万→9折。下表「折后价」按 9折 示例。K2 系列已演进至 K2.6 / K2.7 Code（表中输入价为缓存未命中价）；K3 为新旗舰（1M 上下文）。"),
     "稀宇科技 MiniMax": ("稀宇科技", "dom", "MiniMax / 海螺 AI",
              "计费：按量计费（¥/百万 tokens） · 平台：platform.minimaxi.com · 双兼容 OpenAI / Anthropic 端点",
              "官方现时统一 <b>5折</b>（你清单中的 8.5折 为早期/清单价，已失效）。M3 标价为永久五折后价格。"),
@@ -139,7 +170,7 @@ VENDOR_META = {
              "全系列 <b>9.5折</b>。国内按「输入上下文长度区间」分档：0-32K、32K-128K、128K-256K；折后价按各档分别折算。"),
     "小米 MiMo": ("小米", "dom", "MiMo",
              "计费：按量计费（元/百万 tokens） · 平台：mimo.mi.com · SGLang + HiCache 三级存储",
-             "全系列 <b>8.8折</b>。Batch API / Token Plan 订阅另计；海外价同结构（美元）。"),
+             "全系列 <b>8.8折</b>。当前主力为 V2.6 系列（2026-10 起 V2.5 已下线下新 V2.6）；Batch API / Token Plan 订阅另计。"),
     "Anthropic Claude": ("Anthropic", "os", "Claude",
              "计费：按量计费（$/百万 tokens） · 平台：api.anthropic.com · 缓存分 5min / 1h TTL",
              "全系列 <b>7.5折</b>。缓存读取约输入 5-10%；Batch 5折（与代理折扣可叠加与否以商务条款为准）。"),
@@ -253,13 +284,6 @@ html_parts.append("""<div class="meta">
   </ul>
 </div>""")
 
-# 折扣政策对照表
-html_parts.append('<h2 style="font-size:17px;margin:0 0 12px;">折扣政策对照表</h2>')
-html_parts.append('<div class="scroll"><table class="dtab"><thead><tr><th>厂商系列</th><th>折扣政策</th><th>系数</th></tr></thead><tbody>')
-for name, pol, coef in DISCOUNT_TABLE:
-    html_parts.append("<tr><td><b>%s</b></td><td>%s</td><td class='price'>%s</td></tr>" % (esc(name), esc(pol), esc(coef)))
-html_parts.append("</tbody></table></div>")
-
 # 目录
 html_parts.append('<div class="toc">')
 html_parts.append('<div class="grp">国内</div>')
@@ -281,7 +305,7 @@ for vendor in VENDOR_META:
     html_parts.append('<div class="desc">%s</div>' % esc(desc))
     html_parts.append('<div class="scroll"><table>')
     html_parts.append('<thead><tr>'
-                      '<th>模型</th><th>上下文</th><th>最大输出</th>'
+                      '<th>模型</th><th>偏向能力</th><th>上下文</th><th>最大输出</th>'
                       '<th>输入单价</th><th>输出单价</th><th>缓存命中</th>'
                       '<th>折扣</th><th>折后输入</th><th>折后输出</th>'
                       '</tr></thead><tbody>')
@@ -292,9 +316,11 @@ for vendor in VENDOR_META:
         cache_cls = ' class="na"' if (r["缓存命中单价"] in ("—", "-", "") or "免费" in r["缓存命中单价"]) else ""
         disc = esc(r["折扣"])
         af_in = esc(r["折后输入单价"]); af_out = esc(r["折后输出单价"])
+        cap = esc(r.get("偏向能力", "") or "—")
         html_parts.append(
             '<tr>'
             '<td class="model">%s</td>'
+            '<td class="caps">%s</td>'
             '<td>%s</td><td>%s</td>'
             '<td class="price">%s</td><td class="price">%s</td>'
             '<td class="price"%s>%s</td>'
@@ -302,13 +328,22 @@ for vendor in VENDOR_META:
             '<td class="price disc-col">%s</td>'
             '<td class="price disc-col">%s</td>'
             '</tr>' % (
-                esc(r["模型"]), esc(r["上下文长度"]), esc(r["最大输出Token"]),
+                esc(r["模型"]), cap, esc(r["上下文长度"]), esc(r["最大输出Token"]),
                 inp, out, cache_cls, cache, disc, af_in, af_out
             )
         )
     html_parts.append('</tbody></table></div>')
     html_parts.append('<div class="footnote">%s</div>' % foot)
     html_parts.append('</div>')
+
+# 折扣政策对照表（置于页面底部）
+html_parts.append('<div class="section" id="discount">')
+html_parts.append('<h2 style="font-size:17px;margin:0 0 12px;">📋 折扣政策对照表</h2>')
+html_parts.append('<div class="scroll"><table class="dtab"><thead><tr><th>厂商系列</th><th>折扣政策</th></tr></thead><tbody>')
+for name, pol, _coef in DISCOUNT_TABLE:
+    html_parts.append("<tr><td><b>%s</b></td><td>%s</td></tr>" % (esc(name), esc(pol)))
+html_parts.append("</tbody></table></div>")
+html_parts.append('</div>')
 
 # 市场对照说明
 html_parts.append("""<div class="section">
@@ -339,12 +374,15 @@ import json as _json
 _vendors_json = []
 for _vendor in VENDOR_META:
     _disp, _tag, _series, _desc, _foot = VENDOR_META[_vendor]
+    _src_url = SOURCES.get(_vendor, "")
     _models = []
     for _r in out_rows:
         if _r["厂商"] != _vendor:
             continue
+        _disc_text, _factor = discount_info(_vendor, _r["模型"])
         _models.append({
             "model": _r["模型"],
+            "cap": _r.get("偏向能力", ""),
             "context": _r["上下文长度"],
             "max_output": _r["最大输出Token"],
             "input": _r["输入单价"],
@@ -353,10 +391,20 @@ for _vendor in VENDOR_META:
             "discount": _r["折扣"],
             "after_in": _r["折后输入单价"],
             "after_out": _r["折后输出单价"],
+            # 数值字段（前端计算器 / 排序用）
+            "in_v": parse_price_num(_r["输入单价"]),
+            "out_v": parse_price_num(_r["输出单价"]),
+            "after_in_v": parse_price_num(_r["折后输入单价"]),
+            "after_out_v": parse_price_num(_r["折后输出单价"]),
+            "ctx_v": parse_ctx_num(_r["上下文长度"]),
+            "coef": round(_factor, 4),
+            "cur": "$" if ("$" in (_r["折后输入单价"] + _r["输入单价"])) else "¥",
+            "free": ("免费" in _r["输入单价"] and "免费" in _r["输出单价"]),
         })
     _vendors_json.append({
         "vendor": _vendor, "display": _disp, "tag": _tag,
         "series": _series, "desc": _desc, "footnote": _foot,
+        "source": _src_url,
         "models": _models,
     })
 import datetime as _dt
