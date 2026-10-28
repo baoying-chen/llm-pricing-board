@@ -66,7 +66,7 @@ def main():
     p.add_argument("--repo", required=True, help="仓库名，如 llm-pricing-board")
     p.add_argument("--user", default=None, help="GitHub 登录名（不填则自动获取）")
     p.add_argument("--private", action="store_true", help="创建为私有仓库（Pages 仍可用）")
-    p.add_argument("--desc", default="国内外主流大模型 API 定价对比（含代理折扣）", help="仓库描述")
+    p.add_argument("--desc", default="国内外主流大模型 API 定价对比（含折扣）", help="仓库描述")
     args = p.parse_args()
 
     here = os.path.dirname(os.path.abspath(__file__))

@@ -2307,7 +2307,7 @@
     null,
     null,
     null,
-    7.2
+    10.2
    ],
    "ao": [
     null,
@@ -2317,7 +2317,7 @@
     null,
     null,
     null,
-    21.6
+    30.6
    ]
   },
   "阿里通义 Qwen/qwen3.8-flash": {
@@ -2329,7 +2329,7 @@
     null,
     null,
     null,
-    0.36
+    0.68
    ],
    "ao": [
     null,
@@ -2339,7 +2339,7 @@
     null,
     null,
     null,
-    1.215
+    2.295
    ]
   }
  },

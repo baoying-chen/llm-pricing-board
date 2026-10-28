@@ -1,7 +1,7 @@
 {
   "meta": {
     "generated": "2026-10-28",
-    "updated": "2026-10-28 15:51:05",
+    "updated": "2026-10-28 17:53:21",
     "source": "各厂商官方定价页 + 第三方汇总；折扣为用户提供政策",
     "currency_note": "¥ 人民币 / $ 美元；汇率参考 1 $ ≈ 7.2 ¥"
   },
@@ -33,7 +33,7 @@
     },
     {
       "name": "Qwen 系列",
-      "policy": "4.5折（qwen3.7/3.8-max 6折 / preview 无折扣）",
+      "policy": "4.5折（qwen3.7-max 6折 / qwen3.8 8.5折 / preview 无折扣）",
       "coef": "0.45"
     },
     {
@@ -290,7 +290,7 @@
       "tag": "dom",
       "series": "深度求索",
       "desc": "计费：按量计费（$/百万 tokens，海外区） · 平台：api.deepseek.com · 缓存命中约未命中的 1/50",
-      "footnote": "高峰时段（周一至周五 UTC 01:00-04:00、06:00-10:00，不含中国法定假日）价格翻倍，其余时段半价；折后价已含 5折 代理折扣。",
+      "footnote": "高峰时段（周一至周五 UTC 01:00-04:00、06:00-10:00，不含中国法定假日）价格翻倍，其余时段半价；折后价已含 5折折扣。",
       "source": "https://api-docs.deepseek.com/quick_start/pricing",
       "models": [
         {
@@ -683,7 +683,7 @@
       "tag": "dom",
       "series": "Qwen / 千问",
       "desc": "计费：按量计费（元/百万 tokens） · 平台：阿里云百炼 · 中国内地（北京）口径 · 阶梯按输入长度",
-      "footnote": "基础系列 <b>4.5折</b>；qwen3.7-max / qwen3.8-max 特批 <b>6折</b>；带 preview 的预览模型 <b>无折扣</b>。Batch 半价与缓存命中折扣不可叠加。",
+      "footnote": "基础系列 <b>4.5折</b>；qwen3.7-max 特批 <b>6折</b>；qwen3.8 系列 <b>8.5折</b>；带 preview 的预览模型 <b>无折扣</b>。Batch 半价与缓存命中折扣不可叠加。",
       "source": "https://help.aliyun.com/zh/model-studio/models",
       "models": [
         {
@@ -694,15 +694,15 @@
           "input": "12.00",
           "output": "36.00",
           "cache": "命中折扣",
-          "discount": "6折",
-          "after_in": "¥7.2",
-          "after_out": "¥21.6",
+          "discount": "8.5折",
+          "after_in": "¥10.2",
+          "after_out": "¥30.6",
           "in_v": 12.0,
           "out_v": 36.0,
-          "after_in_v": 7.2,
-          "after_out_v": 21.6,
+          "after_in_v": 10.2,
+          "after_out_v": 30.6,
           "ctx_v": 1000000,
-          "coef": 0.6,
+          "coef": 0.85,
           "cur": "¥",
           "free": false
         },
@@ -714,15 +714,15 @@
           "input": "0.80",
           "output": "2.70",
           "cache": "0.10",
-          "discount": "4.5折",
-          "after_in": "¥0.36",
-          "after_out": "¥1.215",
+          "discount": "8.5折",
+          "after_in": "¥0.68",
+          "after_out": "¥2.295",
           "in_v": 0.8,
           "out_v": 2.7,
-          "after_in_v": 0.36,
-          "after_out_v": 1.215,
+          "after_in_v": 0.68,
+          "after_out_v": 2.295,
           "ctx_v": 1000000,
-          "coef": 0.45,
+          "coef": 0.85,
           "cur": "¥",
           "free": false
         },
@@ -1638,7 +1638,7 @@
       "tag": "os",
       "series": "Claude",
       "desc": "计费：按量计费（$/百万 tokens） · 平台：api.anthropic.com · 缓存分 5min / 1h TTL",
-      "footnote": "全系列 <b>7.5折</b>。缓存读取约输入 5-10%；Batch 5折（与代理折扣可叠加与否以商务条款为准）。",
+      "footnote": "全系列 <b>7.5折</b>。缓存读取约输入 5-10%；Batch 5折（与折扣可叠加与否以商务条款为准）。",
       "source": "https://www.anthropic.com/pricing",
       "models": [
         {

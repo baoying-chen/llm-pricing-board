@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8" />
-<title>国内外主流大模型定价对比（含代理折扣）· 2026-10-13</title>
+<title>国内外主流大模型定价对比（含折扣）· 2026-10-13</title>
 <style>  :root {
     --bg: #f7f8fa; --panel: #ffffff; --border: #e5e7eb; --text: #1f2328;
     --muted: #6b7280; --accent: #2563eb; --domestic: #1d4ed8; --overseas: #047857;
@@ -56,7 +56,7 @@
 <body>
 <div class="wrap">
 
-<h1>国内外主流大模型 API 定价对比 · 含代理折扣</h1>
+<h1>国内外主流大模型 API 定价对比 · 含折扣</h1>
 <div class="sub">采集时间：2026-10-13 · 数据来源：各厂商官方定价页 + 第三方汇总 · 价格单位：每百万 tokens（¥ 或 $）· 折扣为用户提供政策</div>
 
 <div class="meta">
@@ -65,7 +65,7 @@
     <li><b>折扣</b>列：应用你提供的代理 / 渠道折扣政策。阶梯类（GLM、Kimi）按<b>月消费</b>档位，表中列全档位，「折后价」按最低档示例。</li>
     <li><b>折后输入 / 折后输出</b>：在官方标牌价基础上乘以折扣系数所得（同币种）。免费模型仍为免费；"命中折扣"等标记原样保留。</li>
     <li><b>冲突处理</b>：MiniMax 你清单写 8.5折，但注明"官方现时5折"，采用 <b>5折</b>；Kimi 基础 9折 与"月之暗面阶梯"一致，采用阶梯；混元 <b>6.5折</b>、文心 <b>9折</b> 已按你的补充计入清单。</li>
-    <li>所有价格均为按量计费标牌价；不含限时折扣、订阅套餐、Batch 半价（部分可与代理折扣叠加，以商务条款为准）。</li>
+    <li>所有价格均为按量计费标牌价；不含限时折扣、订阅套餐、Batch 半价（部分可与折扣叠加，以商务条款为准）。</li>
     <li>汇率参考 1 $ ≈ 7.2 ¥（2026-10）；海外 $ 价未折算为 ¥。</li>
   </ul>
 </div>
@@ -112,7 +112,7 @@
 <tr><td class="model">deepseek-v4-flash</td><td class="caps">推理, 代码, 低成本, 极速, 开源</td><td>1M</td><td>384K</td><td class="price">0.14/0.44</td><td class="price">0.28</td><td class="price">0.0028</td><td class="disc">5折</td><td class="price disc-col">$0.07/$0.22</td><td class="price disc-col">$0.14</td></tr>
 <tr><td class="model">deepseek-v4-pro</td><td class="caps">推理, 代码, 数学, 开源, 长文本</td><td>1M</td><td>384K</td><td class="price">0.435/1.32</td><td class="price">0.87</td><td class="price">0.003625</td><td class="disc">5折</td><td class="price disc-col">$0.2175/$0.66</td><td class="price disc-col">$0.435</td></tr>
 </tbody></table></div>
-<div class="footnote">高峰时段（周一至周五 UTC 01:00-04:00、06:00-10:00，不含中国法定假日）价格翻倍，其余时段半价；折后价已含 5折 代理折扣。</div>
+<div class="footnote">高峰时段（周一至周五 UTC 01:00-04:00、06:00-10:00，不含中国法定假日）价格翻倍，其余时段半价；折后价已含 5折折扣。</div>
 </div>
 <div class="section" id="Kimi">
 <h2>月之暗面 <span class="tag dom">国内</span> <span style="font-weight:400;font-size:13px;color:var(--muted);">Kimi K 系列</span></h2>
@@ -151,8 +151,8 @@
 <div class="desc">计费：按量计费（元/百万 tokens） · 平台：阿里云百炼 · 中国内地（北京）口径 · 阶梯按输入长度</div>
 <div class="scroll"><table>
 <thead><tr><th>模型</th><th>偏向能力</th><th>上下文</th><th>最大输出</th><th>输入单价</th><th>输出单价</th><th>缓存命中</th><th>折扣</th><th>折后输入</th><th>折后输出</th></tr></thead><tbody>
-<tr><td class="model">qwen3.8-max</td><td class="caps">代码, 推理, 多模态, 长文本, Agent</td><td>1M</td><td>-</td><td class="price">12.00</td><td class="price">36.00</td><td class="price">命中折扣</td><td class="disc">6折</td><td class="price disc-col">¥7.2</td><td class="price disc-col">¥21.6</td></tr>
-<tr><td class="model">qwen3.8-flash</td><td class="caps">极速, 低成本, 长文本, 多模态</td><td>1M</td><td>-</td><td class="price">0.80</td><td class="price">2.70</td><td class="price">0.10</td><td class="disc">4.5折</td><td class="price disc-col">¥0.36</td><td class="price disc-col">¥1.215</td></tr>
+<tr><td class="model">qwen3.8-max</td><td class="caps">代码, 推理, 多模态, 长文本, Agent</td><td>1M</td><td>-</td><td class="price">12.00</td><td class="price">36.00</td><td class="price">命中折扣</td><td class="disc">8.5折</td><td class="price disc-col">¥10.2</td><td class="price disc-col">¥30.6</td></tr>
+<tr><td class="model">qwen3.8-flash</td><td class="caps">极速, 低成本, 长文本, 多模态</td><td>1M</td><td>-</td><td class="price">0.80</td><td class="price">2.70</td><td class="price">0.10</td><td class="disc">8.5折</td><td class="price disc-col">¥0.68</td><td class="price disc-col">¥2.295</td></tr>
 <tr><td class="model">qwen3.7-max</td><td class="caps">代码, 推理, 多模态, 长文本, Agent</td><td>1M</td><td>-</td><td class="price">6.00</td><td class="price">18.00</td><td class="price">命中折扣</td><td class="disc">6折</td><td class="price disc-col">¥3.6</td><td class="price disc-col">¥10.8</td></tr>
 <tr><td class="model">qwen3-max</td><td class="caps">代码, 推理, Agent, 中文</td><td>256K</td><td>-</td><td class="price">2.50/10.00</td><td class="price">10.00/40.00</td><td class="price">命中折扣</td><td class="disc">4.5折</td><td class="price disc-col">¥1.125/¥4.5</td><td class="price disc-col">¥4.5/¥18</td></tr>
 <tr><td class="model">qwen3-plus</td><td class="caps">均衡, 代码, 长文本, 低成本</td><td>1M</td><td>-</td><td class="price">0.80</td><td class="price">2.00</td><td class="price">命中折扣</td><td class="disc">4.5折</td><td class="price disc-col">¥0.36</td><td class="price disc-col">¥0.9</td></tr>
@@ -161,7 +161,7 @@
 <tr><td class="model">qwen-turbo</td><td class="caps">极速, 低成本, 中文</td><td>1M</td><td>-</td><td class="price">0.30</td><td class="price">0.60</td><td class="price" class="na">-</td><td class="disc">4.5折</td><td class="price disc-col">¥0.135</td><td class="price disc-col">¥0.27</td></tr>
 <tr><td class="model">qwen3-omni-flash</td><td class="caps">多模态, 语音</td><td>-</td><td>-</td><td class="price">1.80文本/15.8音频</td><td class="price">6.9/12.7/62.6</td><td class="price" class="na">-</td><td class="disc">4.5折</td><td class="price disc-col">¥0.81文本/¥7.11音频</td><td class="price disc-col">¥3.105/¥5.715/¥28.17</td></tr>
 </tbody></table></div>
-<div class="footnote">基础系列 <b>4.5折</b>；qwen3.7-max / qwen3.8-max 特批 <b>6折</b>；带 preview 的预览模型 <b>无折扣</b>。Batch 半价与缓存命中折扣不可叠加。</div>
+<div class="footnote">基础系列 <b>4.5折</b>；qwen3.7-max 特批 <b>6折</b>；qwen3.8 系列 <b>8.5折</b>；带 preview 的预览模型 <b>无折扣</b>。Batch 半价与缓存命中折扣不可叠加。</div>
 </div>
 <div class="section" id="腾讯混元 Hunyuan">
 <h2>腾讯 <span class="tag dom">国内</span> <span style="font-weight:400;font-size:13px;color:var(--muted);">混元 Hunyuan</span></h2>
@@ -247,7 +247,7 @@
 <tr><td class="model">Claude Sonnet 4.5</td><td class="caps">代码, Agent, 均衡</td><td>1M</td><td>-</td><td class="price">3.00</td><td class="price">15.00</td><td class="price">0.30</td><td class="disc">7.5折</td><td class="price disc-col">$2.25</td><td class="price disc-col">$11.25</td></tr>
 <tr><td class="model">Claude Haiku 3.5</td><td class="caps">极速, 低成本</td><td>200K</td><td>-</td><td class="price">0.80</td><td class="price">4.00</td><td class="price">0.08</td><td class="disc">7.5折</td><td class="price disc-col">$0.6</td><td class="price disc-col">$3</td></tr>
 </tbody></table></div>
-<div class="footnote">全系列 <b>7.5折</b>。缓存读取约输入 5-10%；Batch 5折（与代理折扣可叠加与否以商务条款为准）。</div>
+<div class="footnote">全系列 <b>7.5折</b>。缓存读取约输入 5-10%；Batch 5折（与折扣可叠加与否以商务条款为准）。</div>
 </div>
 <div class="section" id="Google Gemini">
 <h2>Google <span class="tag os">海外</span> <span style="font-weight:400;font-size:13px;color:var(--muted);">Gemini</span></h2>
@@ -311,7 +311,7 @@
 <tr><td><b>Gemini 系列</b></td><td>7折</td></tr>
 <tr><td><b>Grok 系列</b></td><td>6.5折</td></tr>
 <tr><td><b>DouBao 系列</b></td><td>9.5折</td></tr>
-<tr><td><b>Qwen 系列</b></td><td>4.5折（qwen3.7/3.8-max 6折 / preview 无折扣）</td></tr>
+<tr><td><b>Qwen 系列</b></td><td>4.5折（qwen3.7-max 6折 / qwen3.8 8.5折 / preview 无折扣）</td></tr>
 <tr><td><b>Kimi 系列</b></td><td>阶梯：≥50万8.5折 / 3万≤月消&lt;50万9折</td></tr>
 <tr><td><b>MiniMax 系列</b></td><td>5折（官方现时；清单曾8.5折）</td></tr>
 <tr><td><b>DeepSeek / V4</b></td><td>5折</td></tr>

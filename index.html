@@ -8,11 +8,11 @@
 <meta property="og:site_name" content="模型调研" />
 <meta property="og:url" content="https://llm-pricing-board-5vliub0d.edgeone.cool/" />
 <meta property="og:title" content="模型调研" />
-<meta property="og:description" content="智谱/DeepSeek/Kimi/MiniMax/Qwen/混元/文心/豆包/小米 与 Anthropic/Google/OpenAI/Grok 的官方定价 + 代理折扣实时对比，每周自动抓取更新。" />
+<meta property="og:description" content="智谱/DeepSeek/Kimi/MiniMax/Qwen/混元/文心/豆包/小米 与 Anthropic/Google/OpenAI/Grok 的官方定价 + 折扣实时对比，每周自动抓取更新。" />
 <meta property="og:locale" content="zh_CN" />
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="模型调研" />
-<meta name="twitter:description" content="国内外 13 家主流大模型官方定价 + 代理折扣实时对比，每周自动抓取更新。" />
+<meta name="twitter:description" content="国内外 13 家主流大模型官方定价 + 折扣实时对比，每周自动抓取更新。" />
 <style>
   :root {
     --bg: #060b1c; --panel: rgba(18,28,58,.52); --border: rgba(96,140,224,.18);
@@ -743,7 +743,7 @@ function drawOverview(){
   s += statCard(fmtCNY(domAvg), "国内平均折后输出");
   s += statCard(fmtCNY(osAvg), "海外平均折后输出");
   const cov = withPrice? Math.round(discCnt/withPrice*100):0;
-  s += statCard(cov+"%", "享代理折扣占比");
+  s += statCard(cov+"%", "享折扣占比");
   // 降幅统计（基于折扣系数）
   const cuts = all.filter(function(r){return r.m.coef!=null && r.m.coef<1 && !r.m.free;})
                   .map(function(r){return (1-r.m.coef)*100;});
