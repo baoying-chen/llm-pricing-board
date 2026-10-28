@@ -27,7 +27,7 @@ def discount_info(vendor, model):
     if v == "阿里通义 Qwen":
         if "preview" in m:
             return ("preview 无折扣", 1.0)
-        if m == "qwen3.7-max":
+        if m in ("qwen3.7-max", "qwen3.8-max"):
             return ("6折", 0.6)
         return ("4.5折", 0.45)
     if v == "腾讯混元 Hunyuan":
@@ -158,7 +158,7 @@ VENDOR_META = {
              "官方现时统一 <b>5折</b>（你清单中的 8.5折 为早期/清单价，已失效）。M3 标价为永久五折后价格。"),
     "阿里通义 Qwen": ("阿里通义", "dom", "Qwen / 千问",
              "计费：按量计费（元/百万 tokens） · 平台：阿里云百炼 · 中国内地（北京）口径 · 阶梯按输入长度",
-             "基础系列 <b>4.5折</b>；qwen3.7-max 特批 <b>6折</b>；带 preview 的预览模型 <b>无折扣</b>。Batch 半价与缓存命中折扣不可叠加。"),
+             "基础系列 <b>4.5折</b>；qwen3.7-max / qwen3.8-max 特批 <b>6折</b>；带 preview 的预览模型 <b>无折扣</b>。Batch 半价与缓存命中折扣不可叠加。"),
     "腾讯混元 Hunyuan": ("腾讯", "dom", "混元 Hunyuan",
              "计费：按量计费（元/百万 tokens） · 平台：腾讯云大模型知识引擎 · 部分模型支持缓存命中",
              "全系列 <b>6.5折</b>。混元 Lite 等免费模型维持免费；其他模型折后价按 6.5折 折算。"),
@@ -192,7 +192,7 @@ DISCOUNT_TABLE = [
     ("Gemini 系列", "7折", "0.70"),
     ("Grok 系列", "6.5折", "0.65"),
     ("DouBao 系列", "9.5折", "0.95"),
-    ("Qwen 系列", "4.5折（qwen3.7-max 6折 / preview 无折扣）", "0.45"),
+    ("Qwen 系列", "4.5折（qwen3.7/3.8-max 6折 / preview 无折扣）", "0.45"),
     ("Kimi 系列", "阶梯：≥50万8.5折 / 3万≤月消<50万9折", "0.90"),
     ("MiniMax 系列", "5折（官方现时；清单曾8.5折）", "0.50"),
     ("DeepSeek / V4", "5折", "0.50"),
