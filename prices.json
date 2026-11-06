@@ -1,7 +1,7 @@
 {
   "meta": {
     "generated": "2026-11-06",
-    "updated": "2026-11-06 09:51:24",
+    "updated": "2026-11-06 10:43:21",
     "source": "各厂商官方定价页 + 第三方汇总；折扣为用户提供政策",
     "currency_note": "¥ 人民币 / $ 美元；汇率参考 1 $ ≈ 7.2 ¥"
   },
@@ -708,7 +708,7 @@
       "tag": "dom",
       "series": "Qwen / 千问",
       "desc": "计费：按量计费（元/百万 tokens） · 平台：阿里云百炼 · 中国内地（北京）口径 · 阶梯按输入长度",
-      "footnote": "基础系列 <b>4.5折</b>；qwen3.7-max 特批 <b>6折</b>；qwen3.8 系列 <b>8.5折</b>；带 preview 的预览模型 <b>无折扣</b>。Batch 半价与缓存命中折扣不可叠加。",
+      "footnote": "基础系列 <b>4.5折</b>；qwen3.7-max 特批 <b>6折</b>（官网标牌价 12/36 元，现时限时5折→6/18，表内统一按标牌价×折扣口径）；qwen3.8 系列 <b>8.5折</b>；带 preview 的预览模型 <b>无折扣</b>。Batch 半价与缓存命中折扣不可叠加。",
       "source": "https://help.aliyun.com/zh/model-studio/models",
       "models": [
         {
@@ -756,16 +756,16 @@
           "cap": "代码, 推理, 多模态, 长文本, Agent",
           "context": "1M",
           "max_output": "-",
-          "input": "6.00",
-          "output": "18.00",
+          "input": "12.00",
+          "output": "36.00",
           "cache": "命中折扣",
           "discount": "6折",
-          "after_in": "¥3.6",
-          "after_out": "¥10.8",
-          "in_v": 6.0,
-          "out_v": 18.0,
-          "after_in_v": 3.6,
-          "after_out_v": 10.8,
+          "after_in": "¥7.2",
+          "after_out": "¥21.6",
+          "in_v": 12.0,
+          "out_v": 36.0,
+          "after_in_v": 7.2,
+          "after_out_v": 21.6,
           "ctx_v": 1000000,
           "coef": 0.6,
           "cur": "¥",
