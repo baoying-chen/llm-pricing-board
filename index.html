@@ -422,7 +422,6 @@
     </label>
     <label>汇率 <input type="number" id="fxRate" value="7.2" step="0.05" min="1" style="width:72px" /></label>
     <button class="btn" id="tRefresh">立即刷新</button>
-    <button class="btn primary" id="tCmp">对比 (0)</button>
     <button class="btn primary" id="tCalc">💰 成本计算器</button>
     <button class="btn primary" id="tDisc">📋 折扣政策</button>
     <span class="status" id="status"><span class="dot"></span>自动刷新：开 · 等待数据</span>
@@ -750,7 +749,6 @@ function drawCompare(){
   const box = document.getElementById("compare");
   if(!box) return;
   const sel = selectedModels();
-  document.getElementById("tCmp").textContent = "对比 (" + sel.length + ")";
   let tags = "";
   sel.forEach(function(it){
     tags += '<span class="cmptag"><b>'+esc(it.m.model)+'</b> <span class="x" data-key="'+esc(it.m._key)+'">✕</span></span>';
@@ -1624,9 +1622,9 @@ function bindUI(){
     if(chk){
       const k = chk.querySelector("input").getAttribute("data-key");
       const cb = chk.querySelector("input");
-      if(cb.checked) STATE.compare.add(k); else STATE.compare.delete(k);
-      document.getElementById("tCmp").textContent = "对比 ("+STATE.compare.size+")";
-      drawCompare(); return;
+      if(cb.checked){ STATE.compare.add(k); drawCompare(); toast("已加入对比（共 "+STATE.compare.size+" 个）"); }
+      else { STATE.compare.delete(k); drawCompare(); }
+      return;
     }
     const card = e.target.closest(".cutcard");
     if(card) openCutDetail(card.getAttribute("data-vendor"), card.getAttribute("data-model"));
@@ -1634,7 +1632,11 @@ function bindUI(){
   document.getElementById("cutMClose").addEventListener("click", closeCutDetail);
   document.getElementById("cutMask").addEventListener("click", closeCutDetail);
   document.getElementById("tRefresh").addEventListener("click", function(){ checkUpdate(true); });
-  document.getElementById("tCmp").addEventListener("click", function(){ document.getElementById("compare").classList.toggle("show"); });
+  // 侧边栏「模型对比」：点击时确保对比区可见（否则锚点跳不到隐藏元素）
+  document.getElementById("sidenav").addEventListener("click", function(e){
+    const a = e.target.closest("a[data-t='compare']");
+    if(a){ const c = document.getElementById("compare"); if(c) c.classList.add("show"); }
+  });
   document.getElementById("tCalc").addEventListener("click", openCalc);
   document.getElementById("calcClose").addEventListener("click", closeCalc);
   document.getElementById("calcMask").addEventListener("click", closeCalc);
@@ -1718,6 +1720,11 @@ function bindUI(){
       if(e.target.checked){ STATE.compare.add(k); document.getElementById("compare").classList.add("show"); }
       else STATE.compare.delete(k);
       drawCompare();
+      if(e.target.checked){
+        const c = document.getElementById("compare");
+        if(STATE.compare.size===1 && c) c.scrollIntoView({behavior:"smooth", block:"start"});  // 首次勾选带用户过去
+        toast("已加入对比（共 "+STATE.compare.size+" 个）"+(STATE.compare.size===1?"，已定位到对比区":""));
+      }
     }
   });
   document.getElementById("app").addEventListener("click", function(e){
