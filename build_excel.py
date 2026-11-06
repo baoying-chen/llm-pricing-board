@@ -140,15 +140,19 @@ for r in rows:
 
 VENDOR_ORDER = ["智谱 GLM", "DeepSeek", "Kimi", "稀宇科技 MiniMax", "阿里通义 Qwen",
                 "腾讯混元 Hunyuan", "百度文心 ERNIE", "字节豆包 Doubao", "小米 MiMo",
-                "Anthropic Claude", "Google Gemini", "OpenAI", "xAI Grok"]
+                "百川智能 Baichuan", "讯飞星火 iFlytek", "阶跃星辰 StepFun",
+                "Anthropic Claude", "Google Gemini", "OpenAI", "xAI Grok",
+                "Mistral AI", "Cohere"]
 
 SHORT = {
     "智谱 GLM": "GLM", "DeepSeek": "DeepSeek", "Kimi": "Kimi",
     "稀宇科技 MiniMax": "MiniMax", "阿里通义 Qwen": "Qwen",
     "腾讯混元 Hunyuan": "Hunyuan", "百度文心 ERNIE": "ERNIE",
     "字节豆包 Doubao": "Doubao", "小米 MiMo": "MiMo",
+    "百川智能 Baichuan": "Baichuan", "讯飞星火 iFlytek": "iFlytek", "阶跃星辰 StepFun": "StepFun",
     "Anthropic Claude": "Claude", "Google Gemini": "Gemini",
     "OpenAI": "OpenAI", "xAI Grok": "Grok",
+    "Mistral AI": "Mistral", "Cohere": "Cohere",
 }
 
 def sheet_name(v):
