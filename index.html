@@ -320,6 +320,69 @@
   .mcell{ display:flex; justify-content:space-between; gap:14px; padding:9px 0; border-bottom:1px solid rgba(167,139,250,.12); font-size:13px; }
   .mcell .k{ color:var(--muted); }
   .mcell .v{ color:#eaf2ff; text-align:right; }
+
+  /* ---- 智能选型 ---- */
+  .idx-list{ display:flex; flex-direction:column; gap:6px; }
+  .idx-row{ display:grid; grid-template-columns:32px minmax(0,1fr) 130px 104px; gap:10px; align-items:center;
+    padding:8px 11px; border-radius:10px; background:rgba(13,9,32,.55); border:1px solid rgba(167,139,250,.12); transition:.16s; }
+  .idx-row:hover{ border-color:rgba(167,139,250,.42); background:rgba(21,15,46,.8); }
+  .idx-rank{ font-family:ui-monospace,Menlo,monospace; font-weight:700; font-size:13px; color:var(--muted); text-align:center; }
+  .idx-row.r1 .idx-rank{ color:#fbbf24; } .idx-row.r2 .idx-rank{ color:#cbd5e1; } .idx-row.r3 .idx-rank{ color:#f59e0b; }
+  .idx-nm{ font-size:13px; color:#f3efff; font-weight:600; overflow:hidden; white-space:nowrap; text-overflow:ellipsis; }
+  .idx-nm small{ font-weight:400; color:var(--muted); margin-left:6px; font-size:11.5px; }
+  .idx-nm .caps{ margin-top:4px; }
+  .idx-score{ display:flex; align-items:center; gap:7px; }
+  .idx-bar{ flex:1; height:7px; border-radius:999px; background:rgba(255,255,255,.08); overflow:hidden; }
+  .idx-bar i{ display:block; height:100%; border-radius:999px; background:linear-gradient(90deg,#22d3ee,#a78bfa); }
+  .idx-num{ font-family:ui-monospace,Menlo,monospace; font-size:12.5px; font-weight:700; color:#c4b5fd; width:32px; text-align:right; }
+  .idx-price{ font-family:ui-monospace,Menlo,monospace; font-size:12px; color:#a8c4ea; text-align:right; line-height:1.35; }
+  .idx-price small{ display:block; color:var(--muted); font-size:10.5px; }
+
+  .scn-btns{ display:flex; flex-wrap:wrap; gap:8px; margin:0 0 14px; }
+  .scn-btn{ cursor:pointer; font:inherit; font-size:12.5px; padding:7px 13px; border-radius:999px;
+    background:rgba(20,14,44,.7); border:1px solid rgba(167,139,250,.26); color:#c9d8f2; transition:.18s; }
+  .scn-btn:hover{ border-color:rgba(167,139,250,.6); color:#ede9fe; }
+  .scn-btn.on{ background:linear-gradient(135deg,rgba(34,211,238,.22),rgba(168,85,247,.3));
+    border-color:rgba(168,85,247,.7); color:#f0f9ff; box-shadow:0 0 16px rgba(168,85,247,.28); }
+  .scn-out{ display:flex; flex-direction:column; gap:6px; }
+  .scn-item{ display:grid; grid-template-columns:26px minmax(0,1fr) 112px; gap:10px; align-items:center;
+    padding:9px 11px; border-radius:10px; background:rgba(13,9,32,.55); border:1px solid rgba(167,139,250,.12); }
+  .scn-item .r{ font-family:ui-monospace,Menlo,monospace; font-size:12px; color:var(--muted); text-align:center; }
+  .scn-item.r1 .r{ color:#fbbf24; }
+  .scn-why{ font-size:11.5px; color:var(--muted); margin-top:3px; line-height:1.55; }
+  .scn-why b{ color:#7dd3fc; font-weight:600; }
+  .scn-cost{ text-align:right; font-family:ui-monospace,Menlo,monospace; font-size:12.5px; color:#e4d9ff; }
+  .scn-cost small{ display:block; color:var(--muted); font-size:10.5px; font-weight:400; }
+
+  .radar-wrap{ display:grid; grid-template-columns:minmax(0,1fr) 260px; gap:20px; align-items:center; }
+  @media (max-width:900px){ .radar-wrap{ grid-template-columns:1fr; } }
+  .radar-legend{ display:flex; flex-direction:column; gap:11px; }
+  .rl-item{ font-size:12.5px; color:#c9d8f2; }
+  .rl-item .dot{ display:inline-block; width:9px; height:9px; border-radius:3px; margin-right:7px; vertical-align:middle; }
+  .rl-item b{ color:#f3efff; font-weight:600; }
+  .rl-item small{ display:block; color:var(--muted); margin-top:3px; font-size:11px; line-height:1.5; }
+
+  /* ---- 计算器升级 ---- */
+  .calc-sec{ border:1px solid rgba(167,139,250,.14); border-radius:12px; padding:13px 14px 15px; margin-bottom:13px; background:rgba(13,9,32,.42); }
+  .calc-sec .sub2{ margin:0 0 10px; }
+  .calc-sec .seg{ margin:0 0 10px; }
+  .kpi-grid{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:13px; }
+  .kpi{ border:1px solid rgba(167,139,250,.16); border-radius:11px; padding:10px 12px; background:rgba(13,9,32,.5); }
+  .kpi .k{ font-size:11.5px; color:var(--muted); margin-bottom:4px; }
+  .kpi .v{ font-family:ui-monospace,Menlo,monospace; font-size:15px; font-weight:700; color:#c4b5fd; }
+  .kpi .v.green{ color:#34d399; } .kpi .v.amber{ color:#fbbf24; }
+  .kpi .s{ font-size:11px; color:var(--muted); margin-top:4px; line-height:1.45; }
+  .slider-row{ display:flex; align-items:center; gap:10px; font-size:12px; color:var(--muted); margin-top:4px; }
+  .slider-row input[type=range]{ flex:1; accent-color:#a855f7; }
+  .slider-row b{ color:#c4b5fd; font-family:ui-monospace,Menlo,monospace; width:44px; text-align:right; }
+  .field input.mini{ width:104px; }
+  @media (max-width:760px){
+    .idx-row{ grid-template-columns:26px minmax(0,1fr) 96px; }
+    .idx-price{ display:none; }
+    .scn-item{ grid-template-columns:22px minmax(0,1fr); }
+    .scn-cost{ display:none; }
+    .kpi-grid{ grid-template-columns:1fr; }
+  }
 </style>
 </head>
 <body>
@@ -380,15 +443,39 @@
     <button class="btn" id="calcClose">✕ 关闭</button>
   </div>
   <div class="drawer-bd">
-    <div class="calc-row">
-      <div class="field"><label>月输入量（百万 tokens）</label><input type="number" id="cVin" value="100" min="0" step="10" /></div>
-      <div class="field"><label>月输出量（百万 tokens）</label><input type="number" id="cVout" value="50" min="0" step="10" /></div>
+    <div class="calc-sec">
+      <div class="sub2">① 用量模型</div>
+      <div class="seg" id="calcModeSeg"><button type="button" data-m="simple" class="on">简单用量</button><button type="button" data-m="agent">Agent / 多轮</button></div>
+      <div class="calc-row" id="calcSimple">
+        <div class="field"><label>月输入量（百万 tokens）</label><input type="number" id="cVin" value="100" min="0" step="10" /></div>
+        <div class="field"><label>月输出量（百万 tokens）</label><input type="number" id="cVout" value="50" min="0" step="10" /></div>
+      </div>
+      <div class="calc-row" id="calcAgent" style="display:none;">
+        <div class="field"><label>会话数 / 月</label><input type="number" id="cSess" value="2000" min="0" step="100" /></div>
+        <div class="field"><label>轮数 / 会话</label><input type="number" id="cTurn" value="8" min="1" step="1" /></div>
+        <div class="field"><label>单轮用户输入 tokens</label><input type="number" id="cTin" value="1500" min="0" step="100" /></div>
+        <div class="field"><label>单轮模型输出 tokens</label><input type="number" id="cTout" value="400" min="0" step="50" /></div>
+        <div class="field"><label>工具调用 / 轮</label><input type="number" id="cTool" value="3" min="0" step="1" /></div>
+        <div class="field"><label>每次工具结果 tokens</label><input type="number" id="cTres" value="800" min="0" step="100" /></div>
+        <div class="field"><label>每次工具输出 tokens</label><input type="number" id="cTout2" value="120" min="0" step="20" /></div>
+      </div>
+      <div class="calc-note" id="calcAgentNote" style="display:none;margin:2px 0 0;">输入量按「多轮上下文累积重发 + 工具结果回灌」推算，这才是 Agent 账单的大头。</div>
     </div>
-    <div class="cfilttag"><label style="display:flex;align-items:center;gap:7px;cursor:pointer;">
-      <input type="checkbox" id="tFilt" /> 仅统计当前筛选的模型</label></div>
-    <div class="calc-note">成本 = 折后输入×输入量 + 折后输出×输出量</div>
-    <div class="costlist" id="calcRes" style="margin-top:12px;"></div>
-    <div class="footnote" style="margin-top:14px;">价格随用量/缓存/Batch 变动；阶梯厂商按最低档示例。仅供参考，采购前请核对官方与商务条款。</div>
+
+    <div class="calc-sec">
+      <div class="sub2">② 计费策略</div>
+      <div class="slider-row"><span>缓存命中率</span><input type="range" id="cHit" min="0" max="95" value="0" step="5" /><b id="cHitV">0%</b></div>
+      <div class="seg" id="hitSeg" style="margin-top:10px;"><button type="button" data-h="0" class="on">无缓存</button><button type="button" data-h="40">中等 40%</button><button type="button" data-h="70">高重复 70%</button></div>
+      <div class="calc-note" style="margin:10px 0 0;">命中部分按各厂商「缓存命中价」计费；未公布缓存价的模型视为不支持缓存，按原价计算。高重复场景（固定 system prompt、长文档反复问答、Agent 固定工具链）缓存友好型模型会明显变香。</div>
+      <div class="seg" id="batchSeg"><button type="button" data-b="live" class="on">实时</button><button type="button" data-b="batch">批量 5 折</button><button type="button" data-b="cmp">实时 vs 批量</button></div>
+      <div class="cfilttag" style="margin:12px 0 0;"><label style="display:flex;align-items:center;gap:7px;cursor:pointer;">
+        <input type="checkbox" id="tFilt" /> 仅统计当前筛选的模型</label></div>
+    </div>
+
+    <div class="kpi-grid" id="calcKpi"></div>
+    <div class="calc-note" id="calcNote"></div>
+    <div class="costlist" id="calcRes"></div>
+    <div class="footnote" style="margin-top:14px;">批量折扣按行业通行的 5 折示例（各家略有差异）；阶梯厂商按最低档计价。仅供参考，采购前请核对官方与商务条款。</div>
   </div>
 </aside>
 
@@ -485,6 +572,8 @@ function sortModels(list){
 // ---------- 渲染 ----------
 function renderStatic(){
   const meta = DATA.meta || {};
+  const kk = document.querySelector(".kicker");
+  if(kk) kk.textContent = "LLM PRICING INTELLIGENCE · " + DATA.vendors.length + " VENDORS";
   document.getElementById("sub").textContent =
     "数据更新：" + (meta.updated||meta.generated||"") + " · 官网逐一核对：" + (meta.generated||"") +
     " · 价格单位：每百万 tokens（¥ 或 $）· 折扣为用户提供政策";
@@ -502,6 +591,19 @@ function renderStatic(){
   h += '<div id="ovCheap"></div><div id="ovExp"></div>';
   h += '<div class="sub2">折扣覆盖</div>';
   h += '<div id="ovFree"></div></div>';
+
+  // 智能选型（性价比指数 / 场景推荐 / 档位雷达）
+  h += '<div class="section" id="smart"><h2 style="font-size:17px;margin:0 0 6px;">🎯 智能选型 <span style="font-weight:400;font-size:12px;color:var(--muted);">性价比指数 · 场景推荐 · 同档位雷达</span></h2>';
+  h += '<div class="panel-note">性价比指数 = <b>价格分 ×45%</b> + <b>能力分 ×35%</b> + <b>上下文分 ×20%</b>。价格分按行业折后混合单价（输入·输出各半）取对数倒数，最便宜=100；能力分按偏向能力标签加权求和；上下文分按 8K→1M 对数映射。指数为横向参考，不替代业务实测。</div>';
+  h += '<div class="sub2">性价比指数 TOP 15</div>';
+  h += '<div class="idx-list" id="idxList"></div>';
+  h += '<div class="sub2" style="margin-top:20px;">场景化推荐 <span style="font-weight:400;font-size:11.5px;color:var(--muted);">点场景 → 直接给出该场景最划算的前 5 名</span></div>';
+  h += '<div class="scn-btns" id="scnBtns"></div>';
+  h += '<div class="scn-out" id="scnOut"></div>';
+  h += '<div class="sub2" style="margin-top:20px;">同档位横向 PK（雷达图） <span style="font-weight:400;font-size:11.5px;color:var(--muted);">按价格分档 · 每档取国内外性价比最高者 · 速度维度按「极速」标签与模型定位估算</span></div>';
+  h += '<div class="seg" id="tierSeg"><button data-t="flag" class="on">旗舰档（高价）</button><button data-t="mid">中端档</button><button data-t="low">入门档（便宜）</button></div>';
+  h += '<div class="radar-wrap"><div id="radarBox"></div><div class="radar-legend" id="radarLegend"></div></div>';
+  h += '</div>';
 
   // 对比面板（默认隐藏）
   h += '<div class="section" id="compare"><h2 style="font-size:17px;margin:0 0 10px;">🔍 模型对比 <button class="btn" id="cmpClear">清空</button></h2>';
@@ -556,6 +658,7 @@ function renderStatic(){
   const os = DATA.vendors.filter(function(v){return v.tag==="os";});
   let sn = '<div class="grp">页面</div>';
   sn += '<a href="#overview" data-t="overview">📊 行业概览</a>';
+  sn += '<a href="#smart" data-t="smart">🎯 智能选型</a>';
   sn += '<a href="#compare" data-t="compare">🔍 模型对比</a>';
   sn += '<a href="#cutWall" data-t="cutWall">📉 降幅速览</a>';
   sn += '<a href="#history" data-t="history">📈 历史价格曲线</a>';
@@ -569,6 +672,7 @@ function renderStatic(){
 // 重组 app：static 部分已在 DOM，这里仅替换厂商列表；为简单起见整体重渲染
 let _staticHTML = "";
 function renderAll(){
+  SMARTPOOL = null;
   renderStatic();
   _staticHTML = document.getElementById("app").innerHTML;
   buildHeatScale();
@@ -576,6 +680,8 @@ function renderAll(){
   drawCalc();
   drawCompare();
   drawOverview();
+  drawSmart();
+  drawRadar();
   drawHistCurve();
   document.getElementById("loading").style.display = "none";
 }
@@ -652,52 +758,328 @@ function drawCompare(){
   document.getElementById("cmpTags").innerHTML = tags || '<span class="calc-note">勾选表格左侧复选框，把模型加入对比（可跨厂商）。</span>';
 
   let ht = '<thead><tr><th>厂商</th><th>模型</th><th>偏向能力</th><th>上下文</th><th>折后输入</th><th>折后输出</th><th>折扣</th><th>月成本*</th></tr></thead><tbody>';
-  const vin = parseFloat(document.getElementById("cVin").value)||0;
-  const vout = parseFloat(document.getElementById("cVout").value)||0;
+  const u = calcUsage();
+  const hitR = Math.max(0, Math.min(95, CALC.hit))/100;
+  const mulR = (CALC.batch==="batch") ? 0.5 : 1;
   sel.forEach(function(it){
     const m = it.m;
-    let cost = (m._free) ? {v:0, cur:m.cur} : {
-      v: (m._ain!=null?m._ain:0)*vin + (m._aout!=null?m._aout:0)*vout, cur:m.cur };
+    const nat = costNative(m, u, hitR, mulR);
     ht += '<tr><td>'+esc(it.v.display)+'</td><td class="model">'+esc(m.model)+'</td><td class="caps">'+capChips(m.cap)+'</td><td>'+esc(m.context)
         + '</td><td class="price">'+esc(m.after_in)+'</td><td class="price">'+esc(m.after_out)
-        + '</td><td class="disc">'+esc(m.discount)+'</td><td class="price">'+fmtMoney(cost.v, cost.cur)+'</td></tr>';
+        + '</td><td class="disc">'+esc(m.discount)+'</td><td class="price">'+fmtMoney(nat, m.cur)+'</td></tr>';
   });
   ht += '</tbody>';
   document.getElementById("cmpTable").innerHTML = ht;
 }
 
+// ---------- 成本计算器（用量模型 + 缓存 + 批量） ----------
+const CALC = { mode:"simple", hit:0, batch:"live" };
+function cnum(id){ const el=document.getElementById(id); return el ? (parseFloat(el.value)||0) : 0; }
+function calcUsage(){
+  if(CALC.mode==="agent"){
+    const S=cnum("cSess"), N=Math.max(1,cnum("cTurn")), tin=cnum("cTin"), tout=cnum("cTout");
+    const K=cnum("cTool"), R=cnum("cTres"), Ot=cnum("cTout2");
+    const inPer  = N*(tin + K*R) + tin*N*(N-1)/2;   // 工具结果回灌 + 多轮历史累积重发
+    const outPer = N*(tout + K*Ot);
+    return { tin: S*inPer/1e6, tout: S*outPer/1e6, inPer:inPer, outPer:outPer, sess:S, turns:N,
+             toolTok: S*N*K*R/1e6, histTok: S*tin*N*(N-1)/2/1e6 };
+  }
+  return { tin: cnum("cVin"), tout: cnum("cVout"), histTok:0, toolTok:0, sess:0, turns:0 };
+}
+function cacheUnit(m){                    // 缓存命中单价（原币种 / 百万 tokens），null = 不支持
+  if(m._free) return 0;
+  const p = parseNum(m.cache);
+  return (p==null || p<=0) ? null : p;
+}
+function costNative(m, u, hitRate, mul){
+  if(m._free) return 0;
+  const ain = m._ain!=null?m._ain:0, aout = m._aout!=null?m._aout:0;
+  let inp = ain;
+  const cu = cacheUnit(m);
+  if(hitRate>0 && cu!=null) inp = ain*(1-hitRate) + cu*hitRate;
+  return (inp*u.tin + aout*u.tout) * (mul||1);
+}
 function drawCalc(){
-  const vin = parseFloat(document.getElementById("cVin").value)||0;
-  const vout = parseFloat(document.getElementById("cVout").value)||0;
-  const mode = STATE.curMode;
-  const dval = function(it){ // 排序/条长所用等效数值：USD 按$等效，其余按¥等效
-    if(mode==="USD") return it.cur==="$" ? it.v : it.v/RATE;
-    return it.cny;
-  };
-  let list = [];
+  const box = document.getElementById("calcRes");
+  if(!box) return;
+  const u = calcUsage();
+  const hit = Math.max(0, Math.min(95, CALC.hit))/100;
+  const mul = (CALC.batch==="batch") ? 0.5 : 1;
+  const list = [];
   DATA.vendors.forEach(function(v){
     v.models.forEach(function(m){
       if(STATE.useFilt && !matchModel(v, m)) return;
-      if(m._free){ list.push({m:m, v:0, cur:m.cur, cny:0}); return; }
-      const ain = m._ain!=null?m._ain:0, aout = m._aout!=null?m._aout:0;
-      const native = ain*vin + aout*vout;
-      list.push({m:m, v:native, cur:m.cur, cny: toCNY(native, m.cur)});
+      const nat = costNative(m, u, hit, mul);
+      list.push({v:v, m:m, nat:nat, cny:toCNY(nat, m.cur)});
     });
   });
-  list.sort(function(a,b){ return dval(a)-dval(b); });
-  const max = Math.max.apply(null, list.map(dval).concat([1]));
-  const top = list.slice(0, 25);
+  list.sort(function(a,b){ return a.cny-b.cny; });
+  const totM = function(v){ return v>=1 ? v.toFixed(2) : v.toFixed(3); };
+
+  // ---- KPI ----
+  const kp = document.getElementById("calcKpi");
+  if(kp){
+    const min = list[0], med = list[Math.floor(list.length/2)];
+    const ref = list.filter(function(x){ return x.cny>0; })[0] || min;   // 最省的有价模型（排除免费）
+    const cRef = list.filter(function(x){ return x.cny>0 && cacheUnit(x.m)!=null; })[0] || null;  // 最省的支持缓存模型
+    const cNoHit = cRef ? toCNY(costNative(cRef.m, u, 0, mul), cRef.m.cur) : 0;
+    const save = (cNoHit>0 && cRef && cRef.cny<cNoHit) ? Math.round((1-cRef.cny/cNoHit)*100) : 0;
+    const sessTxt = (u.sess % 1 === 0) ? String(u.sess) : u.sess.toFixed(1);
+    let h = '';
+    h += '<div class="kpi"><div class="k">月消耗总量</div><div class="v">'+totM(u.tin)+'M <span style="font-size:11px;color:var(--muted)">入</span> / '+totM(u.tout)+'M <span style="font-size:11px;color:var(--muted)">出</span></div>'
+       + '<div class="s">'+(CALC.mode==="agent" ? ('按 '+sessTxt+' 个会话 × '+u.turns+' 轮推算') : '按简单用量输入')+'</div></div>';
+    h += '<div class="kpi"><div class="k">最省模型 · 月成本</div><div class="v green">'+(min?fmtMoney(min.nat,min.m.cur):"—")+'</div><div class="s">'+(min?esc(min.m.model):"—")+'</div></div>';
+    h += '<div class="kpi"><div class="k">中位模型 · 月成本</div><div class="v">'+(med?fmtMoney(med.nat,med.m.cur):"—")+'</div><div class="s">'+(med?esc(med.m.model):"—")+'</div></div>';
+    h += '<div class="kpi"><div class="k">缓存节省</div><div class="v '+(save>0?'amber':'')+'">'+(CALC.hit>0 ? (cRef?('↓ '+save+'%'):'无缓存价') : '未启用')+'</div>'
+       + '<div class="s">'+(CALC.hit>0 ? ('命中率 '+CALC.hit+'% · 对 '+(cRef?esc(cRef.m.model):'该场景暂无公布缓存价的模型')) : '拖动上方滑块试算')+'</div></div>';
+    if(CALC.mode==="agent"){
+      const tot = u.tin+u.tout;
+      const tj = tot>0 ? u.toolTok/tot*100 : 0;
+      const hj = tot>0 ? u.histTok/tot*100 : 0;
+      h += '<div class="kpi" style="grid-column:1/-1;"><div class="k">隐形 token 占比</div><div class="v amber">工具 '+tj.toFixed(0)+'% · 历史重发 '+hj.toFixed(0)+'%</div>'
+         + '<div class="s">这两块才是 Agent 真实账单的大头；只算「输入 + 输出」会严重低估</div></div>';
+    }
+    if(CALC.batch!=="live" && ref){
+      const liveMin = toCNY(costNative(ref.m, u, hit, 1), ref.m.cur);
+      const batMin  = toCNY(costNative(ref.m, u, hit, 0.5), ref.m.cur);
+      h += '<div class="kpi" style="grid-column:1/-1;"><div class="k">批量 vs 实时（'+esc(ref.m.model)+'）</div><div class="v green">'+fmtMoney(batMin,"¥")+' <span style="color:var(--muted);font-size:12px;">vs</span> '+fmtMoney(liveMin,"¥")+'</div>'
+         + '<div class="s">批量按 5 折估算，每月再省 '+fmtMoney(liveMin-batMin,"¥")+'</div></div>';
+    }
+    kp.innerHTML = h;
+  }
+
+  const note = document.getElementById("calcNote");
+  if(note){
+    note.innerHTML = '成本 = 折后输入 × 输入量 + 折后输出 × 输出量'
+      + (CALC.hit>0 ? '，其中 '+CALC.hit+'% 输入按缓存命中价计' : '')
+      + (CALC.batch==="batch" ? '，整体再打 5 折（批量）' : '')
+      + '。共 '+list.length+' 个模型参与排序。';
+  }
+
+  const max = Math.max.apply(null, list.map(function(x){return x.cny;}).concat([1]));
+  const top = list.slice(0,25);
   let h = "";
   top.forEach(function(it){
-    const val = dval(it);
-    const pct = Math.max(2, Math.round(val/max*100));
+    const pct = Math.max(2, Math.round(it.cny/max*100));
+    let val = fmtMoney(it.nat, it.m.cur);
+    if(CALC.batch==="cmp"){
+      const live = toCNY(costNative(it.m, u, hit, 1), it.m.cur);
+      const bat  = toCNY(costNative(it.m, u, hit, 0.5), it.m.cur);
+      val = fmtMoney(bat,"¥") + '<br><small style="font-weight:400;color:var(--muted);font-size:10.5px;">实时 '+fmtMoney(live,"¥")+'</small>';
+    }
     h += '<div class="costitem"><div class="nm">'+esc(it.m.model)
-       + '<small>'+esc(it.m._key.split("/")[0])+'</small></div>'
+       + '<small>'+esc(it.v.display)+'</small></div>'
        + '<div class="costbar" style="width:'+pct+'%"></div>'
-       + '<div class="costval">'+fmtMoney(it.v, it.cur)+'</div></div>';
+       + '<div class="costval">'+val+'</div></div>';
   });
-  if(list.length>25) h += '<div class="calc-note">仅显示最便宜的前 25 个模型（共 '+list.length+' 个）。</div>';
-  document.getElementById("calcRes").innerHTML = h;
+  if(!top.length) h = '<div class="calc-note">没有匹配的模型</div>';
+  if(list.length>25) h += '<div class="calc-note" style="margin-top:10px;">仅显示最便宜的 25 个（共 '+list.length+' 个参与排序）。</div>';
+  box.innerHTML = h;
+}
+
+// ---------- 智能选型：性价比指数 / 场景推荐 / 档位雷达 ----------
+const SMART = { tier:"flag", scn:"doc" };
+
+// 偏向能力的高价值权重（求和后映射到 0~100）
+const CAP_W = { "推理":1.0, "代码":1.0, "多模态":1.0, "Agent":0.95, "长文本":0.75, "数学":0.75,
+  "视觉":0.65, "语音":0.65, "视频理解":0.65, "指令遵循":0.65, "文档理解":0.65, "长任务":0.60,
+  "实时检索":0.55, "中文":0.55, "极速":0.50, "知识问答":0.45, "OCR":0.45, "创意写作":0.40,
+  "情感陪伴":0.35, "角色扮演":0.30, "开源":0.35, "低成本":0.30, "均衡":0.40, "通用":0.40 };
+
+function blendCost(m){                  // 混合单价（输入·输出各半），单位 = 模型原币种/百万tokens
+  if(m._free) return 0;
+  const a=m._ain, o=m._aout;
+  if(a==null && o==null) return null;
+  return ((a==null?o:a) + (o==null?a:o)) / 2;
+}
+// 价格分：对数倒数映射，最便宜=100，最贵=0
+function priceScore(cost, lo, hi){
+  if(cost==null) return 40;
+  if(cost<=0) return 100;
+  const a=Math.log10(Math.max(lo,1e-9)), b=Math.log10(Math.max(hi,1e-9));
+  if(!(b>a)) return 100;
+  return Math.max(0, Math.min(100, (b-Math.log10(cost))/(b-a)*100));
+}
+// 上下文分：8K → 0，1M → 100（对数）
+function ctxScore(ctx){
+  if(!ctx || !isFinite(ctx)) return 35;
+  const a=Math.log10(8000), b=Math.log10(1000000);
+  return Math.max(0, Math.min(100, (Math.log10(ctx)-a)/(b-a)*100));
+}
+function capScore(caps){
+  let s=0; (caps||[]).forEach(function(c){ s += (CAP_W[c]!=null?CAP_W[c]:0.3); });
+  return Math.max(0, Math.min(100, 24 + s*10.5));
+}
+let SMARTPOOL = null;
+function smartPool(){
+  if(SMARTPOOL) return SMARTPOOL;
+  const rows=[];
+  DATA.vendors.forEach(function(v){
+    v.models.forEach(function(m){ rows.push({v:v, m:m, cost:blendCost(m)}); });
+  });
+  const costs = rows.map(function(r){return r.cost;}).filter(function(c){return c!=null && c>0;}).sort(function(a,b){return a-b;});
+  const lo = costs.length?costs[0]:0.01;
+  const hi = costs.length?costs[costs.length-1]:1;
+  const qf = function(f){ return costs.length ? costs[Math.min(costs.length-1, Math.floor(f*(costs.length-1)))] : 0; };
+  rows.forEach(function(r){
+    r.P = (r.cost==null) ? 40 : priceScore(r.cost, lo, hi);
+    r.C = capScore(r.m._caps);
+    r.X = ctxScore(r.m.ctx_v);
+    r.idx = 0.45*r.P + 0.35*r.C + 0.20*r.X;   // 性价比指数
+  });
+  SMARTPOOL = {rows:rows, lo:lo, hi:hi, p25:qf(0.25), p50:qf(0.5), p75:qf(0.75)};
+  return SMARTPOOL;
+}
+
+// 场景预设：need = 必须命中其一；opt = 加分项；w = 三维权重
+const SCENARIOS = [
+  {id:"doc",   icon:"📄", name:"长文档摘要",  need:["长文本","文档理解"], opt:["中文","知识问答","多模态","低成本"], w:{P:0.35,C:0.35,X:0.30}, note:"上下文越长越省事，输入价更敏感"},
+  {id:"code",  icon:"💻", name:"代码生成",    need:["代码"],             opt:["推理","指令遵循","Agent","长任务"],   w:{P:0.30,C:0.50,X:0.20}, note:"能力优先，代码/推理权重最高"},
+  {id:"mm",    icon:"🎧", name:"多模态客服",  need:["多模态","语音","视觉"], opt:["中文","极速","低成本","情感陪伴"], w:{P:0.40,C:0.40,X:0.20}, note:"要能收图听音，并发高必须便宜"},
+  {id:"agent", icon:"🤖", name:"跑 Agent 多轮", need:["Agent","长任务","指令遵循"], opt:["推理","代码","实时检索"], w:{P:0.40,C:0.40,X:0.20}, note:"多轮重发上下文，价格与窗口都要看"},
+  {id:"math",  icon:"🧮", name:"数学推理",    need:["数学","推理"],      opt:["代码","长文本"],                    w:{P:0.30,C:0.55,X:0.15}, note:"推理能力决定上限"},
+  {id:"fast",  icon:"⚡", name:"高并发闲聊",  need:["极速","低成本","通用","均衡","中文"], opt:["角色扮演","情感陪伴","知识问答"], w:{P:0.60,C:0.25,X:0.15}, note:"价格和速度优先"}
+];
+function scnScore(r, sc){
+  const caps = r.m._caps || [];
+  const hit = function(list){ return list.filter(function(c){ return caps.indexOf(c)>=0; }); };
+  const hn = hit(sc.need), ho = hit(sc.opt);
+  if(hn.length===0) return null;
+  const capRatio = (hn.length/Math.max(1,sc.need.length))*0.7 + (ho.length/Math.max(1,sc.opt.length))*0.3;
+  return { s: sc.w.P*r.P + sc.w.C*(capRatio*100) + sc.w.X*r.X, hn:hn, ho:ho, capRatio:capRatio };
+}
+
+function drawSmart(){
+  const box = document.getElementById("idxList");
+  if(!box) return;
+  const pool = smartPool();
+  const list = pool.rows.slice().sort(function(a,b){ return b.idx-a.idx; }).slice(0,15);
+  let h = "";
+  list.forEach(function(r,i){
+    h += '<div class="idx-row'+(i<3?' r'+(i+1):'')+'">'
+      +  '<div class="idx-rank">'+(i+1)+'</div>'
+      +  '<div class="idx-nm">'+esc(r.m.model)+'<small>'+esc(r.v.display)+'</small>'
+      +    '<div class="caps">'+capChips(r.m.cap)+'</div></div>'
+      +  '<div class="idx-score"><div class="idx-bar"><i style="width:'+Math.max(2,Math.round(r.idx))+'%"></i></div>'
+      +    '<span class="idx-num">'+r.idx.toFixed(1)+'</span></div>'
+      +  '<div class="idx-price">'+(r.m._free?'免费':fmtMoney(r.cost, r.m.cur))
+      +    '<small>'+esc(r.m.context||"—")+'</small></div>'
+      +  '</div>';
+  });
+  box.innerHTML = h || '<div class="calc-note">暂无可评分模型</div>';
+  drawScn();
+}
+
+function drawScn(){
+  const box = document.getElementById("scnOut"), btnBox = document.getElementById("scnBtns");
+  if(!box || !btnBox) return;
+  btnBox.innerHTML = SCENARIOS.map(function(s){
+    return '<button class="scn-btn'+(s.id===SMART.scn?" on":"")+'" data-scn="'+s.id+'">'+s.icon+' '+s.name+'</button>';
+  }).join("");
+  const sc = SCENARIOS.filter(function(s){return s.id===SMART.scn;})[0] || SCENARIOS[0];
+  const pool = smartPool();
+  const scored = [];
+  pool.rows.forEach(function(r){ const q=scnScore(r, sc); if(q) scored.push({r:r, q:q}); });
+  scored.sort(function(a,b){ return b.q.s-a.q.s; });
+  const top = scored.slice(0,5);
+  let h = '<div class="calc-note" style="margin:-2px 0 10px;">'+sc.icon+' <b>'+esc(sc.name)
+        + '</b> · 侧重：'+esc(sc.note)+' · 共 '+scored.length+' 个模型命中该场景能力</div>';
+  top.forEach(function(it,i){
+    const r=it.r;
+    const why = it.q.hn.concat(it.q.ho).slice(0,4).map(function(c){ return '<b>'+esc(c)+'</b>'; }).join(' · ');
+    h += '<div class="scn-item'+(i===0?' r1':'')+'">'
+      +  '<div class="r">'+(i+1)+'</div>'
+      +  '<div><div class="idx-nm">'+esc(r.m.model)+'<small>'+esc(r.v.display)+'</small></div>'
+      +    '<div class="scn-why">命中 '+why+' · 适配分 <b>'+it.q.s.toFixed(1)+'</b></div></div>'
+      +  '<div class="scn-cost">'+(r.m._free?'免费':fmtMoney(r.cost, r.m.cur))
+      +    '<small>'+esc(r.m.context||"—")+'</small></div>'
+      +  '</div>';
+  });
+  if(!top.length) h += '<div class="calc-note">该场景暂无匹配模型（能力标签缺失）。</div>';
+  box.innerHTML = h;
+}
+
+const RADAR_DIMS = ["价格友好","上下文","能力广度","多模态","Agent适配","速度"];
+function speedScore(r){                   // 速度无实测数据，按「极速」标签 + 模型定位估算
+  const caps = r.m._caps || [], nm = String(r.m.model||"").toLowerCase();
+  let s = 40;
+  if(caps.indexOf("极速")>=0) s += 30;
+  if(caps.indexOf("低成本")>=0) s += 10;
+  if(/flash|lite|turbo|mini|speed|air|nano/.test(nm)) s += 20;
+  if(/pro|max|opus|ultra|large|reason|thinking/.test(nm)) s -= 15;
+  return Math.max(10, Math.min(100, s));
+}
+function radarVals(r){
+  const caps = r.m._caps || [];
+  const cnt = function(list){ return list.filter(function(c){ return caps.indexOf(c)>=0; }).length; };
+  return [ r.P, r.X, r.C,
+           Math.min(100, cnt(["多模态","视觉","视频理解","语音"])*34),
+           Math.min(100, cnt(["Agent","长任务","指令遵循","实时检索","代码"])*24),
+           speedScore(r) ];
+}
+function radarSVG(items){
+  const W=420, H=336, cx=210, cy=166, R=116;
+  const n = RADAR_DIMS.length;
+  const ang = function(i){ return -Math.PI/2 + i*2*Math.PI/n; };
+  const pt = function(i, v){ const rr=R*Math.max(0,Math.min(1,v/100));
+    return [cx+rr*Math.cos(ang(i)), cy+rr*Math.sin(ang(i))]; };
+  let g = "";
+  for(let k=1;k<=4;k++){
+    let d="";
+    for(let i=0;i<n;i++){ const p=pt(i,k*25); d += (i?"L":"M")+p[0].toFixed(1)+" "+p[1].toFixed(1); }
+    g += '<path d="'+d+'Z" fill="none" stroke="rgba(96,140,224,'+(k===4?0.32:0.15)+')" stroke-width="1"/>';
+  }
+  for(let i=0;i<n;i++){
+    const p=pt(i,100);
+    g += '<line x1="'+cx+'" y1="'+cy+'" x2="'+p[0].toFixed(1)+'" y2="'+p[1].toFixed(1)+'" stroke="rgba(96,140,224,.16)"/>';
+    const lp=pt(i,126);
+    const anchor = Math.abs(lp[0]-cx)<8 ? "middle" : (lp[0]>cx?"start":"end");
+    g += '<text x="'+lp[0].toFixed(1)+'" y="'+(lp[1]+4).toFixed(1)+'" fill="#8fa6c8" font-size="11" text-anchor="'+anchor+'">'+RADAR_DIMS[i]+'</text>';
+  }
+  items.forEach(function(it){
+    let d="";
+    it.vals.forEach(function(v,i){ const p=pt(i,v); d += (i?"L":"M")+p[0].toFixed(1)+" "+p[1].toFixed(1); });
+    g += '<path d="'+d+'Z" fill="'+hexToRgba(it.color,0.13)+'" stroke="'+it.color+'" stroke-width="2" stroke-linejoin="round"/>';
+    it.vals.forEach(function(v,i){ const p=pt(i,v);
+      g += '<circle cx="'+p[0].toFixed(1)+'" cy="'+p[1].toFixed(1)+'" r="2.6" fill="'+it.color+'"/>'; });
+  });
+  return '<svg viewBox="0 0 '+W+' '+H+'" width="100%" style="max-width:520px;display:block;margin:0 auto;">'+g+'</svg>';
+}
+function pickTier(pool, tier){
+  return pool.rows.filter(function(r){
+    if(r.cost==null) return false;
+    if(tier==="flag") return r.cost >= pool.p75;
+    if(tier==="low")  return r.cost <  pool.p25;
+    return r.cost >= pool.p25 && r.cost < pool.p75;
+  });
+}
+function drawRadar(){
+  const box=document.getElementById("radarBox"), lg=document.getElementById("radarLegend");
+  if(!box || !lg) return;
+  const pool = smartPool();
+  const seg = document.getElementById("tierSeg");
+  if(seg){
+    Array.prototype.forEach.call(seg.querySelectorAll("button"), function(b){
+      b.classList.toggle("on", b.getAttribute("data-t")===SMART.tier);
+    });
+  }
+  const inTier = pickTier(pool, SMART.tier);
+  const byIdx = function(a,b){ return b.idx-a.idx; };
+  const dom = inTier.filter(function(r){return r.v.tag==="dom";}).sort(byIdx).slice(0,2);
+  const os  = inTier.filter(function(r){return r.v.tag!=="dom";}).sort(byIdx).slice(0,2);
+  const picks = dom.concat(os);
+  const pal = ["#38bdf8","#a78bfa","#fb7185","#34d399"];
+  const items = picks.map(function(r,i){
+    return {name:r.m.model, vendor:r.v.display, color:pal[i%pal.length], vals:radarVals(r), r:r};
+  });
+  box.innerHTML = items.length ? radarSVG(items) : '<div class="calc-note">该档位暂无模型</div>';
+  lg.innerHTML = items.length ? items.map(function(it){
+    return '<div class="rl-item"><span class="dot" style="background:'+it.color+'"></span><b>'+esc(it.name)+'</b>'
+      + '<small>'+esc(it.vendor)+' · 指数 '+it.r.idx.toFixed(1)+' · '
+      + (it.r.m._free?'免费':'混合单价 '+fmtMoney(it.r.cost, it.r.m.cur))
+      + '<br>' + it.vals.map(function(v,i){ return RADAR_DIMS[i]+' '+Math.round(v); }).join(' · ')
+      + '</small></div>';
+  }).join("") : '<div class="calc-note">—</div>';
 }
 
 // ---------- 偏向能力标签 ----------
@@ -894,9 +1276,8 @@ function openCutDetail(vendor, model){
   DATA.vendors.forEach(function(v){ if(v.vendor===vendor){ vm=v; v.models.forEach(function(x){ if(x.model===model) m=x; }); } });
   if(!m) return;
   const cut = (1-(m._coef==null?1:m._coef))*100;
-  const vin = parseFloat(document.getElementById("cVin").value)||0;
-  const vout = parseFloat(document.getElementById("cVout").value)||0;
-  const cost = m._free ? 0 : ((m._ain||0)*vin + (m._aout||0)*vout);
+  const cu = calcUsage();
+  const cost = costNative(m, cu, Math.max(0, Math.min(95, CALC.hit))/100, CALC.batch==="batch"?0.5:1);
   document.getElementById("cutMTitle").textContent = m.model;
   document.getElementById("cutMSub").innerHTML = esc(vm.display)+' · '+((vm.tag==="dom")?"国内":"海外")+' · 上下文 '+esc(m.context)+' · 折扣：'+esc(m.discount);
   document.getElementById("cutMCells").innerHTML =
@@ -1295,8 +1676,42 @@ function bindUI(){
   document.getElementById("hmDom").addEventListener("click", function(){ selectHist(true,"1"); });
   document.getElementById("hmOs").addEventListener("click", function(){ selectHist(true,"0"); });
   document.addEventListener("keydown", function(e){ if(e.key==="Escape"){ closeCalc(); closeDisc(); closeCutDetail(); } });
-  document.getElementById("cVin").addEventListener("input", function(){ drawCalc(); drawCompare(); });
-  document.getElementById("cVout").addEventListener("input", function(){ drawCalc(); drawCompare(); });
+  // 计算器：用量模型 / 缓存 / 批量（统一在抽屉上做事件委托）
+  document.getElementById("calcDrawer").addEventListener("input", function(e){
+    if(e.target.id==="cHit"){
+      CALC.hit = parseFloat(e.target.value)||0;
+      document.getElementById("cHitV").textContent = CALC.hit + "%";
+      Array.prototype.forEach.call(document.querySelectorAll("#hitSeg button"), function(b){
+        b.classList.toggle("on", parseFloat(b.getAttribute("data-h"))===CALC.hit);
+      });
+    }
+    drawCalc(); drawCompare();
+  });
+  document.getElementById("calcDrawer").addEventListener("click", function(e){
+    const mb = e.target.closest("#calcModeSeg button[data-m]");
+    if(mb){
+      CALC.mode = mb.getAttribute("data-m");
+      Array.prototype.forEach.call(document.querySelectorAll("#calcModeSeg button"), function(b){ b.classList.toggle("on", b===mb); });
+      document.getElementById("calcSimple").style.display = (CALC.mode==="agent") ? "none" : "";
+      document.getElementById("calcAgent").style.display  = (CALC.mode==="agent") ? "" : "none";
+      document.getElementById("calcAgentNote").style.display = (CALC.mode==="agent") ? "" : "none";
+      drawCalc(); drawCompare(); return;
+    }
+    const bb = e.target.closest("#batchSeg button[data-b]");
+    if(bb){
+      CALC.batch = bb.getAttribute("data-b");
+      Array.prototype.forEach.call(document.querySelectorAll("#batchSeg button"), function(b){ b.classList.toggle("on", b===bb); });
+      drawCalc(); return;
+    }
+    const hb = e.target.closest("#hitSeg button[data-h]");
+    if(hb){
+      CALC.hit = parseFloat(hb.getAttribute("data-h"))||0;
+      const sl = document.getElementById("cHit"); if(sl) sl.value = CALC.hit;
+      document.getElementById("cHitV").textContent = CALC.hit + "%";
+      Array.prototype.forEach.call(document.querySelectorAll("#hitSeg button"), function(b){ b.classList.toggle("on", b===hb); });
+      drawCalc(); drawCompare(); return;
+    }
+  });
   document.getElementById("app").addEventListener("change", function(e){
     if(e.target.classList.contains("cmp")){
       const k = e.target.getAttribute("data-key");
@@ -1306,6 +1721,10 @@ function bindUI(){
     }
   });
   document.getElementById("app").addEventListener("click", function(e){
+    const scn = e.target.closest("button[data-scn]");
+    if(scn){ SMART.scn = scn.getAttribute("data-scn"); drawScn(); return; }
+    const tier = e.target.closest("#tierSeg button[data-t]");
+    if(tier){ SMART.tier = tier.getAttribute("data-t"); drawRadar(); return; }
     if(e.target.classList.contains("x")){
       const k = e.target.getAttribute("data-key");
       STATE.compare.delete(k);
