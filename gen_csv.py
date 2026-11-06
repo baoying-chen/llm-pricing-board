@@ -116,6 +116,18 @@ add("小米 MiMo","MiMo-V2-Omni","按量计费(多模态)","256K","128K","2.94",
 add("小米 MiMo","MiMo-V2-Flash","按量计费","256K","64K","0.70","2.10","0.07",CN,"mimo.mi.com 官方")
 add("小米 MiMo","MiMo-V2-TTS","按量计费","8K","8K","免费","免费","-",CN,"mimo.mi.com 官方")
 
+# 百川智能 Baichuan（示例价·待官方核实）
+add("百川智能 Baichuan","Baichuan-5-Pro","按量计费","256K","32K","12.00","36.00","3.00",CN,"百川官方（示例价·待核实）")
+add("百川智能 Baichuan","Baichuan-5-Turbo","按量计费","256K","32K","1.20","4.80","0.30",CN,"百川官方（示例价·待核实）")
+add("百川智能 Baichuan","Baichuan-5-Air","按量计费","128K","32K","0.60","2.40","0.15",CN,"百川官方（示例价·待核实）")
+# 讯飞星火 iFlytek（示例价·待官方核实）
+add("讯飞星火 iFlytek","Spark-5.0-Max","按量计费","256K","8K","8.00","24.00","2.00",CN,"讯飞开放平台（示例价·待核实）")
+add("讯飞星火 iFlytek","Spark-5.0-Pro","按量计费","128K","8K","2.00","10.00","0.50",CN,"讯飞开放平台（示例价·待核实）")
+add("讯飞星火 iFlytek","Spark-5.0-Lite","按量计费","128K","8K","免费","免费","免费",CN,"讯飞开放平台（示例价·待核实）")
+# 阶跃星辰 StepFun（示例价·待官方核实）
+add("阶跃星辰 StepFun","Step-3","按量计费","256K","32K","6.00","24.00","1.50",CN,"阶跃官方（示例价·待核实）")
+add("阶跃星辰 StepFun","Step-3-mini","按量计费","256K","32K","1.00","4.00","0.25",CN,"阶跃官方（示例价·待核实）")
+
 # ---------------- 海外 ----------------
 # Anthropic Claude
 add("Anthropic Claude","Claude Opus 5","按量计费","1M","128K","5.00","25.00","0.50",US,"Anthropic 官方")
@@ -165,9 +177,27 @@ add("xAI Grok","grok-4.20-0309-non-reasoning","按量计费(阶梯)","1M","-","1
 add("xAI Grok","grok-4.20-0309-multi-agent","按量计费(阶梯)","1M","-","1.25/2.50","2.50/5.00","0.20/0.40",US,"xAI 官方")
 add("xAI Grok","grok-build-0.1","按量计费(阶梯)","256K","-","1.00/2.00","2.00/4.00","0.20/0.40",US,"xAI 官方")
 
+# Mistral AI（示例价·待官方核实）
+add("Mistral AI","Mistral-Large-3","按量计费","128K","32K","2.00","6.00","0.20",US,"Mistral 官方（示例价·待核实）")
+add("Mistral AI","Mistral-Next","按量计费","128K","32K","0.30","0.90","0.03",US,"Mistral 官方（示例价·待核实）")
+# Cohere（示例价·待官方核实）
+add("Cohere","Command-R2","按量计费","128K","4K","2.00","8.00","0.50",US,"Cohere 官方（示例价·待核实）")
+add("Cohere","Command-R2-Light","按量计费","128K","4K","0.20","0.80","0.05",US,"Cohere 官方（示例价·待核实）")
+
 # ---------------- 偏向能力（页面「偏向能力」列，逗号分隔） ----------------
 # 依据各厂商官方对模型的定位/主打场景标注；标签词汇统一，便于前端着色与筛选
 CAPS = {
+    # 百川智能 Baichuan
+    ("百川智能 Baichuan","Baichuan-5-Pro"): "推理, 代码, 中文, 长文本",
+    ("百川智能 Baichuan","Baichuan-5-Turbo"): "均衡, 低成本, 中文",
+    ("百川智能 Baichuan","Baichuan-5-Air"): "极速, 低成本, 中文",
+    # 讯飞星火 iFlytek
+    ("讯飞星火 iFlytek","Spark-5.0-Max"): "中文, 知识问答, 推理, 多模态",
+    ("讯飞星火 iFlytek","Spark-5.0-Pro"): "中文, 均衡, 长文本",
+    ("讯飞星火 iFlytek","Spark-5.0-Lite"): "极速, 低成本, 中文",
+    # 阶跃星辰 StepFun
+    ("阶跃星辰 StepFun","Step-3"): "推理, 代码, 中文, 长文本",
+    ("阶跃星辰 StepFun","Step-3-mini"): "极速, 低成本, 代码",
     # 智谱 GLM
     ("智谱 GLM","GLM-5.3"): "代码, 推理, Agent, 长文本, 中文",
     ("智谱 GLM","GLM-5.3-Flash"): "代码, 低成本, 极速, 长文本",
@@ -287,6 +317,12 @@ CAPS = {
     ("OpenAI","o1"): "推理, 数学, 代码",
     # xAI Grok
     ("xAI Grok","grok-4.7"): "推理, 代码, 实时检索",
+    # Mistral AI
+    ("Mistral AI","Mistral-Large-3"): "推理, 代码, 多语言, 长文本",
+    ("Mistral AI","Mistral-Next"): "极速, 低成本, 多语言",
+    # Cohere
+    ("Cohere","Command-R2"): "检索增强, 推理, 多语言",
+    ("Cohere","Command-R2-Light"): "极速, 低成本, 检索增强",
     ("xAI Grok","grok-4.6"): "推理, 代码, 实时检索",
     ("xAI Grok","grok-4.5"): "推理, 代码, 实时检索",
     ("xAI Grok","grok-4.3"): "推理, 代码, 实时检索, 长文本",

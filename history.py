@@ -42,14 +42,17 @@ def load_prices():
 
 
 def build_today(data):
+    # 存储原生币种数值（after_in_v / after_out_v）+ 模型币种 cur，
+    # 便于前端按 ¥人民币 / HK$港币 / $美元 实时换算，而非固定折算为 ¥。
     snap = {}
     for v in data["vendors"]:
         for m in v["models"]:
-            ai = cny_val(m, "after_in_v")
-            ao = cny_val(m, "after_out_v")
+            ai = m.get("after_in_v")
+            ao = m.get("after_out_v")
             if ai is None or ao is None:
                 continue
             snap[v["vendor"] + "/" + m["model"]] = {
+                "cur": m.get("cur", "¥"),
                 "ai": round(ai, 4), "ao": round(ao, 4)
             }
     return snap
@@ -73,7 +76,7 @@ def seed_history(snap, today):
             f = trend * jitter
             s_ai.append(round(ai0 * f, 4))
             s_ao.append(round(ao0 * f, 4))
-        models[key] = {"ai": s_ai, "ao": s_ao}
+        models[key] = {"cur": val.get("cur", "¥"), "ai": s_ai, "ao": s_ao}
     return {"dates": dates, "models": models, "seeded": True}
 
 
@@ -102,6 +105,7 @@ def main():
             if key not in hist["models"]:
                 pad = len(hist["dates"]) - 1
                 hist["models"][key] = {
+                    "cur": val.get("cur", "¥"),
                     "ai": [None] * pad + [val["ai"]],
                     "ao": [None] * pad + [val["ao"]],
                 }

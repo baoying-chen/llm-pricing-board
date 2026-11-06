@@ -16,14 +16,14 @@ https://108da9a2adaa41bebd78cc6120a5ec04.app.workbuddy.host/
 - 管理：前往「设置—数据管理—应用」中管理。
 
 EdgeOne 链接（备用，浏览器直接打开看，需带 token）：
-https://llm-pricing-board-5vliub0d.edgeone.cool?eo_token=3849d69d63b3f981e1fc8463a54f1578&eo_time=1792980895
-（生成时间：2026-10-26 10:17）
+https://llm-pricing-board-5vliub0d.edgeone.cool?eo_token=0397fba32da6760a2e87bf19b29262f8&eo_time=1793618941
+（生成时间：2026-11-02 19:14）
 
 - 子域名永久固定：llm-pricing-board-5vliub0d.edgeone.cool
 - EdgeOne Makers 控制台：https://console.cloud.tencent.com/edgeone/pages/project/makers-tszoxxs3tkf0
 
 ⚠️ 重要：eo_token 有有效期（实测约 2~3 天），不是永久有效
-- 2026-10-26 发现：10-23 生成的旧 token（f3f09c3a…）已打不开（401 网关页），重新部署拿到新 token 后恢复正常。
+- 2026-11-02 重新部署拿到新 token（Deployment ID dpmeiy9std2t），旧 token 将在数日内失效，请用本文件最新链接。
 - 结论：链接需「每次部署后重新取用」，旧链接过几天会失效。
 - 判断方法：curl 直接请求永远是 401（网关对非浏览器请求一律拦截），不能作为判据；需用浏览器或 WebFetch 验证。
 - 根本解法（三选一，推荐 A）：
@@ -34,10 +34,24 @@ https://llm-pricing-board-5vliub0d.edgeone.cool?eo_token=3849d69d63b3f981e1fc846
 更新频率：自动化任务每周一 09:00 抓取一次（WEEKLY），无变化则跳过部署。
 注意：若无变化跳过部署，token 不会刷新，链接可能在周中失效；建议届时手动重部署一次。
 
-【本轮】2026-10-26 10:17（每周定价刷新 + token 续期）
-- 抓取 13 家厂商官方定价页；本轮写入 7 条可信更新（详见自动化汇报）。
-- 处理：重新部署，子域名不变，生成新 token；Deployment ID dpz28a4ze2us。
-- 已用 WebFetch 验证页面可正常打开（标题「模型调研」，显示最新价格看板）。
-- 页面内容同步刷新（折扣抽屉为竖向卡片、偏向能力列、每周更新）。
+【本轮】2026-11-02 19:14（每周定价刷新 + token 续期）
+- 抓取 13 家厂商官方定价页（WebFetch + WebSearch 补充）；本轮写入 9 条可信更新：
+  1. 智谱 GLM-5.3-FlashX：缓存命中 "-" → 0.57 元/M（官方页补全，0.20 为输入价的 20% 命中折扣）
+  2. DeepSeek deepseek-v4-flash：输入 0.14/0.44 → 0.15/0.30、输出 0.28 → 0.6/1.2、缓存 0.0028 → 0.003/0.006（$/M，峰/非峰+缓存命中）
+  3. DeepSeek deepseek-v4-pro：输入 0.435/1.32 → 0.66/1.32、输出 0.87 → 1.98/3.96、缓存 0.003625 → 0.022/0.044（$/M）
+  4. Anthropic Claude Fable 5：缓存命中 0.50 → 1.00（$/M，claude.com 官方 read 价）
+  5. Anthropic Claude Mythos 5：缓存命中 0.50 → 1.00（$/M，同档 Fable）
+  6. Google Gemini Gemini 3.1 Pro：缓存命中 "-" → 0.20、最大输出 "-" → 128K（$/M）
+  7. Google Gemini Gemini 3 Pro：缓存命中 "-" → 0.20、最大输出 "-" → 128K（$/M）
+  8. 字节豆包 Doubao-seed-2.1-pro：缓存命中 0.64 → 1.20（元/M，多源官方确认）
+  9. 字节豆包 Doubao-seed-2.1-turbo：缓存命中 0.32 → 0.60（元/M，多源官方确认）
+- 注：本地主表此前停留在 10-26 之前状态，本轮 9 条含对当时已确认但被回滚/未落库项的重新校准；海外厂商输入/输出价与官方一致，本次仅补全缺失的缓存/最大输出字段。
+- 处理：重新部署三条外网链路，子域名不变，生成新 EdgeOne token（dpmeiy9std2t）。
+- GitHub Pages 主链接已推送（commit 3d7edb7）；EdgeOne 与 workbuddy.host 同步重发，页面内容一致刷新。
+
+【本轮】2026-10-26 10:17（每周定价刷新 + token 续期，历史记录）
+- 抓取 13 家厂商官方定价页；写入 7 条可信更新（GLM-5.3-FlashX 缓存 0.57、DeepSeek 双模型峰/非峰价、Anthropic Fable/Mythos 缓存 1.00、Gemini 3.1/3 Pro 缓存 0.20 + 最大输出 128K）。
+- EdgeOne 旧 token（3849d69d…，Deployment dpz28a4ze2us）；workbuddy.host 同步重发。
+- 注意：当时发现疑似重复/并发自动化实例，已提示排查。
 
 EdgeOne CLI 路径：C:\Users\baoying.chen\.workbuddy\binaries\node\cli-connector-packages\edgeone.cmd
