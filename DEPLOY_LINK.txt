@@ -16,14 +16,14 @@ https://108da9a2adaa41bebd78cc6120a5ec04.app.workbuddy.host/
 - 管理：前往「设置—数据管理—应用」中管理。
 
 EdgeOne 链接（备用，浏览器直接打开看，需带 token）：
-https://llm-pricing-board-5vliub0d.edgeone.cool?eo_token=bc299a8a6774a0386d920c9f7452571e&eo_time=1794187984
-（生成时间：2026-11-09 09:15）
+https://llm-pricing-board-5vliub0d.edgeone.cool?eo_token=4db51ec950c0825c0f478aecf3daad74&eo_time=1794794370
+（生成时间：2026-11-16 09:56，Deployment ID dp2q3jrn489y）
 
 - 子域名永久固定：llm-pricing-board-5vliub0d.edgeone.cool
 - EdgeOne Makers 控制台：https://console.cloud.tencent.com/edgeone/pages/project/makers-tszoxxs3tkf0
 
 ⚠️ 重要：eo_token 有有效期（实测约 2~3 天），不是永久有效
-- 2026-11-09 重新部署拿到新 token（Deployment ID dpphcbs7e0ti），旧 token 将在数日内失效，请用本文件最新链接。
+- 2026-11-16 重新部署拿到新 token（Deployment ID dp2q3jrn489y），旧 token（11-09 的 bc299a8a…）已失效，请用本文件最新链接。
 - 结论：链接需「每次部署后重新取用」，旧链接过几天会失效。
 - 判断方法：curl 直接请求永远是 401（网关对非浏览器请求一律拦截），不能作为判据；需用浏览器或 WebFetch 验证。
 - 根本解法（三选一，推荐 A）：
@@ -34,7 +34,14 @@ https://llm-pricing-board-5vliub0d.edgeone.cool?eo_token=bc299a8a6774a0386d920c9
 更新频率：自动化任务每周一 09:00 抓取一次（WEEKLY），无变化则跳过部署。
 注意：若无变化跳过部署，token 不会刷新，链接可能在周中失效；建议届时手动重部署一次。
 
-【本轮】2026-11-09 09:15（每周定价刷新 + token 续期）
+【本轮】2026-11-16 09:56（每周定价刷新 + token 续期）—— 数据无变化，仅刷新链接
+- 抓取 13 家厂商官方定价页（WebFetch + WebSearch 补充）：已收录的全部模型输入/输出/缓存价与官方现行价完全一致，本轮 0 条更新、0 条新增（updates_2026-11-16.json 为空），主表维持 125 条。
+- 差异项均为既定口径不写入：新代际模型（Claude Fable5.2/Opus5.5/Sonnet5.5/Haiku5.5、OpenAI gpt-6/5.6/5.5/5.4/5.2 系列、Kimi k3.1-pro、Qwen4-max-preview 等）按 10-23 口径不自动新增；MiniMax 美元价 vs 主表¥币种冲突、Qwen/Hunyuan/ERNIE/Doubao 落地页无结构化价格表 → 保留旧数据。
+- 按约定跳过步骤4（折扣重算/导出/历史快照，折扣逻辑零改动）；三条外网链路照常刷新。
+- GitHub Pages 主链接已推送（commit 5190081，UP 不变）；EdgeOne 重新部署得新 token（dp2q3jrn489y）；workbuddy.host 同步重发，三链页面内容一致。
+- 未写入 / 需人工核对：Claude Mythos 5（官方页不再单列，缓存价保留 0.50，建议核对）；新代际模型待人工增列。
+
+【历史】2026-11-09 09:15（每周定价刷新 + token 续期）
 - 抓取 13 家厂商官方定价页（WebFetch + WebSearch 补充）；本轮写入 8 条可信更新：
   1. 智谱 GLM-5.3-FlashX：缓存命中 "-" → 0.57 元/M（官方页补全；当前 CSV 此前于 11-06 被外部 gen_csv.py 回滚致缺失，本轮纠正）
   2. DeepSeek deepseek-v4-flash：输入 0.14/0.44 → 0.15/0.30、输出 0.28 → 0.6/1.2、缓存 0.0028 → 0.003/0.006（$/M，峰/非峰+缓存命中，多源官方确认）
